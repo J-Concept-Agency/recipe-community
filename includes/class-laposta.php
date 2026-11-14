@@ -66,8 +66,10 @@ class RCOM_Laposta implements RCOM_Newsletter_Provider {
 		$out = array();
 		foreach ( (array) ( $d['data'] ?? array() ) as $row ) {
 			$f = $row['field'] ?? array();
-			if ( ! empty( $f['tag'] ) && 'email' !== $f['tag'] ) {
-				$out[ $f['tag'] ] = (string) ( $f['name'] ?? $f['tag'] );
+			// Member calls are keyed by custom_name; 'tag' is the campaign variable and has braces ({{voornaam}}).
+			$key = (string) ( $f['custom_name'] ?? trim( (string) ( $f['tag'] ?? '' ), '{}' ) );
+			if ( '' !== $key && 'email' !== $key && empty( $f['is_email'] ) && 'deleted' !== ( $f['state'] ?? '' ) ) {
+				$out[ $key ] = (string) ( $f['name'] ?? $key );
 			}
 		}
 		set_transient( $k, $out, 10 * MINUTE_IN_SECONDS );

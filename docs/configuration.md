@@ -19,7 +19,7 @@ The review form is **not shown to visitors** until both keys are present, becaus
 
 Option A, in the plugin: paste both into Settings > Spam protection and save. The secret is shown masked afterwards. Click **Test my keys**: the server asks Cloudflare to verify a dummy token. "Accepted" means the secret is valid. The site key cannot be verified from the server, so open a recipe page and check that the widget appears.
 
-Option B, in `wp-config.php` (takes precedence over the database):
+Option B, in `wp-config.php` (takes precedence over the database). Put the lines above the line `/* That's all, stop editing! Happy publishing. */`:
 
 ```php
 define( 'RCOM_TURNSTILE_SITE_KEY', '0x...' );
@@ -53,7 +53,13 @@ Choose a service. Only visitors who tick the (unticked by default) newsletter bo
 
 Laposta:
 
-- API key: paste it, or `define( 'RCOM_LAPOSTA_API_KEY', '...' );`. Shown masked.
+- API key: paste it, or set it in `wp-config.php`, above the line `/* That's all, stop editing! Happy publishing. */`:
+
+  ```php
+  define( 'RCOM_LAPOSTA_API_KEY', 'your-key' );
+  ```
+
+  The constant takes precedence over the saved key and the field shows the constant's name instead of an input. Shown masked.
 - List: a dropdown appears once a valid key is saved (or type the list ID).
 - First name field: optional name of a Laposta custom field.
 - Flow: paste the key, press Connect (read-only check), pick a list (the dropdown shows member counts), the first-name field is suggested from the list's fields.
