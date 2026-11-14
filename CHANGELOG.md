@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ## [0.2.0-dev]
 
 ### Added
+- Reviewer names are as large as the owner reply label by default (`--rcom-name-size`, shared by both).
 - Settings > Appearance: Style (Neutral, Core Framework, None) with a bundled `assets/skins/core-framework.css`, and an Extra CSS field (max 20 KB, sanitised, printed after the plugin CSS only where the plugin renders). Replaces the `rcom_skin_active` filter, which is removed.
 - Markup efficiency: stars are one element drawn by a CSS mask, one `rcom-i18n` JSON block for all JS strings, `data-post` once per section, distribution bars use `--w`, no SVG sprite or wrapper elements. 3 reviews: 10,247 to 6,074 bytes (gzip 2,182 to 1,774), 206 to 126 DOM nodes; 20 reviews: 27,140 to 13,167 bytes (gzip 2,536 to 1,981), 579 to 261 nodes.
 - Review list as `ul.rcom-items > li.rcom-item > article.rcom-review > div.rcom-head` with `<time datetime>`, also in the load-more REST output and the account page; `docs/accessibility.md`.

@@ -22,7 +22,7 @@
 .rcom-bar::before{content:"";display:block;height:100%;width:var(--w);background:var(--rcom-bar-fill,var(--c-p))}
 .rcom-form{display:grid;gap:var(--rcom-space-4,1rem);padding:var(--rcom-space-5,1.5rem);background:var(--c-s);border:1px solid var(--c-b);border-radius:var(--r)}
 .rcom-ft{margin:0;font-family:var(--rcom-font-heading,inherit);font-weight:var(--rcom-heading-weight,700);font-size:var(--rcom-text-l,1.25rem);color:var(--c-t)}
-.rcom-name{font-family:var(--rcom-font-body,inherit);font-weight:var(--rcom-name-weight,700);font-size:var(--rcom-name-size,var(--rcom-text-l,1.25rem));line-height:1.2;color:var(--c-t)}
+.rcom-name{font-family:var(--rcom-font-body,inherit);font-weight:var(--rcom-name-weight,700);font-size:var(--rcom-name-size,var(--rcom-text-m,1rem));line-height:1.2;color:var(--c-t)}
 .rcom-item .rcom-stars{--sz:var(--rcom-star-size-lg,20px)}
 .rcom-review>p{line-height:var(--rcom-line-height,1.6)}
 .rcom-own{font-size:var(--rcom-text-s,.875rem);color:var(--c-p);font-weight:600}
@@ -66,7 +66,7 @@
 .rcom-photo{display:block;max-width:320px;width:100%;height:auto;border-radius:var(--r)}
 .rcom-note{font-size:var(--rcom-text-s,.875rem);color:var(--c-m);font-style:italic}
 .rcom-reply{display:flex;flex-direction:column;gap:var(--rcom-space-1,.25rem);padding:var(--rcom-reply-pad,var(--rcom-space-3,.75rem) var(--rcom-space-5,1.5rem));background:var(--rcom-reply-bg,var(--rcom-surface-alt,#f5f6f8));border:var(--rcom-reply-border,0);border-radius:var(--rcom-radius-sm,4px)}
-.rcom-reply strong{font-weight:700}
+.rcom-reply strong{font-weight:700;font-size:var(--rcom-name-size,var(--rcom-text-m,1rem))}
 .rcom-reply span{font-size:var(--rcom-text-m,1rem);line-height:var(--rcom-line-height,1.6)}
 .rcom-del{align-self:flex-start;background:none;border:0;padding:0;color:var(--c-m);text-decoration:underline;font:inherit;font-size:var(--rcom-text-s,.875rem);cursor:pointer}
 .rcom-more{display:inline-block;background:none;border:0;padding:var(--rcom-space-4,1rem) 0;color:var(--rcom-link,var(--rcom-accent,#2b59c3));text-align:left;text-decoration:none;cursor:pointer}

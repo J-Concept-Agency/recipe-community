@@ -48,7 +48,7 @@ A theme or plugin can still do it in code: `wp_add_inline_style( 'rcom', $css )`
 | `--rcom-ok-bg`, `--rcom-ok-text`, `--rcom-err-bg`, `--rcom-err-text`, `--rcom-danger` | greens/reds | Messages, destructive actions |
 | `--rcom-font-body`, `--rcom-font-heading` | `inherit` | Fonts |
 | `--rcom-heading-weight`, `--rcom-score-weight`, `--rcom-name-weight` | `700`, `800`, `700` | Weights |
-| `--rcom-name-size`, `--rcom-text-s`, `--rcom-text-m`, `--rcom-text-l` | `1.25rem`, `.875rem`, `1rem`, `1.25rem` | Sizes |
+| `--rcom-name-size`, `--rcom-text-s`, `--rcom-text-m`, `--rcom-text-l` | `1rem`, `.875rem`, `1rem`, `1.25rem` | Sizes. `--rcom-name-size` is shared by the reviewer name and the owner reply label |
 | `--rcom-space-0` ... `--rcom-space-6` | `.125` to `2rem` | Spacing scale |
 | `--rcom-line-height` | `1.6` | Review text |
 | `--rcom-reply-bg`, `--rcom-reply-pad`, `--rcom-reply-border` | alt surface, `.75rem 1.5rem`, none | Owner reply block |

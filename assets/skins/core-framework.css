@@ -27,6 +27,6 @@
 --rcom-text-s:var(--text-s);
 --rcom-text-m:var(--text-m);
 --rcom-text-l:var(--text-l);
---rcom-name-size:var(--text-l);
+--rcom-name-size:var(--text-m);
 --rcom-star-size-lg:var(--text-l);
 }
