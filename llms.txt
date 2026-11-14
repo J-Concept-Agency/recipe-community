@@ -1,0 +1,11 @@
+# Recipe Community
+
+> WordPress plugin by J-Concept: star reviews with photos, "was this helpful?" votes, email-verified reviewers without accounts, Turnstile spam protection, Laposta newsletter opt-in.
+
+- [README](README.md): overview and quick start
+- [Usage](docs/usage.md): shortcodes
+- [Configuration](docs/configuration.md): Turnstile, newsletter, settings
+- [Hooks and filters](docs/hooks-and-filters.md)
+- [Security](docs/security.md) and [Privacy](docs/privacy.md)
+- [AI assistants and abilities](docs/ai.md)
+- [AGENTS.md](AGENTS.md): rules for AI assistants (never share emails, no real keys)

@@ -8,6 +8,7 @@ Shortcodes work in any editor or page builder (Bricks: Shortcode element). They 
 | `[rcom_summary]` | Average with a bar per star count. |
 | `[rcom_form]` | The review form (hidden without Turnstile keys). |
 | `[rcom_list per_page="3"]` | Newest reviews; "Read all n reviews" loads the rest without a page reload. |
+| `[rcom_helpful]` | "Was this article helpful?" with Yes/No buttons and an optional feedback box. Active on the post types chosen under Settings > Helpful (default `kennis`). Shows the public count from a threshold (default 5). |
 | `[rcom_reviews heading="1" per_page="3"]` | Everything in one `<section id="rcom-reviews">`: H2, summary, form, list. `heading="0"` omits the H2 (for a theme heading). |
 
 ## Typical recipe template

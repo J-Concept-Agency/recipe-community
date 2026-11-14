@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "admin/admin.css"
+        ],
+        "createdAt": "2026-11-14T13:39:10.392Z",
+        "reason": "assistant: .rcom-a-flash is a status notice copying WordPress core .notice (4px left border); native admin pattern, not a decorative card accent"
+      }
+    ]
+  }
+}

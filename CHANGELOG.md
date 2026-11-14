@@ -16,4 +16,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 - Admin: reviews list with filters and bulk actions, replies, photo approval, people tab, CSV export, settings.
 - Newsletter opt-in with provider interface, Laposta provider and `rcom_newsletter_optin` action.
 - WordPress privacy exporter and eraser, uninstall cleanup (optional keep data).
+- "Was this helpful?" module (`[rcom_helpful]`): anonymous votes, optional feedback text, optional link to a confirmed identity, admin screen and Dashboard block.
+- Terms checkbox (required) with terms/privacy page, version and timestamp stored per review.
+- Coarse device category (no raw user agent) with aggregated Dashboard charts.
+- Admin: Community menu with Dashboard, Reviews, By recipe, Helpful, People, Settings, About; compact reviews table; per-post-type activation; recipe metabox switch.
+- Laposta: connect, list dropdown with member counts, first-name field suggestion, one-email confirmation option, connection test.
+- Optional WordPress Abilities (off by default), `AGENTS.md`, `llms.txt` and a Claude skill.
 - Built-in update check against GitHub Releases, release workflow, Dutch translation.

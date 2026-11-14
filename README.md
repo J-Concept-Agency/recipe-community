@@ -2,7 +2,7 @@
 
 Light, fast and safe community features for recipe sites, by [J-Concept](https://jconcept.nl).
 
-Version 0.1 ships **star reviews** with optional text, photo and a reply from the site owner. No WordPress comments, no visitor accounts, no jQuery, no build step. Accounts and favourites are on the roadmap; the code is split per domain (reviews, identity, photos, newsletter, admin) so they can be added later.
+Version 0.1 ships **star reviews** and a **"Was this helpful?"** module with optional text, photo and a reply from the site owner. No WordPress comments, no visitor accounts, no jQuery, no build step. Accounts and favourites are on the roadmap; the code is split per domain (reviews, identity, photos, newsletter, admin) so they can be added later.
 
 ## Highlights
 
@@ -33,11 +33,12 @@ Requires WordPress 6.2+ and PHP 8.0+ (GD or Imagick with WebP support for photos
 | [Usage and shortcodes](docs/usage.md) | [Hooks and filters](docs/hooks-and-filters.md) |
 | [Security](docs/security.md) | [Privacy (GDPR)](docs/privacy.md) |
 | [Development and releases](docs/development.md) | [FAQ](docs/faq.md) |
-| [Licensing](docs/licensing.md) | [Changelog](CHANGELOG.md) |
+| [Licensing](docs/licensing.md) | [AI assistants](docs/ai.md) |
+| [Changelog](CHANGELOG.md) | |
 
 ## Updates
 
-The plugin checks the GitHub Releases of `J-Concept/recipe-community` (every 12 hours, plain request, nothing about your site is sent). Disable with `define( 'RCOM_DISABLE_UPDATE_CHECK', true );` or in the settings. The header also carries `GitHub Plugin URI` for Git Updater users (use one updater, not both).
+The plugin checks the GitHub Releases of `J-Concept-Agency/recipe-community` (every 12 hours, plain request, nothing about your site is sent). Disable with `define( 'RCOM_DISABLE_UPDATE_CHECK', true );` or in the settings. The header also carries `GitHub Plugin URI` for Git Updater users (use one updater, not both).
 
 ## Roadmap
 

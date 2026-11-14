@@ -40,7 +40,7 @@ There is no test framework dependency. Before a release check on a local site: `
 
 ## Updates
 
-`RCOM_Updater` asks `https://api.github.com/repos/J-Concept/recipe-community/releases/latest` (cached 12 hours, 1 hour after a failure or 404), compares the tag with `RCOM_VERSION`, and feeds the `pre_set_site_transient_update_plugins` and `plugins_api` filters. The package must be a `.zip` release asset of that repository. Nothing about the site is sent (fixed user agent). Disable with `RCOM_DISABLE_UPDATE_CHECK` or the setting. Test without GitHub by filtering `pre_http_request` to return a fake response.
+`RCOM_Updater` asks `https://api.github.com/repos/J-Concept-Agency/recipe-community/releases/latest` (cached 12 hours, 1 hour after a failure or 404), compares the tag with `RCOM_VERSION`, and feeds the `pre_set_site_transient_update_plugins` and `plugins_api` filters. The package must be a `.zip` release asset of that repository. Nothing about the site is sent (fixed user agent). Disable with `RCOM_DISABLE_UPDATE_CHECK` or the setting. Test without GitHub by filtering `pre_http_request` to return a fake response.
 
 ## Making a release
 

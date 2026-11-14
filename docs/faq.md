@@ -14,6 +14,6 @@
 
 **Behind a proxy or CDN, rate limiting blocks everybody?** Return the real visitor IP from the `rcom_client_ip` filter.
 
-**Can I hide the "Powered by J-Concept" link?** Yes, Settings > Credit link. See [licensing](licensing.md).
+**Can I hide the "Powered by J-Concept" link?** Yes, it is on by default and can be switched off in Settings > Credit link. See [licensing](licensing.md).
 
 **Does it work without Bricks?** Yes, it only provides shortcodes.

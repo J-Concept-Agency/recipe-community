@@ -9,7 +9,7 @@
 
 ## Install
 
-1. Download `recipe-community.zip` from the latest [GitHub release](https://github.com/J-Concept/recipe-community/releases).
+1. Download `recipe-community.zip` from the latest [GitHub release](https://github.com/J-Concept-Agency/recipe-community/releases).
 2. WordPress admin: Plugins > Add New > Upload Plugin, choose the zip, Install, Activate.
    (Or unzip into `wp-content/plugins/recipe-community/`.)
 3. Activation creates the table `{prefix}rcom_reviews` and the folder `wp-content/uploads/rcom/` (with an `index.php` and an `.htaccess` that blocks script execution).

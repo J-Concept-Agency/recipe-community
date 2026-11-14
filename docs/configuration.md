@@ -30,6 +30,14 @@ define( 'RCOM_TURNSTILE_SECRET_KEY', '0x...' );
 
 Cloudflare publishes test keys that always pass. They are only used when you add `define( 'RCOM_ALLOW_DEV_BYPASS', true );` to `wp-config.php` of a development site (never on production) and no real keys are set.
 
+## Terms and consent
+
+Posting a review requires ticking "I agree to the terms". Choose the terms page (and optionally a privacy page) under Settings > Terms and consent; the checkbox links there. The moment, the page and the version are stored per review; the version is automatic: the last-modified date of the terms page (every edit counts, keep post revisions enabled so the applicable text can be found; the review detail links to the matching revision). The plugin does not supply terms text.
+
+## Helpful? (was this article helpful)
+
+Choose the post types, the count threshold, the two follow-up questions, and whether the feedback text needs Turnstile and may contain links. Place `[rcom_helpful]` on the article template.
+
 ## Newsletter
 
 Choose a service. Only visitors who tick the (unticked by default) newsletter box **and** click the confirmation link are sent on.
@@ -39,6 +47,7 @@ Laposta:
 - API key: paste it, or `define( 'RCOM_LAPOSTA_API_KEY', '...' );`. Shown masked.
 - List: a dropdown appears once a valid key is saved (or type the list ID).
 - First name field: optional name of a Laposta custom field.
+- Flow: paste the key, press Connect (read-only check), pick a list (the dropdown shows member counts), the first-name field is suggested from the list's fields.
 - Confirmation: "Our email link confirms it" (default, the visitor receives one email; the member is added with `ignore_doubleoptin`) or "Laposta sends its own confirmation email".
 - **Test Laposta connection** only reads your lists, it never creates a member.
 - If another plugin on the site already holds a Laposta connection that can be read (Bricks Laposta or a `LAPOSTA_API_KEY` constant), the button **Use existing Laposta settings** copies key and list once into these settings.

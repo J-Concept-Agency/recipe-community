@@ -21,6 +21,7 @@ After any change (new, hidden, deleted, verified). Use it to purge caches. `lite
 | Filter | Purpose |
 |---|---|
 | `rcom_post_types` (array) | Post types that get reviews. |
+| `rcom_helpful_post_types` (array) | Post types for the Helpful module. |
 | `rcom_load_assets` (bool) | Return false to skip CSS/JS on a single page. |
 | `rcom_bbq_types` (array) | `key => [ form label, sentence under the review ('' = none) ]`. |
 | `rcom_client_ip` (string) | IP used for the (hashed) rate limit, for sites behind a proxy: return the real visitor IP. |
