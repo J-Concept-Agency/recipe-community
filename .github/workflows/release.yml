@@ -23,7 +23,7 @@ jobs:
         run: |
           mkdir -p dist/recipe-community
           rsync -a --exclude='.git' --exclude='.github' --exclude='dist' --exclude='docs' --exclude='.gitignore' \
-            --exclude='CONTRIBUTING.md' --exclude='SECURITY.md' --exclude='*.po' --exclude='*.pot' ./ dist/recipe-community/
+            --exclude='AGENTS.md' --exclude='llms.txt' --exclude='skills' --exclude='CONTRIBUTING.md' --exclude='SECURITY.md' --exclude='*.po' --exclude='*.pot' ./ dist/recipe-community/
           (cd dist && zip -qr recipe-community.zip recipe-community)
 
       - name: Release notes from CHANGELOG
