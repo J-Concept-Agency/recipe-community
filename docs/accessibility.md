@@ -32,7 +32,7 @@ A review has no heading element. The reviewer's name is `<strong>`, not `<h3>`.
 
 - **Why:** a name is a label, not a section title. Fifty headings called "Anna", "Mark", "Lotte" pollute the heading outline of a recipe page, which is what people use to skim the page. It also adds one more element per review.
 - **What it costs:** a screen reader user cannot jump from review to review with the heading key. They use list navigation (next list item) or the article quick keys of their screen reader, and in a browse list each review is read from the stars to the text in order.
-- **If your audience needs headings:** the markup is easy to change by filter or template override; a heading inside `rcom-head` is enough. We did not make that the default.
+- **If your audience needs headings:** there is no option for it yet. Say so and it can become a setting; the change is one element inside `rcom-head`.
 
 ## Structured data
 
