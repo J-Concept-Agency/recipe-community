@@ -594,12 +594,13 @@ class RCOM_Views {
 			echo '<p class="rcom-a-flash err">' . esc_html__( 'Could not load your lists: the API key is invalid or Laposta is unreachable.', 'recipe-community' ) . '</p>';
 		}
 		if ( $lists ) {
-			$lo = '<option value="">&mdash;</option>';
+			list( $eff_list, $list_src ) = RCOM_Laposta::list_source();
+			$lo = '<option value="">' . ( 'bricks' === $list_src ? esc_html( sprintf( /* translators: %s: list name */ __( 'The list of Bricks Laposta: %s', 'recipe-community' ), isset( $lists[ $eff_list ] ) ? $lists[ $eff_list ]['name'] : $eff_list ) ) : '&mdash;' ) . '</option>';
 			foreach ( $lists as $lid => $li ) {
 				$lo .= '<option value="' . esc_attr( $lid ) . '"' . selected( $o['laposta_list'], $lid, false ) . '>' . esc_html( $li['name'] . ( null !== $li['members'] ? ' (' . number_format_i18n( $li['members'] ) . ')' : '' ) ) . '</option>';
 			}
-			echo self::field( __( 'Laposta list', 'recipe-community' ), '<select name="laposta_list">' . $lo . '</select>', ( $o['laposta_list'] && ! isset( $lists[ $o['laposta_list'] ] ) ) ? __( 'The saved list was not found in this account.', 'recipe-community' ) : __( 'Pick a list and save: the first-name field is then suggested automatically.', 'recipe-community' ) );
-			$fl = $o['laposta_list'] ? $lp->fields( $o['laposta_list'] ) : null;
+			echo self::field( __( 'Laposta list', 'recipe-community' ), '<select name="laposta_list">' . $lo . '</select>', ( $o['laposta_list'] && ! isset( $lists[ $o['laposta_list'] ] ) ) ? __( 'The saved list was not found in this account.', 'recipe-community' ) : ( 'bricks' === $list_src ? __( 'Taken from Bricks Laposta (read live, not copied). Pick a list here to use another one.', 'recipe-community' ) : __( 'Pick a list and save: the first-name field is then suggested automatically.', 'recipe-community' ) ) );
+			$fl = $eff_list ? $lp->fields( $eff_list ) : null;
 			if ( $fl ) {
 				$fo = '<option value="">&mdash;</option>';
 				foreach ( $fl as $tag => $nm ) {

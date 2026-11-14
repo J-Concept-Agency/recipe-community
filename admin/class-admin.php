@@ -237,9 +237,10 @@ class RCOM_Admin {
 				$new['extra_css'] = $css;
 			}
 		}
-		if ( 'laposta' === $new['newsletter_provider'] && '' !== $new['laposta_list'] && '' === $new['laposta_name_field'] ) {
-			update_option( 'rcom_settings', $new, false ); // so the API call below uses the new key
-			$f                         = ( new RCOM_Laposta() )->fields( $new['laposta_list'] );
+		if ( 'laposta' === $new['newsletter_provider'] && '' === $new['laposta_name_field'] ) {
+			update_option( 'rcom_settings', $new, false ); // so the API call below uses the new key and list
+			$eff = RCOM_Laposta::list_source()[0];
+			$f   = '' !== $eff ? ( new RCOM_Laposta() )->fields( $eff ) : null;
 			$new['laposta_name_field'] = $f ? RCOM_Laposta::guess_name_field( $f ) : '';
 		}
 		$after = isset( $_POST['rcom_after'] ) ? sanitize_key( $_POST['rcom_after'] ) : '';

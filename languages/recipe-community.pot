@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-14 17:36+0100\n"
+"POT-Creation-Date: 2026-11-14 17:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -297,7 +297,7 @@ msgstr ""
 
 #. translators: %s: number of reviews
 #. translators: 1: average rating, 2: number of reviews
-#: includes/class-front.php:102 admin/class-admin.php:350
+#: includes/class-front.php:102 admin/class-admin.php:351
 #: admin/class-views.php:282 admin/class-views.php:418
 #, php-format
 msgid "%s review"
@@ -624,20 +624,20 @@ msgstr ""
 msgid "This link has expired or was already used."
 msgstr ""
 
-#: includes/class-laposta.php:116
+#: includes/class-laposta.php:135
 msgid "Enter an API key first."
 msgstr ""
 
-#: includes/class-laposta.php:120
+#: includes/class-laposta.php:139
 msgid "Could not reach Laposta. Try again later."
 msgstr ""
 
-#: includes/class-laposta.php:123
+#: includes/class-laposta.php:142
 msgid "Laposta rejected the API key."
 msgstr ""
 
 #. translators: %d: number of lists
-#: includes/class-laposta.php:127
+#: includes/class-laposta.php:146
 #, php-format
 msgid "Connected. Laposta returned %d list."
 msgid_plural "Connected. Laposta returned %d lists."
@@ -796,7 +796,7 @@ msgstr ""
 msgid "People"
 msgstr ""
 
-#: admin/class-admin.php:41 admin/class-views.php:636
+#: admin/class-admin.php:41 admin/class-views.php:637
 msgid "About"
 msgstr ""
 
@@ -840,19 +840,19 @@ msgstr ""
 msgid "You are not allowed to do this."
 msgstr ""
 
-#: admin/class-admin.php:340
+#: admin/class-admin.php:341
 msgid "Community reviews"
 msgstr ""
 
-#: admin/class-admin.php:350
+#: admin/class-admin.php:351
 msgid "Open the reviews of this recipe"
 msgstr ""
 
-#: admin/class-admin.php:352
+#: admin/class-admin.php:353
 msgid "No reviews yet."
 msgstr ""
 
-#: admin/class-admin.php:354
+#: admin/class-admin.php:355
 msgid "Reviews enabled for this recipe"
 msgstr ""
 
@@ -1472,7 +1472,7 @@ msgid "The credit link below this block is set under %s."
 msgstr ""
 
 #: admin/class-views.php:502 admin/class-views.php:560
-#: admin/class-views.php:619
+#: admin/class-views.php:620
 msgid "General"
 msgstr ""
 
@@ -1741,222 +1741,234 @@ msgid ""
 "Could not load your lists: the API key is invalid or Laposta is unreachable."
 msgstr ""
 
-#: admin/class-views.php:601
+#. translators: %s: list name
+#: admin/class-views.php:598
+#, php-format
+msgid "The list of Bricks Laposta: %s"
+msgstr ""
+
+#: admin/class-views.php:602
 msgid "Laposta list"
 msgstr ""
 
-#: admin/class-views.php:601
+#: admin/class-views.php:602
 msgid "The saved list was not found in this account."
 msgstr ""
 
-#: admin/class-views.php:601
+#: admin/class-views.php:602
+msgid ""
+"Taken from Bricks Laposta (read live, not copied). Pick a list here to use "
+"another one."
+msgstr ""
+
+#: admin/class-views.php:602
 msgid ""
 "Pick a list and save: the first-name field is then suggested automatically."
 msgstr ""
 
-#: admin/class-views.php:608
+#: admin/class-views.php:609
 msgid "Field for the first name"
 msgstr ""
 
-#: admin/class-views.php:608
+#: admin/class-views.php:609
 msgid "The email address is always sent. Change the suggestion if needed."
 msgstr ""
 
-#: admin/class-views.php:611
+#: admin/class-views.php:612
 msgid "Laposta list ID"
 msgstr ""
 
-#: admin/class-views.php:611
+#: admin/class-views.php:612
 msgid "Connect an API key to pick from your lists."
 msgstr ""
 
-#: admin/class-views.php:613
+#: admin/class-views.php:614
 msgid "Confirmation"
 msgstr ""
 
-#: admin/class-views.php:613
+#: admin/class-views.php:614
 msgid "We confirm: the review email link counts, no second email"
 msgstr ""
 
-#: admin/class-views.php:613
+#: admin/class-views.php:614
 msgid "Laposta sends its own confirmation email"
 msgstr ""
 
-#: admin/class-views.php:613
+#: admin/class-views.php:614
 msgid ""
 "With the first choice the visitor gets one email in total; with the second a "
 "second email from Laposta that must be confirmed too."
 msgstr ""
 
-#: admin/class-views.php:614
+#: admin/class-views.php:615
 msgid "Notification email"
 msgstr ""
 
-#: admin/class-views.php:614
+#: admin/class-views.php:615
 msgid "Do not send the Laposta notification email"
 msgstr ""
 
-#: admin/class-views.php:614
+#: admin/class-views.php:615
 msgid ""
 "Laposta can email you for every new sign-up through the API. This switches "
 "that email off for sign-ups from this site."
 msgstr ""
 
-#: admin/class-views.php:615
+#: admin/class-views.php:616
 msgid "Test connection"
 msgstr ""
 
-#: admin/class-views.php:615
+#: admin/class-views.php:616
 msgid "Copy to this plugin"
 msgstr ""
 
-#: admin/class-views.php:620
+#: admin/class-views.php:621
 msgid "Credit link"
 msgstr ""
 
-#: admin/class-views.php:620
+#: admin/class-views.php:621
 msgid "Show \"Powered by J-Concept\" below the reviews and below Helpful?"
 msgstr ""
 
-#: admin/class-views.php:620
+#: admin/class-views.php:621
 msgid "One switch for both blocks. Anyone may switch it off."
 msgstr ""
 
-#: admin/class-views.php:621
+#: admin/class-views.php:622
 msgid "Sender email for mails"
 msgstr ""
 
-#: admin/class-views.php:621
+#: admin/class-views.php:622
 msgid "Default: the WordPress admin address."
 msgstr ""
 
-#: admin/class-views.php:622
+#: admin/class-views.php:623
 msgid "Updates"
 msgstr ""
 
-#: admin/class-views.php:622
+#: admin/class-views.php:623
 msgid "Do not check GitHub for plugin updates"
 msgstr ""
 
-#: admin/class-views.php:624
+#: admin/class-views.php:625
 msgid "AI abilities"
 msgstr ""
 
-#: admin/class-views.php:624
+#: admin/class-views.php:625
 msgid "Allow AI abilities (WordPress Abilities API, administrators only)"
 msgstr ""
 
-#: admin/class-views.php:624
+#: admin/class-views.php:625
 msgid ""
 "Lets an AI assistant read statistics and reviews and reply, approve photos "
 "or hide reviews. Off by default."
 msgstr ""
 
-#: admin/class-views.php:626
+#: admin/class-views.php:627
 msgid "When a recipe is deleted for good"
 msgstr ""
 
-#: admin/class-views.php:626
+#: admin/class-views.php:627
 msgid "Delete its reviews and photos"
 msgstr ""
 
-#: admin/class-views.php:626
+#: admin/class-views.php:627
 msgid "Keep them hidden (filter \"Recipe deleted\")"
 msgstr ""
 
-#: admin/class-views.php:626
+#: admin/class-views.php:627
 msgid ""
 "Emptying the trash deletes recipes for good. Choose \"keep\" to protect "
 "reviews against an accidentally emptied trash."
 msgstr ""
 
-#: admin/class-views.php:627
+#: admin/class-views.php:628
 msgid "Cached ratings"
 msgstr ""
 
-#: admin/class-views.php:627
+#: admin/class-views.php:628
 msgid "Recalculate cache"
 msgstr ""
 
 #. translators: %d: number of posts
-#: admin/class-views.php:627
+#: admin/class-views.php:628
 #, php-format
 msgid "%d posts recalculated"
 msgstr ""
 
-#: admin/class-views.php:627
+#: admin/class-views.php:628
 msgid ""
 "Averages and counts are cached in post meta and can always be rebuilt from "
 "the tables."
 msgstr ""
 
-#: admin/class-views.php:628
+#: admin/class-views.php:629
 msgid "Keep data on uninstall"
 msgstr ""
 
-#: admin/class-views.php:628
+#: admin/class-views.php:629
 msgid "Do not delete reviews and photos when the plugin is deleted"
 msgstr ""
 
-#: admin/class-views.php:629
+#: admin/class-views.php:630
 msgid "Save changes"
 msgstr ""
 
-#: admin/class-views.php:638
+#: admin/class-views.php:639
 msgid "OK"
 msgstr ""
 
-#: admin/class-views.php:638
+#: admin/class-views.php:639
 msgid "Check"
 msgstr ""
 
 #. translators: %s: link to the author
-#: admin/class-views.php:644
+#: admin/class-views.php:645
 #, php-format
 msgid "Recipe Community by %s"
 msgstr ""
 
-#: admin/class-views.php:647
+#: admin/class-views.php:648
 msgid "System check"
 msgstr ""
 
-#: admin/class-views.php:648
+#: admin/class-views.php:649
 msgid "PHP 8.0 or newer"
 msgstr ""
 
-#: admin/class-views.php:649
+#: admin/class-views.php:650
 msgid "Photo processing with WebP"
 msgstr ""
 
-#: admin/class-views.php:650
+#: admin/class-views.php:651
 msgid "Photo folder writable"
 msgstr ""
 
-#: admin/class-views.php:651
+#: admin/class-views.php:652
 msgid "Turnstile keys present"
 msgstr ""
 
-#: admin/class-views.php:652
+#: admin/class-views.php:653
 msgid "Newsletter service"
 msgstr ""
 
-#: admin/class-views.php:653
+#: admin/class-views.php:654
 msgid "Update check"
 msgstr ""
 
-#: admin/class-views.php:653
+#: admin/class-views.php:654
 msgid "disabled"
 msgstr ""
 
-#: admin/class-views.php:653
+#: admin/class-views.php:654
 msgid "GitHub releases"
 msgstr ""
 
-#: admin/class-views.php:660
+#: admin/class-views.php:661
 msgid "Demo data"
 msgstr ""
 
-#: admin/class-views.php:660
+#: admin/class-views.php:661
 msgid ""
 "Adds example reviews (with a photo and replies) or votes to one post so you "
 "can preview the look. Demo data shows on that page only: it is left out of "
@@ -1964,20 +1976,20 @@ msgid ""
 "line: wp rcom demo add --post=ID and wp rcom demo clear."
 msgstr ""
 
-#: admin/class-views.php:663
+#: admin/class-views.php:664
 msgid "Post"
 msgstr ""
 
-#: admin/class-views.php:663
+#: admin/class-views.php:664
 msgid "Add demo data"
 msgstr ""
 
-#: admin/class-views.php:663
+#: admin/class-views.php:664
 msgid "Remove demo data"
 msgstr ""
 
 #. translators: %d: number of demo rows
-#: admin/class-views.php:664
+#: admin/class-views.php:665
 #, php-format
 msgid "%d demo rows present"
 msgstr ""

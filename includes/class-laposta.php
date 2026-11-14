@@ -31,6 +31,25 @@ class RCOM_Laposta implements RCOM_Newsletter_Provider {
 		return array( '', '' );
 	}
 
+	/**
+	 * The list ID and where it comes from: the choice made in this plugin, otherwise the list of Bricks Laposta (read live, not copied).
+	 * @return array{0:string,1:string} list id, source ('own', 'bricks' or '')
+	 */
+	public static function list_source() {
+		$own = (string) RCOM_Settings::get( 'laposta_list' );
+		if ( '' !== $own ) {
+			return array( $own, 'own' );
+		}
+		if ( class_exists( 'Bricks_Laposta' ) && method_exists( 'Bricks_Laposta', 'get_settings' ) ) {
+			$s = Bricks_Laposta::get_settings();
+			$b = is_array( $s ) ? (string) ( $s['list_id'] ?? '' ) : '';
+			if ( '' !== $b ) {
+				return array( $b, 'bricks' );
+			}
+		}
+		return array( '', '' );
+	}
+
 	public static function key() {
 		return self::key_source()[0];
 	}
@@ -129,7 +148,7 @@ class RCOM_Laposta implements RCOM_Newsletter_Provider {
 
 	/** Unsubscribe a member (needs the list id). Returns true on success. */
 	public function unsubscribe( $email ) {
-		$list = (string) RCOM_Settings::get( 'laposta_list' );
+		$list = self::list_source()[0];
 		if ( '' === $list || '' === self::key() ) {
 			return false;
 		}
@@ -138,7 +157,7 @@ class RCOM_Laposta implements RCOM_Newsletter_Provider {
 	}
 
 	public function subscribe( $email, $name, $post_id ) {
-		$list = (string) RCOM_Settings::get( 'laposta_list' );
+		$list = self::list_source()[0];
 		$ip   = RCOM_Identity::ip();
 		if ( '' === $list || '' === self::key() || ! filter_var( $ip, FILTER_VALIDATE_IP ) ) {
 			return false;

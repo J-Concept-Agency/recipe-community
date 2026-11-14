@@ -14,4 +14,7 @@ chk "nothing set" "||||" OWN=
 chk "Turnstile constants win" "||constant|CONST-SITE|constant" T_TS=1 OWN=
 TAIL=1 chk "notification option off: not sent" 'OPT:{"upsert":"true","suppress_reactivation":"true"}' SUB=1 QUIET=0 T_LP=1
 chk "notification option on: suppress_email_notification" 'OPT:{"upsert":"true","suppress_reactivation":"true","suppress_email_notification":"true"}' SUB=1 QUIET=1 T_LP=1
+TAIL=1 chk "list: own choice wins over Bricks Laposta" "L1|own" LISTS=1 T_BRICKS=1
+TAIL=1 chk "list: Bricks Laposta list read live when none chosen" "BRLIST|bricks" LISTS=1 NOLIST=1 T_BRICKS=1
+TAIL=1 chk "list: none" "|" LISTS=1 NOLIST=1
 exit $f

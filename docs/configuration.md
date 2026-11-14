@@ -76,6 +76,7 @@ Laposta:
 - Confirmation: "Our email link confirms it" (default, the visitor receives one email; the member is added with `ignore_doubleoptin`) or "Laposta sends its own confirmation email".
 - **Test Laposta connection** only reads your lists, it never creates a member.
 - Read order of the key, first one set wins: 1) `RCOM_LAPOSTA_API_KEY`, 2) `LAPOSTA_API_KEY` (also read by Bricks Laposta, so **one `define( 'LAPOSTA_API_KEY', 'your-key' );` serves both plugins**), 3) the key saved in this plugin, 4) the key of Bricks Laposta when that plugin is active (read live through `Bricks_Laposta::get_api_key()`, not copied). Settings shows where the key comes from and its last 4 characters, never the whole key. When the key comes from Bricks Laposta, the button **Copy to this plugin** saves a copy for those who want to switch Bricks Laposta off later.
+- List: if you choose none here and Bricks Laposta has a list, that list is used (read live, not copied; Settings shows "Taken from Bricks Laposta"). Choose a list here to use another one.
 - **Do not send the Laposta notification email**: sends `suppress_email_notification` with every sign-up. Laposta can email the list owner for each sign-up through the API; this stops that email for sign-ups from this site (Laposta API documentation, member options). Off by default.
 
 Other services: use the `rcom_newsletter_optin` action or add a provider ([hooks](hooks-and-filters.md)).

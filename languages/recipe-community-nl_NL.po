@@ -1976,3 +1976,11 @@ msgstr "Laposta kan je bij elke nieuwe aanmelding via de API een mail sturen. Di
 
 msgid "Copy to this plugin"
 msgstr "Kopieer naar deze plugin"
+
+#. translators: %s: list name
+#, php-format
+msgid "The list of Bricks Laposta: %s"
+msgstr "De lijst van Bricks Laposta: %s"
+
+msgid "Taken from Bricks Laposta (read live, not copied). Pick a list here to use another one."
+msgstr "Overgenomen uit Bricks Laposta (live uitgelezen, niet gekopieerd). Kies hier een lijst om een andere te gebruiken."
