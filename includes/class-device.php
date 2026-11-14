@@ -37,10 +37,10 @@ class RCOM_Device {
 	}
 
 	/** @return array<string,int> category => count for one table (aggregated, never per person). */
-	public static function counts( $table ) {
+	public static function counts( $table, $extra = '1=1' ) {
 		global $wpdb;
 		$out = array();
-		foreach ( $wpdb->get_results( "SELECT device, COUNT(*) AS c FROM {$table} WHERE device <> '' GROUP BY device ORDER BY c DESC" ) as $r ) {
+		foreach ( $wpdb->get_results( "SELECT device, COUNT(*) AS c FROM {$table} WHERE device <> '' AND {$extra} GROUP BY device ORDER BY c DESC" ) as $r ) {
 			$out[ $r->device ] = (int) $r->c;
 		}
 		return $out;

@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ## [0.2.0-dev]
 
 ### Added
+- Theming: default style rebuilt on `--rcom-*` tokens with neutral fallbacks (no site-specific values), filters `rcom_load_default_css`, `rcom_css_classes`, `rcom_skin_active`, Settings > Appearance, `docs/theming.md`.
+- Demo data (admin button and `wp rcom demo add|clear`), flagged `is_demo`, shown on the page only; Dutch or English texts by locale.
+- Summary block full width with count per star; consistent label hints; full-width photo button; review header with larger stars and body-font names; owner reply as a compact tinted block.
+- Account page settings: grouped "Create the page" field with URL preview.
 - Account page `[rcom_account]` ("Pitmaster"): passwordless login by emailed single-use link (mail-scanner safe landing page, 15 minutes), server-side sessions with rotation, "My reviews / My votes / My data", change or remove votes, delete reviews, download data, newsletter unsubscribe (Laposta), log out everywhere, delete everything; re-authentication for sensitive actions; security log (90 days); admin can end sessions under People.
 - Settings: choose or create the account page (slug check, existing page detection), editable name of the account, `[rcom_account_link]`.
 - `rank_math/frontend/canonical` plus a duplicate-free own canonical on `?rcom_page=N` variants.

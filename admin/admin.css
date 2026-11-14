@@ -193,3 +193,16 @@ g:hover>.rcom-rect{fill:var(--ac-d)}
 .rcom-table .rcom-tr>span:has(.rcom-btn-a){flex-basis:auto}
 .rcom-a .rcom-table .rcom-tr a:not(.rcom-btn-a){color:var(--ink);text-decoration:none}
 .rcom-a .rcom-table .rcom-tr a:not(.rcom-btn-a):hover{color:var(--ac);text-decoration:underline}
+
+/* grouped fields (create page) and spacing rules for buttons next to fields */
+.rcom-create{display:grid;grid-template-columns:1fr;gap:16px;align-items:start;max-width:520px}
+.rcom-cf label{display:block;font-weight:600;margin:0 0 6px}
+.rcom-cf input{width:100%}
+.rcom-cf .rcom-muted{margin:6px 0 0}
+.rcom-pre{display:flex;align-items:center;border:1px solid #8c8f94;border-radius:6px;background:#fff;overflow:hidden}
+.rcom-pre span{padding:0 10px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60%;background:var(--soft);line-height:34px;font-size:12px}
+.rcom-pre span:last-child{background:var(--soft)}
+.rcom-pre input{border:0;border-radius:0;min-width:90px;flex:1 0 90px;box-shadow:none}
+.rcom-fc .rcom-btns{margin-top:16px}
+.rcom-fc>.rcom-btn-a,.rcom-fc input+.rcom-btn-a{margin-left:8px}
+@media (max-width:782px){.rcom-create{grid-template-columns:1fr}}

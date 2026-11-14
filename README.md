@@ -33,7 +33,8 @@ Requires WordPress 6.2+ and PHP 8.0+ (GD or Imagick with WebP support for photos
 | [Usage and shortcodes](docs/usage.md) | [Hooks and filters](docs/hooks-and-filters.md) |
 | [Security](docs/security.md) | [Privacy (GDPR)](docs/privacy.md) |
 | [Development and releases](docs/development.md) | [FAQ](docs/faq.md) |
-| [Licensing](docs/licensing.md) | [AI assistants](docs/ai.md) |
+| [Theming](docs/theming.md) | [Licensing](docs/licensing.md) |
+| [AI assistants](docs/ai.md) | |
 | [Changelog](CHANGELOG.md) | |
 
 ## Updates

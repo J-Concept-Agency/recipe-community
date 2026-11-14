@@ -9,9 +9,10 @@
 		});
 	};
 
+	var I = {}; try { I = JSON.parse($('#rcom-i18n').textContent); } catch (e) {}
 	var lf = $('.rcom-accform');
 	if (lf) {
-		var api = lf.dataset.api, T = JSON.parse(lf.dataset.t || '{}'), msg = $('.rcom-msg', lf), st, wid, ts, E = lf.elements;
+		var api = I.api + 'account/', T = I.ac || {}, msg = $('.rcom-msg', lf), st, wid, ts, E = lf.elements;
 		var say = function (m, e) { msg.textContent = m; msg.className = 'rcom-msg' + (e ? ' err' : ''); };
 		var state = function () {
 			return st || (st = j(api + 'state').then(function (d) { E.nonce.value = d.nonce; E.stamp.value = d.stamp; }).catch(function () { st = null; }));
@@ -38,7 +39,7 @@
 
 	var a = $('.rcom-acc');
 	if (!a) { return; }
-	var API = a.dataset.api, N = a.dataset.nonce, TT = JSON.parse(a.dataset.t || '{}'), box = $('.rcom-msg', a);
+	var API = (I.api || '') + 'account/', N = a.dataset.nonce, TT = I.ac || {}, box = $('.rcom-msg', a);
 	var tell = function (m, e) { box.textContent = m; box.className = 'rcom-msg' + (e ? ' err' : ''); };
 	var post = function (path, o) {
 		var f = new FormData(); Object.keys(o || {}).forEach(function (k) { f.append(k, o[k]); });

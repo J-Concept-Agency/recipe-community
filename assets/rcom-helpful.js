@@ -5,9 +5,10 @@
 			return r.json().then(function (d) { if (!r.ok) { throw d; } return d; });
 		});
 	};
+	var I = {}; try { I = JSON.parse(document.getElementById('rcom-i18n').textContent); } catch (e) {}
+	var api = I.api || '', T = I.hf || {};
 	[].slice.call(document.querySelectorAll('.rcom-helpful')).forEach(function (w) {
-		var api = w.dataset.api, pid = w.dataset.post, T = {}, st, S = {}, yes = +w.dataset.yes || 0, cur = '', wid, tsOn;
-		try { T = JSON.parse(w.dataset.t); } catch (e) {}
+		var pid = w.dataset.post, st, S = {}, yes = +w.dataset.yes || 0, cur = '', wid, tsOn;
 		var btns = [].slice.call(w.querySelectorAll('.rcom-hbtn[data-v]')), f = w.querySelector('.rcom-hform'), msg = w.querySelector('.rcom-hmsg'), cnt = w.querySelector('.rcom-hcount'), lab = f.querySelector('label'), ta = f.querySelector('textarea');
 		var post = function (path, o) { var d = new FormData(); Object.keys(o).forEach(function (k) { d.append(k, o[k]); }); d.append('post', pid); d.append('nonce', S.nonce); d.append('stamp', S.stamp); return j(api + path, { method: 'POST', body: d }); };
 		var say = function (t) { msg.textContent = t; };

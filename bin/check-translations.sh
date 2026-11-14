@@ -21,3 +21,12 @@ fi
 rm -rf "$TMP"
 if [ "$fail" -ne 0 ]; then echo "FAIL: translations incomplete"; exit 1; fi
 echo "OK: every source string is translated"
+
+# Rendered output (nl_NL and en_US) through WP-CLI: proves the compiled .mo is loaded and the output is in the right language.
+# Needs WP-CLI and a post with reviews: RCOM_CHECK_POST=<id> bin/check-translations.sh. Skipped when WP-CLI is absent.
+WP=${RCOM_WP:-wp}   # e.g. a wrapper that sets the database socket of a Local site
+if command -v "$WP" >/dev/null 2>&1; then
+  $WP eval-file "$PWD/bin/check-rendered.php" ${RCOM_CHECK_POST:-} --path="$(cd ../../.. && pwd)" || exit 1
+else
+  echo "SKIP: WP-CLI not found, rendered-output check not run"
+fi

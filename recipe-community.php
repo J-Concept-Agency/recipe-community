@@ -39,6 +39,7 @@ require_once RCOM_DIR . 'includes/class-laposta.php';
 require_once RCOM_DIR . 'includes/class-helpful.php';
 require_once RCOM_DIR . 'includes/class-abilities.php';
 require_once RCOM_DIR . 'includes/class-account.php';
+require_once RCOM_DIR . 'includes/class-demo.php';
 require_once RCOM_DIR . 'includes/class-front.php';
 require_once RCOM_DIR . 'includes/class-rest.php';
 require_once RCOM_DIR . 'includes/class-privacy.php';

@@ -246,8 +246,8 @@ class RCOM_Views {
 		$t     = RCOM_Reviews::table();
 		$per   = 25;
 		$page  = max( 1, (int) ( $_GET['paged'] ?? 1 ) );
-		$total = (int) $wpdb->get_var( "SELECT COUNT(DISTINCT post_id) FROM {$t}" );
-		$rows  = $wpdb->get_results( $wpdb->prepare( "SELECT post_id, COUNT(*) AS n, AVG(rating) AS avg, MAX(created_at) AS last, SUM(photo_status = 'pending') AS pend, SUM(rating = 1) AS d1, SUM(rating = 2) AS d2, SUM(rating = 3) AS d3, SUM(rating = 4) AS d4, SUM(rating = 5) AS d5 FROM {$t} GROUP BY post_id ORDER BY last DESC LIMIT %d OFFSET %d", $per, ( $page - 1 ) * $per ) );
+		$total = (int) $wpdb->get_var( "SELECT COUNT(DISTINCT post_id) FROM {$t} WHERE is_demo = 0" );
+		$rows  = $wpdb->get_results( $wpdb->prepare( "SELECT post_id, COUNT(*) AS n, AVG(rating) AS avg, MAX(created_at) AS last, SUM(photo_status = 'pending') AS pend, SUM(rating = 1) AS d1, SUM(rating = 2) AS d2, SUM(rating = 3) AS d3, SUM(rating = 4) AS d4, SUM(rating = 5) AS d5 FROM {$t} WHERE is_demo = 0 GROUP BY post_id ORDER BY last DESC LIMIT %d OFFSET %d", $per, ( $page - 1 ) * $per ) );
 		_prime_post_caches( array_map( 'intval', wp_list_pluck( $rows, 'post_id' ) ), false, false );
 		self::head( __( 'By recipe', 'recipe-community' ), __( 'Which recipes get reviews, and how they score.', 'recipe-community' ) );
 		if ( ! $rows ) {
@@ -355,7 +355,7 @@ class RCOM_Views {
 		if ( ! empty( $_GET['has_text'] ) ) {
 			$having[] = 'fb > 0';
 		}
-		$rows = $wpdb->get_results( "SELECT v.post_id, SUM(v.vote = 'yes') AS y, SUM(v.vote = 'no') AS n, MAX(v.created_at) AS last, SUM(v.created_at >= '" . gmdate( 'Y-m-d H:i:s', time() - 30 * DAY_IN_SECONDS ) . "') AS recent, (SELECT COUNT(*) FROM {$f} x WHERE x.post_id = v.post_id) AS fb FROM {$v} v GROUP BY v.post_id" . ( $having ? ' HAVING ' . implode( ' AND ', $having ) : '' ) . ' ORDER BY (n / (y + n)) DESC, n DESC LIMIT ' . $hper . ' OFFSET ' . ( ( $hpage - 1 ) * $hper ) );
+		$rows = $wpdb->get_results( "SELECT v.post_id, SUM(v.vote = 'yes') AS y, SUM(v.vote = 'no') AS n, MAX(v.created_at) AS last, SUM(v.created_at >= '" . gmdate( 'Y-m-d H:i:s', time() - 30 * DAY_IN_SECONDS ) . "') AS recent, (SELECT COUNT(*) FROM {$f} x WHERE x.post_id = v.post_id) AS fb FROM {$v} v WHERE v.is_demo = 0 GROUP BY v.post_id" . ( $having ? ' HAVING ' . implode( ' AND ', $having ) : '' ) . ' ORDER BY (n / (y + n)) DESC, n DESC LIMIT ' . $hper . ' OFFSET ' . ( ( $hpage - 1 ) * $hper ) );
 		_prime_post_caches( array_map( 'intval', wp_list_pluck( $rows, 'post_id' ) ), false, false );
 		self::head( __( 'Helpful', 'recipe-community' ), __( 'Was this article helpful? Votes and feedback per article, least helpful first.', 'recipe-community' ), '<a class="rcom-btn-a' . ( ! empty( $_GET['min_no'] ) ? ' primary' : '' ) . '" href="' . esc_url( self::url( 'rcom-helpful', empty( $_GET['min_no'] ) ? array( 'min_no' => 1 ) : array() ) ) . '">' . esc_html__( 'More No than Yes', 'recipe-community' ) . '</a> <a class="rcom-btn-a' . ( ! empty( $_GET['has_text'] ) ? ' primary' : '' ) . '" href="' . esc_url( self::url( 'rcom-helpful', empty( $_GET['has_text'] ) ? array( 'has_text' => 1 ) : array() ) ) . '">' . esc_html__( 'With feedback text', 'recipe-community' ) . '</a> <a class="rcom-btn-a" href="' . esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=rcom_export_fb' ), 'rcom_export_fb' ) ) . '">' . esc_html__( 'Export CSV', 'recipe-community' ) . '</a>' );
 		if ( ! $rows ) {
@@ -369,7 +369,7 @@ class RCOM_Views {
 		foreach ( $rows as $r ) {
 			echo '<a class="rcom-tr" href="' . esc_url( self::url( 'rcom-helpful', array( 'post' => $r->post_id ) ) ) . '"><span class="rcom-grow"><b>' . esc_html( self::title( $r->post_id ) ) . '</b></span><span class="num">' . (int) $r->y . '</span><span class="num">' . (int) $r->n . '</span><span class="num">' . round( 100 * $r->y / max( 1, $r->y + $r->n ) ) . '%</span><span class="num rcom-hide-s">' . (int) $r->fb . '</span><span class="num rcom-hide-s">' . (int) $r->recent . '</span></a>';
 		}
-		$htotal = (int) $wpdb->get_var( "SELECT COUNT(DISTINCT post_id) FROM {$v}" );
+		$htotal = (int) $wpdb->get_var( "SELECT COUNT(DISTINCT post_id) FROM {$v} WHERE is_demo = 0" );
 		echo '</div>' . self::foot( $htotal, $hper, $hpage ) . '</section></div>';
 	}
 
@@ -381,8 +381,8 @@ class RCOM_Views {
 		$per  = 40;
 		$page = max( 1, (int) ( $_GET['paged'] ?? 1 ) );
 		$t    = RCOM_Reviews::table();
-		$tot  = (int) $wpdb->get_var( "SELECT COUNT(DISTINCT email) FROM {$t}" );
-		$rows = $wpdb->get_results( $wpdb->prepare( "SELECT email, MAX(name) AS name, COUNT(*) AS n, MAX(created_at) AS last, MAX(newsletter_optin AND verified) AS nl, MAX(verified) AS ver FROM {$t} GROUP BY email ORDER BY last DESC LIMIT %d OFFSET %d", $per, ( $page - 1 ) * $per ) );
+		$tot  = (int) $wpdb->get_var( "SELECT COUNT(DISTINCT email) FROM {$t} WHERE is_demo = 0" );
+		$rows = $wpdb->get_results( $wpdb->prepare( "SELECT email, MAX(name) AS name, COUNT(*) AS n, MAX(created_at) AS last, MAX(newsletter_optin AND verified) AS nl, MAX(verified) AS ver FROM {$t} WHERE is_demo = 0 GROUP BY email ORDER BY last DESC LIMIT %d OFFSET %d", $per, ( $page - 1 ) * $per ) );
 		$vc = array();
 		if ( $rows ) {
 			$map = array();
@@ -506,6 +506,13 @@ class RCOM_Views {
 		echo self::field( __( 'Newsletter checkbox text', 'recipe-community' ), '<input name="newsletter_label" value="' . esc_attr( $o['newsletter_label'] ) . '" placeholder="' . esc_attr__( 'Yes, send me the newsletter', 'recipe-community' ) . '">' );
 		echo '</section>';
 
+		// Appearance
+		$skin = (bool) apply_filters( 'rcom_skin_active', false );
+		$dflt = (bool) apply_filters( 'rcom_load_default_css', true );
+		echo '<section class="rcom-card"><h2>' . esc_html__( 'Appearance', 'recipe-community' ) . '</h2><p class="rcom-muted">' . esc_html__( 'The plugin ships structure and a neutral default style built on CSS custom properties (--rcom-accent, --rcom-text, --rcom-surface, ...). A site links those tokens to its own variables in one small snippet (a skin). The filter rcom_load_default_css turns the default style off completely.', 'recipe-community' ) . '</p>';
+		echo self::field( __( 'Status', 'recipe-community' ), self::pill( $skin ? 'ok' : 'mute', $skin ? __( 'Site skin connected', 'recipe-community' ) : __( 'No skin: neutral default style', 'recipe-community' ) ) . ( $dflt ? '' : ' ' . self::pill( 'warn', __( 'Default style is off', 'recipe-community' ) ) ), '<a href="https://github.com/J-Concept-Agency/recipe-community/blob/main/docs/theming.md" target="_blank" rel="noopener">' . esc_html__( 'How theming works (docs/theming.md)', 'recipe-community' ) . '</a>' );
+		echo '</section>';
+
 		// Account
 		$ap = '<option value="0">&mdash;</option>';
 		foreach ( get_pages() as $pg ) {
@@ -515,7 +522,7 @@ class RCOM_Views {
 		echo '<section class="rcom-card"><h2>' . esc_html__( 'Account page', 'recipe-community' ) . '</h2><p class="rcom-muted">' . esc_html__( 'Visitors manage their reviews, votes and data on one page with the shortcode [rcom_account]. Without a page there are no links to it anywhere. [rcom_account_link] prints a small link, for example for the footer.', 'recipe-community' ) . '</p>';
 		echo self::field( __( 'Account page', 'recipe-community' ), '<select name="account_page">' . $ap . '</select>', __( 'Exclude this page from page caches (it is sent with no-store headers and noindex).', 'recipe-community' ) );
 		echo self::field( __( 'Name of the account', 'recipe-community' ), '<input name="account_label" value="' . esc_attr( $o['account_label'] ) . '" placeholder="' . esc_attr__( 'Pitmaster', 'recipe-community' ) . '">', __( 'Used in the link text and in the emails ("Go to your Pitmaster page").', 'recipe-community' ) );
-		echo self::field( __( 'Create the page', 'recipe-community' ), '<input name="account_slug" value="' . esc_attr( $sug ) . '" aria-label="' . esc_attr__( 'Slug', 'recipe-community' ) . '" style="max-width:180px"> <input name="account_title" value="' . esc_attr( __( 'Pitmaster', 'recipe-community' ) ) . '" aria-label="' . esc_attr__( 'Page title', 'recipe-community' ) . '" style="max-width:220px"> <button class="rcom-btn-a" name="rcom_after" value="create_account">' . esc_html__( 'Create page', 'recipe-community' ) . '</button>', __( 'Creates a published page with [rcom_account]. The slug is checked first; an existing page with the shortcode is chosen instead of making a second one.', 'recipe-community' ) );
+		echo self::field( __( 'Create the page', 'recipe-community' ), '<div class="rcom-create"><div class="rcom-cf"><label for="rcom-slug">' . esc_html__( 'Page URL', 'recipe-community' ) . '</label><div class="rcom-pre"><span>' . esc_html( trailingslashit( home_url( '/' ) ) ) . '</span><input id="rcom-slug" name="account_slug" value="' . esc_attr( $sug ) . '"><span>/</span></div><p class="rcom-muted">' . esc_html__( 'Letters, numbers and hyphens. Checked before the page is created.', 'recipe-community' ) . '</p></div><div class="rcom-cf"><label for="rcom-title">' . esc_html__( 'Page title', 'recipe-community' ) . '</label><input id="rcom-title" name="account_title" value="' . esc_attr( __( 'Pitmaster', 'recipe-community' ) ) . '"><p class="rcom-muted">' . esc_html__( 'Shown as the heading of the page.', 'recipe-community' ) . '</p></div></div><div class="rcom-btns"><button class="rcom-btn-a" name="rcom_after" value="create_account">' . esc_html__( 'Create page', 'recipe-community' ) . '</button></div>', __( 'Creates a published page with [rcom_account]. An existing page with the shortcode is chosen instead of making a second one.', 'recipe-community' ) );
 		echo '</section>';
 
 		// Helpful
@@ -609,6 +616,16 @@ class RCOM_Views {
 		echo $chk( __( 'Turnstile keys present', 'recipe-community' ), RCOM_Settings::turnstile_ready() );
 		echo $chk( __( 'Newsletter service', 'recipe-community' ), 'none' !== RCOM_Settings::get( 'newsletter_provider' ), RCOM_Newsletter::providers()[ RCOM_Settings::get( 'newsletter_provider' ) ]['label'] ?? '' );
 		echo $chk( __( 'Update check', 'recipe-community' ), ! RCOM_Updater::disabled(), RCOM_Updater::disabled() ? __( 'disabled', 'recipe-community' ) : __( 'GitHub releases', 'recipe-community' ) );
-		echo '</section></div>';
+		echo '</section>';
+		$posts = get_posts( array( 'post_type' => array_values( array_unique( array_merge( RCOM_Settings::post_types(), RCOM_Settings::helpful_types() ) ) ), 'numberposts' => 100, 'orderby' => 'title', 'order' => 'ASC' ) );
+		$opts  = '';
+		foreach ( $posts as $p ) {
+			$opts .= '<option value="' . (int) $p->ID . '">' . esc_html( $p->post_title ) . '</option>';
+		}
+		echo '<section class="rcom-card"><h2>' . esc_html__( 'Demo data', 'recipe-community' ) . '</h2><p class="rcom-muted">' . esc_html__( 'Adds example reviews (with a photo and replies) or votes to one post so you can preview the look. Demo data shows on that page only: it is left out of the dashboard, people, exports, newsletter and rcom_get_rating(). Command line: wp rcom demo add --post=ID and wp rcom demo clear.', 'recipe-community' ) . '</p>';
+		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php?action=rcom_demo' ) ) . '" class="rcom-btns">';
+		wp_nonce_field( 'rcom_demo' );
+		echo '<select name="post" aria-label="' . esc_attr__( 'Post', 'recipe-community' ) . '">' . $opts . '</select> <button class="rcom-btn-a primary" name="do" value="add">' . esc_html__( 'Add demo data', 'recipe-community' ) . '</button> <button class="rcom-btn-a" name="do" value="clear">' . esc_html__( 'Remove demo data', 'recipe-community' ) . '</button>';
+		echo ' <span class="rcom-muted">' . esc_html( sprintf( /* translators: %d: number of demo rows */ __( '%d demo rows present', 'recipe-community' ), RCOM_Demo::count() ) ) . '</span></form></section></div>';
 	}
 }

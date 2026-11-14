@@ -103,7 +103,7 @@ class RCOM_Account {
 	/* ---------- page and hooks ---------- */
 
 	public static function page_id() {
-		return (int) RCOM_Settings::get( 'account_page' );
+		return (int) get_option( 'rcom_account_pid', 0 ); // tiny autoloaded copy: no settings query on every front-end request
 	}
 
 	/** Name of the account, e.g. "Pitmaster" (editable in the settings). */
@@ -135,7 +135,7 @@ class RCOM_Account {
 			return $r;
 		} );
 		add_action( 'wp_enqueue_scripts', function () {
-			wp_register_style( 'rcom-account', RCOM_URL . 'assets/rcom-account.css', array( 'rcom' ), RCOM_VERSION );
+			wp_register_style( 'rcom-account', apply_filters( 'rcom_load_default_css', true ) ? RCOM_URL . 'assets/rcom-account.css' : false, array( 'rcom' ), RCOM_VERSION );
 			wp_register_script( 'rcom-account', RCOM_URL . 'assets/rcom-account.js', array(), RCOM_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		} );
 	}
@@ -322,18 +322,18 @@ class RCOM_Account {
 		if ( ! $rows ) {
 			return '<p class="rcom-small">' . esc_html__( 'You have not posted a review yet.', 'recipe-community' ) . '</p>';
 		}
-		$h = '';
+		$h = '<ul class="rcom-items">';
 		foreach ( $rows as $r ) {
-			$h .= '<article class="rcom-item" data-id="' . (int) $r->id . '"><header>' . RCOM_Front::stars( (int) $r->rating ) . '<strong class="rcom-name"><a href="' . esc_url( get_permalink( $r->post_id ) ) . '">' . esc_html( self::title( $r->post_id ) ) . '</a></strong><span class="rcom-small">' . esc_html( wp_date( get_option( 'date_format' ), strtotime( $r->created_at . ' UTC' ) ) ) . '</span>' . ( 'published' !== $r->status ? '<span class="rcom-own">' . esc_html__( 'Hidden', 'recipe-community' ) . '</span>' : '' ) . '<button type="button" class="rcom-del" data-act="del-review">' . esc_html__( 'Delete', 'recipe-community' ) . '</button></header>';
+			$h .= '<li class="rcom-item" data-id="' . (int) $r->id . '"><article class="rcom-review"><div class="rcom-head">' . RCOM_Front::stars( (int) $r->rating ) . '<strong class="rcom-name"><a href="' . esc_url( get_permalink( $r->post_id ) ) . '">' . esc_html( self::title( $r->post_id ) ) . '</a></strong><span class="rcom-small"><time datetime="' . esc_attr( gmdate( 'Y-m-d', strtotime( $r->created_at . ' UTC' ) ) ) . '">' . esc_html( wp_date( get_option( 'date_format' ), strtotime( $r->created_at . ' UTC' ) ) ) . '</time></span>' . ( 'published' !== $r->status ? '<span class="rcom-own">' . esc_html__( 'Hidden', 'recipe-community' ) . '</span>' : '' ) . '<button type="button" class="rcom-del" data-act="del-review">' . esc_html__( 'Delete', 'recipe-community' ) . '</button></div>';
 			if ( '' !== $r->body ) {
 				$h .= '<p>' . esc_html( $r->body ) . '</p>';
 			}
 			if ( $r->photo_file ) {
 				$h .= 'approved' === $r->photo_status ? '<img class="rcom-photo" src="' . esc_url( RCOM_Photo::url( $r->photo_file ) ) . '" width="320" height="240" loading="lazy" alt="">' : '<p class="rcom-note">' . esc_html__( 'Photo is being checked', 'recipe-community' ) . '</p>';
 			}
-			$h .= '</article>';
+			$h .= '</article></li>';
 		}
-		return $h;
+		return $h . '</ul>';
 	}
 
 	public static function sec_votes( $s ) {
@@ -376,8 +376,7 @@ class RCOM_Account {
 		wp_enqueue_style( 'rcom' );
 		wp_enqueue_style( 'rcom-account' );
 		wp_enqueue_script( 'rcom-account' );
-		$api = esc_url( rest_url( 'rcom/v1/account/' ) );
-		$t   = esc_attr( wp_json_encode( array(
+		RCOM_Front::i18n( 'ac', array(
 			'err'     => __( 'Something went wrong. Please try again.', 'recipe-community' ),
 			'sure'    => __( 'Delete this review?', 'recipe-community' ),
 			'sureall' => __( 'Delete everything for good?', 'recipe-community' ),
@@ -386,11 +385,10 @@ class RCOM_Account {
 			'sent'    => __( 'A new login link is on its way.', 'recipe-community' ),
 			'confirm' => __( 'Tick the box to confirm.', 'recipe-community' ),
 			'gone'    => __( 'Done.', 'recipe-community' ),
-		) ) );
+		) );
 		$s = self::session();
-		$sym = RCOM_Front::symbol();
 		if ( ! $s ) {
-			return '<form class="rcom-form rcom-accform" method="post" action="#" data-api="' . $api . '" data-ts="' . esc_attr( RCOM_Settings::turnstile_site() ) . '" data-t="' . $t . '"><p class="rcom-ft">' . esc_html__( 'Log in to your reviews', 'recipe-community' ) . '</p><div class="rcom-msg" role="status" aria-live="polite"></div><div class="rcom-f"><label for="rcom-ae">' . esc_html__( 'Email address', 'recipe-community' ) . '</label><input id="rcom-ae" name="email" type="email" required maxlength="190" autocomplete="email"></div><div class="rcom-hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div><input type="hidden" name="nonce"><input type="hidden" name="stamp"><div class="rcom-ts"></div><p class="rcom-small">' . esc_html__( 'We email you a login link. No password needed.', 'recipe-community' ) . '</p><div><button type="submit" class="rcom-btn">' . esc_html__( 'Send me a link', 'recipe-community' ) . '</button></div></form>';
+			return '<form class="rcom-form rcom-accform" method="post" action="#" data-ts="' . esc_attr( RCOM_Settings::turnstile_site() ) . '"><p class="rcom-ft">' . esc_html__( 'Log in to your reviews', 'recipe-community' ) . '</p><div class="rcom-msg" role="status" aria-live="polite"></div><div class="rcom-f"><label for="rcom-ae">' . esc_html__( 'Email address', 'recipe-community' ) . '</label><input id="rcom-ae" name="email" type="email" required maxlength="190" autocomplete="email"></div><div class="rcom-hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div><input type="hidden" name="nonce"><input type="hidden" name="stamp"><div class="rcom-ts"></div><p class="rcom-small">' . esc_html__( 'We email you a login link. No password needed.', 'recipe-community' ) . '</p><div><button type="submit" class="rcom-btn">' . esc_html__( 'Send me a link', 'recipe-community' ) . '</button></div></form>';
 		}
 		$secs = self::sections();
 		$nav  = '';
@@ -401,7 +399,7 @@ class RCOM_Account {
 			$body .= '<section class="rcom-sec" role="tabpanel" id="rcom-sec-' . esc_attr( $id ) . '" aria-labelledby="rcom-tab-' . esc_attr( $id ) . '"><h2 class="rcom-ft">' . esc_html( $sec['label'] ) . '</h2>' . call_user_func( $sec['cb'], $s ) . '</section>';
 			$i++;
 		}
-		return $sym . '<div class="rcom-acc" data-api="' . $api . '" data-nonce="' . esc_attr( self::nonce( $s ) ) . '" data-t="' . $t . '"><div class="rcom-msg" role="status" aria-live="polite"></div><div class="rcom-tabs" role="tablist">' . $nav . '</div>' . $body . '</div>';
+		return '<div class="rcom-acc" data-nonce="' . esc_attr( self::nonce( $s ) ) . '"><div class="rcom-msg" role="status" aria-live="polite"></div><div class="rcom-tabs" role="tablist">' . $nav . '</div>' . $body . '</div>';
 	}
 
 	/* ---------- REST ---------- */

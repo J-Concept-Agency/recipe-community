@@ -2,27 +2,29 @@
 	'use strict';
 	var $ = function (s, r) { return (r || document).querySelector(s); };
 	var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+	var I = {}; try { I = JSON.parse($('#rcom-i18n').textContent); } catch (x) {}
+	var T = I.rv || {}, api = I.api || '';
 	var j = function (u, o) {
 		return fetch(u, Object.assign({ credentials: 'same-origin' }, o)).then(function (r) {
 			return r.json().then(function (d) { if (!r.ok) { throw d; } return d; });
 		});
 	};
-	var post = function (api, path, o) { var f = new FormData(); Object.keys(o).forEach(function (k) { f.append(k, o[k]); }); return j(api + path, { method: 'POST', body: f }); };
+	var post = function (path, o) { var f = new FormData(); Object.keys(o).forEach(function (k) { f.append(k, o[k]); }); return j(api + path, { method: 'POST', body: f }); };
 	var gone = function (n) { n.parentNode.removeChild(n); };
+	var pid = function (el) { var s = el.closest('[data-post]'); return s ? s.dataset.post : ''; };
 
 	$$('.rcom-list').forEach(function (l) {
-		var b = $('.rcom-more', l), T = {}, live = $('.rcom-sr', l);
-		try { T = JSON.parse(l.dataset.t || '{}'); } catch (x) {}
+		var b = $('.rcom-more', l), live = $('.rcom-sr', l);
 		if (!b) { return; }
 		b.addEventListener('click', function (ev) {
 			ev.preventDefault();
 			if (b.getAttribute('aria-disabled')) { return; }
 			b.setAttribute('aria-disabled', 'true');
-			var items = $$('.rcom-item', l), last = items[items.length - 1];
-			j(l.dataset.api + 'reviews?post=' + l.dataset.post + '&limit=10&cursor=' + encodeURIComponent(last ? last.dataset.c : '')).then(function (d) {
+			var ul = $('.rcom-items', l), items = $$('.rcom-item', l), last = items[items.length - 1];
+			j(api + 'reviews?post=' + pid(l) + '&limit=10&cursor=' + encodeURIComponent(last ? last.dataset.c : '')).then(function (d) {
 				var t = document.createElement('div'); t.innerHTML = d.html;
 				var fresh = t.firstChild;
-				while (t.firstChild) { l.insertBefore(t.firstChild, b); }
+				while (t.firstChild) { ul.appendChild(t.firstChild); }
 				var left = +l.dataset.total - $$('.rcom-item', l).length;
 				if (!d.count || left <= 0) { gone(b); } else {
 					b.textContent = (T.more || '%s').replace('%s', left.toLocaleString());
@@ -36,8 +38,7 @@
 	});
 
 	$$('.rcom-form').forEach(function (f) {
-		var api = f.dataset.api, pid = f.dataset.post, msg = $('.rcom-msg', f), T = {}, st, wid, tsReady, E = f.elements;
-		try { T = JSON.parse(f.dataset.t || '{}'); } catch (x) {}
+		var post_id = pid(f), msg = $('.rcom-msg', f), st, S = {}, wid, tsReady, E = f.elements;
 		var say = function (m, err) { msg.textContent = m; msg.className = 'rcom-msg' + (err ? ' err' : ''); };
 		var q = /[?&]rcom=(confirmed|manage)/.exec(location.search);
 		if (q && T[q[1]]) { say(T[q[1]]); }
@@ -46,12 +47,12 @@
 			d.own.forEach(function (id) {
 				$$('.rcom-item[data-id="' + id + '"]').forEach(function (it) {
 					if ($('.rcom-del', it)) { return; }
-					var h = $('header', it), l = document.createElement('span'), b = document.createElement('button');
+					var h = $('.rcom-head', it), l = document.createElement('span'), b = document.createElement('button');
 					l.className = 'rcom-own'; l.textContent = T.mine;
 					b.type = 'button'; b.className = 'rcom-del'; b.textContent = T.del;
 					b.onclick = function () {
 						if (!confirm(T.sure)) { return; }
-						post(api, 'delete', { id: id, nonce: E.nonce.value }).then(function (r) { gone(it); say(r.message); }).catch(function (x) { say(x.message || T.err, 1); });
+						post('delete', { id: id, nonce: S.nonce }).then(function (r) { gone(it); say(r.message); }).catch(function (x) { say(x.message || T.err, 1); });
 					};
 					h.appendChild(l); h.appendChild(b);
 				});
@@ -59,8 +60,8 @@
 		}
 
 		function loadState() {
-			return st || (st = j(api + 'state?post=' + pid).then(function (d) {
-				E.nonce.value = d.nonce; E.stamp.value = d.stamp;
+			return st || (st = j(api + 'state?post=' + post_id).then(function (d) {
+				S = d;
 				mark(d);
 				if (d.own.length) {
 					$$(':scope > *', f).forEach(function (c) { if (!c.classList.contains('rcom-msg')) { c.hidden = true; } });
@@ -72,7 +73,7 @@
 					var p = document.createElement('p'); p.className = 'rcom-small';
 					p.textContent = T.as.replace('%s', d.me.hint) + ' ';
 					var b = document.createElement('button'); b.type = 'button'; b.className = 'rcom-del'; b.textContent = T.notyou;
-					b.onclick = function () { post(api, 'forget', {}).then(function () { gone(p); e.hidden = false; E.email.required = true; }); };
+					b.onclick = function () { post('forget', {}).then(function () { gone(p); e.hidden = false; E.email.required = true; }); };
 					p.appendChild(b); e.parentNode.parentNode.insertBefore(p, e.parentNode);
 				}
 			}).catch(function () { st = null; }));
@@ -81,9 +82,11 @@
 		function turnstile() {
 			if (!f.dataset.ts || tsReady) { return; }
 			tsReady = 1;
+			var box = document.createElement('div'); box.className = 'rcom-ts';
+			f.insertBefore(box, $('button[type=submit]', f).parentNode);
 			var s = document.createElement('script');
 			s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'; s.async = true;
-			s.onload = function () { wid = window.turnstile.render($('.rcom-ts', f), { sitekey: f.dataset.ts }); };
+			s.onload = function () { wid = window.turnstile.render(box, { sitekey: f.dataset.ts }); };
 			document.head.appendChild(s);
 		}
 		function init() { loadState(); turnstile(); }
@@ -127,18 +130,18 @@
 			ev.preventDefault();
 			sub.disabled = true;
 			loadState().then(function () {
-				var d = new FormData(f); d.append('post', pid);
+				var d = new FormData(f); d.append('post', post_id); d.append('nonce', S.nonce); d.append('stamp', S.stamp);
 				return j(api + 'reviews', { method: 'POST', body: d });
 			}).then(function (r) {
 				say(r.message);
 				f.reset();
 				if (r.html) {
-					var l = $('.rcom-list'), t = document.createElement('div'); t.innerHTML = r.html;
-					if (l) { l.insertBefore(t.firstChild, l.firstChild); }
+					var l = $('.rcom-list'), ul = l && $('.rcom-items', l), t = document.createElement('div'); t.innerHTML = r.html;
+					if (l && !ul) { ul = document.createElement('ul'); ul.className = 'rcom-items'; l.insertBefore(ul, l.firstChild); }
+					if (ul) { ul.insertBefore(t.firstChild, ul.firstChild); }
 				}
 			}).catch(function (x) { say((x && x.message) || T.err, 1); st = null; loadState(); })
 				.then(function () { sub.disabled = false; if (wid !== undefined) { window.turnstile.reset(wid); } });
 		});
-
 	});
 })();

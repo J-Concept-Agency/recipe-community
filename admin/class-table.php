@@ -164,7 +164,7 @@ class RCOM_Table extends WP_List_Table {
 				return '<a class="rcom-th" href="' . $u . '" target="_blank" rel="noopener"><img src="' . esc_url( RCOM_Photo::thumb_url( $r->photo_file ) ) . '" width="40" height="40" loading="lazy" alt=""><img class="big" src="' . $u . '" loading="lazy" alt=""></a><span class="rcom-dot ' . ( 'pending' === $r->photo_status ? 'warn' : 'ok' ) . '" title="' . esc_attr( 'pending' === $r->photo_status ? __( 'Waiting', 'recipe-community' ) : __( 'Approved', 'recipe-community' ) ) . '"></span>';
 			case 'status':
 				$h = $r->verified ? '<span class="rcom-pill ok">' . esc_html__( 'Verified', 'recipe-community' ) . '</span>' : '<span class="rcom-pill">' . esc_html__( 'Unverified', 'recipe-community' ) . '</span>';
-				return $h . ( 'hidden' === $r->status ? ' <span class="rcom-pill off">' . esc_html__( 'Hidden', 'recipe-community' ) . '</span>' : ( 'orphan' === $r->status ? ' <span class="rcom-pill off">' . esc_html__( 'Recipe deleted', 'recipe-community' ) . '</span>' : '' ) );
+				return ( $r->is_demo ? '<span class="rcom-pill warn">' . esc_html__( 'Demo', 'recipe-community' ) . '</span> ' : '' ) . $h . ( 'hidden' === $r->status ? ' <span class="rcom-pill off">' . esc_html__( 'Hidden', 'recipe-community' ) . '</span>' : ( 'orphan' === $r->status ? ' <span class="rcom-pill off">' . esc_html__( 'Recipe deleted', 'recipe-community' ) . '</span>' : '' ) );
 			case 'created_at':
 				return '<span title="' . esc_attr( RCOM_Views::dt( $r->created_at, true ) ) . '">' . esc_html( RCOM_Views::dt( $r->created_at ) ) . '</span>';
 		}

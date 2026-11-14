@@ -14,6 +14,7 @@ class RCOM_Admin {
 		add_action( 'admin_notices', array( __CLASS__, 'notices' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'assets' ) );
 		add_action( 'admin_post_rcom_repair', array( __CLASS__, 'repair' ) );
+		add_action( 'admin_post_rcom_demo', array( __CLASS__, 'demo' ) );
 		add_action( 'admin_init', array( 'RCOM_Integrity', 'schedule' ) );
 		add_action( 'admin_post_rcom_export_fb', array( __CLASS__, 'export_feedback' ) );
 		add_action( 'admin_post_rcom_export', array( __CLASS__, 'export' ) );
@@ -72,6 +73,22 @@ class RCOM_Admin {
 			return;
 		}
 		echo '<div class="notice notice-warning"><p><strong>Recipe Community:</strong> ' . esc_html__( 'the review form is hidden for visitors until you add Cloudflare Turnstile keys.', 'recipe-community' ) . ' <a href="' . esc_url( admin_url( 'admin.php?page=rcom-settings' ) ) . '">' . esc_html__( 'Open settings', 'recipe-community' ) . '</a></p></div>';
+	}
+
+	public static function demo() {
+		self::guard();
+		check_admin_referer( 'rcom_demo' );
+		$n = 0;
+		if ( 'clear' === ( $_POST['do'] ?? '' ) ) {
+			$n = RCOM_Demo::clear();
+		} else {
+			$id = (int) ( $_POST['post'] ?? 0 );
+			if ( $id && get_post( $id ) ) {
+				$n = ( RCOM_Settings::enabled_for( $id ) ? RCOM_Demo::add( $id ) : 0 ) + ( RCOM_Settings::helpful_enabled_for( $id ) ? RCOM_Demo::add_votes( $id ) : 0 );
+			}
+		}
+		wp_safe_redirect( add_query_arg( 'done', $n, admin_url( 'admin.php?page=rcom-about' ) ) );
+		exit;
 	}
 
 	public static function repair() {
@@ -228,6 +245,7 @@ class RCOM_Admin {
 		}
 		update_option( 'rcom_settings', $new, false );
 		update_option( 'rcom_ai_on', $new['ai_abilities'] ? 1 : 0, true );
+		update_option( 'rcom_account_pid', (int) $new['account_page'], true );
 		delete_transient( 'rcom_update' );
 		delete_transient( 'rcom_lp_lists' );
 		$arg = array( 'done' => 1 );
@@ -369,7 +387,7 @@ class RCOM_Admin {
 		$o = fopen( 'php://output', 'w' );
 		fwrite( $o, "\xEF\xBB\xBF" );
 		fputcsv( $o, array( 'ID', 'Recipe', 'Stars', 'Review', 'Name', 'Email', 'BBQ', 'Photo status', 'Verified', 'Newsletter (confirmed)', 'Status', 'Reply', 'Date (UTC)' ), ';', '"', '' );
-		foreach ( $wpdb->get_results( 'SELECT * FROM ' . RCOM_Reviews::table() . ' ORDER BY id' ) as $r ) {
+		foreach ( $wpdb->get_results( 'SELECT * FROM ' . RCOM_Reviews::table() . ' WHERE is_demo = 0 ORDER BY id' ) as $r ) {
 			fputcsv( $o, array_map( $safe, array( $r->id, get_the_title( $r->post_id ), $r->rating, $r->body, $r->name, $r->email, $r->bbq_type, $r->photo_status, $r->verified, ( $r->newsletter_optin && $r->verified ) ? 1 : 0, $r->status, $r->reply_text, $r->created_at ) ), ';', '"', '' );
 		}
 		fclose( $o );

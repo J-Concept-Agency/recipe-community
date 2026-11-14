@@ -41,3 +41,7 @@ The values are cached in post meta `_rcom_avg`, `_rcom_count`, `_rcom_vcount`, `
 ## Managing your own review
 
 Only visitors identified through the confirmation link see "Your review - Delete" at their own review. Every confirmation mail contains that link. There is no manage page yet; the REST route `POST /rcom/v1/link` ("send me a link") stays available for a future `[rcom_account]` page.
+
+## Demo data
+
+Settings > About > Demo data, or `wp rcom demo add --post=<id>` and `wp rcom demo clear`. Demo reviews, replies, a photo and demo votes show on that one page (average, list, helpful count) and are marked Demo in the admin. They are excluded from the dashboard, people, CSV export, the newsletter and `rcom_get_rating()`. Texts are Dutch for `nl_*` locales, English otherwise.

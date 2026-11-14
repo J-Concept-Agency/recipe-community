@@ -1,13 +1,16 @@
-# Dutch translation of Recipe Community.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Recipe Community package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Recipe Community\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-14 15:20+0100\n"
-"PO-Revision-Date: 2026-11-14 14:00+0100\n"
-"Last-Translator: J-Concept\n"
+"POT-Creation-Date: 2026-11-14 15:49+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: J-Concept\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
@@ -19,8 +22,8 @@ msgstr ""
 msgid "Reviews and helpful votes of recipe pages."
 msgstr "Beoordelingen en nuttig-stemmen van receptpagina's."
 
-#: includes/class-account.php:112 admin/class-views.php:517
-#: admin/class-views.php:518
+#: includes/class-account.php:112 admin/class-views.php:524
+#: admin/class-views.php:525
 msgid "Pitmaster"
 msgstr "Pitmaster"
 
@@ -81,13 +84,13 @@ msgstr "Je hebt nog geen beoordeling geplaatst."
 msgid "Hidden"
 msgstr "Verborgen"
 
-#: includes/class-account.php:327 includes/class-front.php:174
+#: includes/class-account.php:327 includes/class-front.php:187
 #: admin/class-table.php:39 admin/class-table.php:143 admin/class-views.php:318
 #: admin/class-views.php:344
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: includes/class-account.php:332 includes/class-front.php:236
+#: includes/class-account.php:332 includes/class-front.php:250
 msgid "Photo is being checked"
 msgstr "Foto wordt gecontroleerd"
 
@@ -95,19 +98,19 @@ msgstr "Foto wordt gecontroleerd"
 msgid "You have not voted yet."
 msgstr "Je hebt nog niet gestemd."
 
-#: includes/class-account.php:347 includes/class-helpful.php:174
+#: includes/class-account.php:347 includes/class-helpful.php:176
 #: includes/class-privacy.php:32 admin/class-views.php:335
 #: admin/class-views.php:344 admin/class-views.php:367
 msgid "Yes"
 msgstr "Ja"
 
-#: includes/class-account.php:347 includes/class-helpful.php:174
+#: includes/class-account.php:347 includes/class-helpful.php:176
 #: includes/class-privacy.php:32 admin/class-views.php:335
 #: admin/class-views.php:344 admin/class-views.php:367
 msgid "No"
 msgstr "Nee"
 
-#: includes/class-account.php:347 includes/class-helpful.php:169
+#: includes/class-account.php:347 includes/class-helpful.php:170
 msgid "Remove my vote"
 msgstr "Haal mijn stem weg"
 
@@ -161,133 +164,140 @@ msgid ""
 "chosen under Settings > Account page (only you can see this message)."
 msgstr "Recipe Community: de accountpagina heeft de Turnstile-sleutels nodig en moet gekozen zijn onder Instellingen > Accountpagina (alleen jij ziet dit bericht)."
 
-#: includes/class-account.php:381 includes/class-account.php:624
-#: includes/class-front.php:178 includes/class-helpful.php:167
-#: includes/class-helpful.php:216 includes/class-helpful.php:239
-#: includes/class-helpful.php:247 includes/class-helpful.php:257
-#: includes/class-helpful.php:280 includes/class-helpful.php:292
-#: includes/class-helpful.php:295 includes/class-helpful.php:320
+#: includes/class-account.php:380 includes/class-account.php:623
+#: includes/class-front.php:191 includes/class-helpful.php:168
+#: includes/class-helpful.php:218 includes/class-helpful.php:241
+#: includes/class-helpful.php:249 includes/class-helpful.php:259
+#: includes/class-helpful.php:282 includes/class-helpful.php:294
+#: includes/class-helpful.php:297 includes/class-helpful.php:322
 msgid "Something went wrong. Please try again."
 msgstr "Er ging iets mis. Probeer het nog een keer."
 
-#: includes/class-account.php:382 admin/class-table.php:143
+#: includes/class-account.php:381 admin/class-table.php:143
 #: admin/class-views.php:318
 msgid "Delete this review?"
 msgstr "Deze beoordeling verwijderen?"
 
-#: includes/class-account.php:383
+#: includes/class-account.php:382
 msgid "Delete everything for good?"
 msgstr "Alles definitief verwijderen?"
 
-#: includes/class-account.php:384 includes/class-account.php:438
+#: includes/class-account.php:383 includes/class-account.php:437
 msgid "For your safety please log in again with a fresh link first."
 msgstr "Log voor je veiligheid eerst opnieuw in met een verse link."
 
-#: includes/class-account.php:385
+#: includes/class-account.php:384
 msgid "Send me a new login link"
 msgstr "Stuur me een nieuwe inloglink"
 
-#: includes/class-account.php:386 includes/class-account.php:612
+#: includes/class-account.php:385 includes/class-account.php:611
 msgid "A new login link is on its way."
 msgstr "Er is een nieuwe inloglink onderweg."
 
-#: includes/class-account.php:387 includes/class-account.php:571
+#: includes/class-account.php:386 includes/class-account.php:570
 msgid "Tick the box to confirm."
 msgstr "Vink het vakje aan om te bevestigen."
 
-#: includes/class-account.php:388 admin/class-views.php:19
+#: includes/class-account.php:387 admin/class-views.php:19
 msgid "Done."
 msgstr "Klaar."
 
-#: includes/class-account.php:392
+#: includes/class-account.php:391
 msgid "Log in to your reviews"
 msgstr "Log in bij je beoordelingen"
 
-#: includes/class-account.php:392 includes/class-privacy.php:31
+#: includes/class-account.php:391 includes/class-front.php:208
+#: includes/class-privacy.php:31
 msgid "Email address"
 msgstr "E-mailadres"
 
-#: includes/class-account.php:392
+#: includes/class-account.php:391
 msgid "We email you a login link. No password needed."
 msgstr "We mailen je een inloglink. Geen wachtwoord nodig."
 
-#: includes/class-account.php:392
+#: includes/class-account.php:391
 msgid "Send me a link"
 msgstr "Stuur me een link"
 
-#: includes/class-account.php:422
+#: includes/class-account.php:421
 msgid "Please log in again."
 msgstr "Log opnieuw in."
 
-#: includes/class-account.php:449
+#: includes/class-account.php:448
 msgid "If this address has reviews or votes, a login link is on its way."
 msgstr "Als dit adres beoordelingen of stemmen heeft, is er een inloglink onderweg."
 
-#: includes/class-account.php:451 includes/class-account.php:455
+#: includes/class-account.php:450 includes/class-account.php:454
 #: includes/class-rest.php:97 includes/class-rest.php:105
 #: includes/class-rest.php:193
 msgid "The form has expired. Please reload the page and try again."
 msgstr "Het formulier is verlopen. Laad de pagina opnieuw en probeer het nog een keer."
 
-#: includes/class-account.php:461 includes/class-account.php:514
-#: includes/class-account.php:529 includes/class-account.php:606
+#: includes/class-account.php:460 includes/class-account.php:513
+#: includes/class-account.php:528 includes/class-account.php:605
 #: includes/class-rest.php:199
 msgid "Too many requests. Please try again later."
 msgstr "Te veel verzoeken. Probeer het later nog een keer."
 
-#: includes/class-account.php:464 includes/class-helpful.php:298
+#: includes/class-account.php:463 includes/class-helpful.php:300
 #: includes/class-rest.php:114
 msgid "The spam check failed. Please try again."
 msgstr "De spamcontrole is mislukt. Probeer het nog een keer."
 
-#: includes/class-account.php:469 includes/class-rest.php:137
+#: includes/class-account.php:468 includes/class-rest.php:137
 #: includes/class-rest.php:196
 msgid "Please enter a valid email address."
 msgstr "Vul een geldig e-mailadres in."
 
-#: includes/class-account.php:518 includes/class-account.php:535
+#: includes/class-account.php:517 includes/class-account.php:534
 msgid "Not found."
 msgstr "Niet gevonden."
 
-#: includes/class-front.php:77
+#: includes/class-front.php:82
 msgid "Charcoal"
 msgstr "Houtskool"
 
-#: includes/class-front.php:77
+#: includes/class-front.php:82
 msgid "made on charcoal"
 msgstr "gemaakt op houtskool"
 
-#: includes/class-front.php:78
+#: includes/class-front.php:83
 msgid "Gas grill"
 msgstr "Gasbarbecue"
 
-#: includes/class-front.php:78
+#: includes/class-front.php:83
 msgid "made on a gas grill"
 msgstr "gemaakt op een gasbarbecue"
 
-#: includes/class-front.php:79
+#: includes/class-front.php:84
 msgid "Kamado"
 msgstr "Kamado"
 
-#: includes/class-front.php:79
+#: includes/class-front.php:84
 msgid "made on a kamado"
 msgstr "gemaakt op een kamado"
 
-#: includes/class-front.php:80
+#: includes/class-front.php:85
 msgid "Pellet grill"
 msgstr "Pelletgrill"
 
-#: includes/class-front.php:80
+#: includes/class-front.php:85
 msgid "made on a pellet grill"
 msgstr "gemaakt op een pelletgrill"
 
-#: includes/class-front.php:81
+#: includes/class-front.php:86
 msgid "Something else"
 msgstr "Iets anders"
 
+#. translators: %s: rating
+#: includes/class-front.php:93
+#, php-format
+msgid "%s out of 5 stars"
+msgstr "%s van de 5 sterren"
+
 #. translators: %s: number of reviews
 #. translators: 1: average rating, 2: number of reviews
-#: includes/class-front.php:111 admin/class-admin.php:318
+#: includes/class-front.php:102 admin/class-admin.php:336
 #: admin/class-views.php:279 admin/class-views.php:415
 #, php-format
 msgid "%s review"
@@ -296,261 +306,256 @@ msgstr[0] "%s beoordeling"
 msgstr[1] "%s beoordelingen"
 
 #. translators: %d: number of stars
-#: includes/class-front.php:116
+#: includes/class-front.php:107
 #, php-format
 msgid "%d star"
 msgid_plural "%d stars"
 msgstr[0] "%d ster"
 msgstr[1] "%d sterren"
 
-#: includes/class-front.php:120
+#: includes/class-front.php:133
 msgid "Powered by J-Concept"
 msgstr "Mogelijk gemaakt door J-Concept"
 
-#: includes/class-front.php:134
+#: includes/class-front.php:147
 msgid "No reviews yet. Be the first to rate this recipe."
 msgstr "Nog geen beoordelingen. Beoordeel dit recept als eerste."
 
 #. translators: %s: average rating, e.g. 4,5
-#: includes/class-front.php:137
+#: includes/class-front.php:150
 #, php-format
 msgid "%s out of 5"
 msgstr "%s uit 5"
 
-#: includes/class-front.php:149
+#: includes/class-front.php:162
 msgid ""
 "This recipe has no reviews yet. Did you make it? Let me know what you "
 "thought."
 msgstr "Dit recept heeft nog geen beoordelingen. Heb je het gemaakt? Laat me weten wat je ervan vond."
 
-#: includes/class-front.php:151
+#: includes/class-front.php:164
 msgid "Distribution of the reviews"
 msgstr "Verdeling van de beoordelingen"
 
-#: includes/class-front.php:165
+#: includes/class-front.php:178
 msgid ""
 "Recipe Community: the review form is hidden because the Turnstile keys are "
 "missing. Add them under Recipe community > Settings (only you can see this "
 "message)."
 msgstr "Recipe Community: het beoordelingsformulier is verborgen omdat de Turnstile-sleutels ontbreken. Voeg ze toe onder Recept-community > Instellingen (alleen jij ziet dit bericht)."
 
-#: includes/class-front.php:169
+#: includes/class-front.php:182
 msgid "Thanks, your email address is confirmed."
 msgstr "Bedankt, je e-mailadres is bevestigd."
 
-#: includes/class-front.php:170
+#: includes/class-front.php:183
 msgid "Done. You can now remove your review on this device for 30 days."
 msgstr "Klaar. Je kunt je beoordeling de komende 30 dagen op dit apparaat zelf verwijderen."
 
 #. translators: %s: masked email address
-#: includes/class-front.php:172
+#: includes/class-front.php:185
 #, php-format
 msgid "Posting with %s."
 msgstr "Je plaatst met %s."
 
-#: includes/class-front.php:173
+#: includes/class-front.php:186
 msgid "Not you?"
 msgstr "Ben jij dit niet?"
 
-#: includes/class-front.php:175
+#: includes/class-front.php:188
 msgid "Your review"
 msgstr "Jouw beoordeling"
 
-#: includes/class-front.php:176
+#: includes/class-front.php:189
 msgid "Thanks for your review."
 msgstr "Bedankt voor je beoordeling."
 
-#: includes/class-front.php:177
+#: includes/class-front.php:190
 msgid "Remove your review?"
 msgstr "Je beoordeling verwijderen?"
 
-#: includes/class-front.php:179
+#: includes/class-front.php:192
 msgid "Change photo"
 msgstr "Foto wijzigen"
 
-#: includes/class-front.php:180 includes/class-front.php:198
+#: includes/class-front.php:193 includes/class-front.php:213
 msgid "Add photo"
 msgstr "Foto toevoegen"
 
-#: includes/class-front.php:181
+#: includes/class-front.php:194
 msgid "Please choose a JPG, PNG or WebP image."
 msgstr "Kies een JPG-, PNG- of WebP-afbeelding."
 
-#: includes/class-front.php:182
+#: includes/class-front.php:195
 msgid "This photo is too large (max 8 MB)."
 msgstr "Deze foto is te groot (max. 8 MB)."
 
-#: includes/class-front.php:185
+#: includes/class-front.php:196
+#, php-format
+msgid "Show more (%s left)"
+msgstr "Toon meer (nog %s)"
+
+#: includes/class-front.php:197
+msgid "More reviews loaded."
+msgstr "Meer beoordelingen geladen."
+
+#: includes/class-front.php:200
 msgid "Rate this recipe"
 msgstr "Beoordeel dit recept"
 
-#: includes/class-front.php:186
+#: includes/class-front.php:201
 msgid "Your rating"
 msgstr "Jouw beoordeling"
 
-#: includes/class-front.php:191
-msgid "What did you think? (optional)"
-msgstr "Wat vond je ervan? (optioneel)"
+#: includes/class-front.php:206
+msgid "What did you think?"
+msgstr "Wat vond je ervan?"
 
-#: includes/class-front.php:191
+#: includes/class-front.php:206 includes/class-front.php:209
+#: includes/class-front.php:213
+msgid "optional"
+msgstr "optioneel"
+
+#: includes/class-front.php:206
 msgid "How did it go and what did you cook it on?"
 msgstr "Hoe ging het en op welke BBQ heb je het gemaakt?"
 
-#: includes/class-front.php:192
+#: includes/class-front.php:207
 msgid "First name"
 msgstr "Voornaam"
 
-#: includes/class-front.php:193
-msgid "Email address (never shown)"
-msgstr "E-mailadres (wordt nooit getoond)"
+#: includes/class-front.php:208
+msgid "never shown"
+msgstr "wordt nooit getoond"
 
-#: includes/class-front.php:194
-msgid "Which BBQ? (optional)"
-msgstr "Op welke BBQ? (optioneel)"
+#: includes/class-front.php:209
+msgid "Which BBQ?"
+msgstr "Op welke BBQ?"
 
-#: includes/class-front.php:194
+#: includes/class-front.php:209
 msgid "Choose your BBQ"
 msgstr "Kies je BBQ"
 
-#: includes/class-front.php:198 includes/class-privacy.php:36
+#: includes/class-front.php:213 includes/class-privacy.php:36
 #: admin/class-table.php:24
 msgid "Photo"
 msgstr "Foto"
 
-#: includes/class-front.php:198
-msgid "optional"
-msgstr "optioneel"
-
-#: includes/class-front.php:198
+#: includes/class-front.php:213
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: includes/class-front.php:199 admin/class-views.php:506
+#: includes/class-front.php:214 admin/class-views.php:506
 msgid "Yes, send me the newsletter"
 msgstr "Ja, stuur me de nieuwsbrief"
 
-#: includes/class-front.php:201
+#: includes/class-front.php:216
 msgid "terms"
 msgstr "voorwaarden"
 
 #. translators: %1$s: the word "terms", linked to the terms page
-#: includes/class-front.php:204
+#: includes/class-front.php:219
 #, php-format
 msgid "I agree to the %1$s"
 msgstr "Ik ga akkoord met de %1$s"
 
-#: includes/class-front.php:208
+#: includes/class-front.php:222
 msgid "Post review"
 msgstr "Plaats beoordeling"
 
 #. translators: %1$s: the words "privacy policy", linked to the privacy page
-#: includes/class-front.php:212
+#: includes/class-front.php:226
 #, php-format
 msgid ""
 "Your email address is never visible and only used for the confirmation (and "
 "for the newsletter if you tick it). More in the %1$s."
 msgstr "Je e-mailadres is nooit zichtbaar en wordt alleen gebruikt voor de bevestiging (en voor de nieuwsbrief als je die aanvinkt). Meer in het %1$s."
 
-#: includes/class-front.php:212
+#: includes/class-front.php:226
 msgid "privacy policy"
 msgstr "privacybeleid"
 
-#: includes/class-front.php:214
+#: includes/class-front.php:228
 msgid ""
 "Your email address is never visible and only used for the confirmation (and "
 "for the newsletter if you tick it)."
 msgstr "Je e-mailadres is nooit zichtbaar en wordt alleen gebruikt voor de bevestiging (en voor de nieuwsbrief als je die aanvinkt)."
 
-#: includes/class-front.php:216
+#: includes/class-front.php:230
 msgid "JavaScript is needed to post a review."
 msgstr "Je hebt JavaScript nodig om een beoordeling te plaatsen."
 
-#. translators: %d: stars
-#: includes/class-front.php:224
-#, php-format
-msgid "%d out of 5 stars."
-msgstr "%d van 5 sterren."
-
 #. translators: %s: first name
-#: includes/class-front.php:233
+#: includes/class-front.php:247
 #, php-format
 msgid "Photo of the dish by %s"
 msgstr "Foto van het gerecht door %s"
 
-#: includes/class-front.php:240 admin/class-views.php:488
+#: includes/class-front.php:254 admin/class-views.php:488
 msgid "Reply from the author"
 msgstr "Reactie van de auteur"
 
-#: includes/class-front.php:255
-#, php-format
-msgid "Show more (%s left)"
-msgstr "Toon meer (nog %s)"
-
-#: includes/class-front.php:255
-msgid "More reviews loaded."
-msgstr "Meer beoordelingen geladen."
-
 #. translators: %s: number of reviews
-#: includes/class-front.php:265
+#: includes/class-front.php:280
 #, php-format
 msgid "Show all %s reviews"
 msgstr "Toon alle %s beoordelingen"
 
-#: includes/class-front.php:278 admin/class-admin.php:35
+#: includes/class-front.php:293 admin/class-admin.php:36
 #: admin/class-views.php:110 admin/class-views.php:217
 #: admin/class-views.php:259 admin/class-views.php:484
 msgid "Reviews"
 msgstr "Beoordelingen"
 
 #. translators: %s: number of people
-#: includes/class-helpful.php:138 includes/class-helpful.php:168
+#: includes/class-helpful.php:139 includes/class-helpful.php:169
 #, php-format
 msgid "%s person found this article helpful."
 msgid_plural "%s people found this article helpful."
 msgstr[0] "%s persoon vond dit artikel nuttig."
 msgstr[1] "%s mensen vonden dit artikel nuttig."
 
-#: includes/class-helpful.php:160
+#: includes/class-helpful.php:161
 msgid "Was this article helpful?"
 msgstr "Was dit artikel nuttig?"
 
-#: includes/class-helpful.php:161
+#: includes/class-helpful.php:162
 msgid "Thanks for your feedback."
 msgstr "Bedankt voor je feedback."
 
-#: includes/class-helpful.php:162 admin/class-views.php:534
+#: includes/class-helpful.php:163 admin/class-views.php:541
 msgid "What did you like?"
 msgstr "Wat vond je fijn?"
 
-#: includes/class-helpful.php:163 admin/class-views.php:535
+#: includes/class-helpful.php:164 admin/class-views.php:542
 msgid "What could be better?"
 msgstr "Wat kunnen we beter?"
 
-#: includes/class-helpful.php:164
+#: includes/class-helpful.php:165
 msgid "Good to hear, thank you."
 msgstr "Fijn om te horen, bedankt."
 
-#: includes/class-helpful.php:165
+#: includes/class-helpful.php:166
 msgid "Sorry about that."
 msgstr "Jammer om te horen."
 
-#: includes/class-helpful.php:166
+#: includes/class-helpful.php:167
 msgid "Thank you, your feedback has been sent."
 msgstr "Bedankt, je feedback is verstuurd."
 
-#: includes/class-helpful.php:176
+#: includes/class-helpful.php:178
 msgid "Send"
 msgstr "Versturen"
 
-#: includes/class-helpful.php:176
+#: includes/class-helpful.php:178
 msgid "Anonymous. Optional."
 msgstr "Anoniem. Optioneel."
 
-#: includes/class-helpful.php:219 includes/class-rest.php:108
+#: includes/class-helpful.php:221 includes/class-rest.php:108
 msgid "Please wait a moment and try again."
 msgstr "Wacht even en probeer het dan nog een keer."
 
-#: includes/class-helpful.php:308
+#: includes/class-helpful.php:310
 msgid "Please leave out links."
 msgstr "Laat links weg."
 
@@ -672,7 +677,7 @@ msgid "Name"
 msgstr "Naam"
 
 #: includes/class-privacy.php:32 admin/class-views.php:415
-#: admin/class-views.php:546
+#: admin/class-views.php:553
 msgid "Newsletter"
 msgstr "Nieuwsbrief"
 
@@ -754,88 +759,88 @@ msgid ""
 "verified reviewers, no WordPress comments."
 msgstr "Community-functies voor receptensites: sterbeoordelingen met foto's, schrijvers met bevestigd e-mailadres, geen WordPress-reacties."
 
-#: admin/class-admin.php:24 admin/class-admin.php:39 admin/class-views.php:438
+#: admin/class-admin.php:25 admin/class-admin.php:40 admin/class-views.php:438
 msgid "Settings"
 msgstr "Instellingen"
 
-#: admin/class-admin.php:32 admin/class-admin.php:43 admin/class-views.php:96
+#: admin/class-admin.php:33 admin/class-admin.php:44 admin/class-views.php:96
 msgid "Community"
 msgstr "Community"
 
-#: admin/class-admin.php:34
+#: admin/class-admin.php:35
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: admin/class-admin.php:36 admin/class-views.php:252
+#: admin/class-admin.php:37 admin/class-views.php:252
 msgid "By recipe"
 msgstr "Per recept"
 
-#: admin/class-admin.php:37 admin/class-views.php:335 admin/class-views.php:360
+#: admin/class-admin.php:38 admin/class-views.php:335 admin/class-views.php:360
 #: admin/class-views.php:367
 msgid "Helpful"
 msgstr "Nuttig"
 
-#: admin/class-admin.php:38 admin/class-views.php:408
+#: admin/class-admin.php:39 admin/class-views.php:408
 msgid "People"
 msgstr "Personen"
 
-#: admin/class-admin.php:40 admin/class-views.php:594
+#: admin/class-admin.php:41 admin/class-views.php:601
 msgid "About"
 msgstr "Over"
 
 #. translators: %s: table names
-#: admin/class-admin.php:63
+#: admin/class-admin.php:64
 #, php-format
 msgid ""
 "database tables are missing (%s). Data in them cannot be recovered; the "
 "tables can be recreated empty."
 msgstr "er ontbreken databasetabellen (%s). De gegevens daarin kunnen niet worden teruggehaald; de tabellen kunnen leeg opnieuw worden aangemaakt."
 
-#: admin/class-admin.php:63
+#: admin/class-admin.php:64
 msgid "Repair tables"
 msgstr "Tabellen herstellen"
 
-#: admin/class-admin.php:66
+#: admin/class-admin.php:67
 msgid ""
 "no privacy page is set, so the privacy line under the review button is not "
 "shown."
 msgstr "er is geen privacypagina ingesteld, daarom wordt de privacyregel onder de verstuurknop niet getoond."
 
-#: admin/class-admin.php:66 admin/class-admin.php:69 admin/class-admin.php:74
+#: admin/class-admin.php:67 admin/class-admin.php:70 admin/class-admin.php:75
 #: admin/class-views.php:31 admin/class-views.php:35 admin/class-views.php:362
 #: admin/class-views.php:410
 msgid "Open settings"
 msgstr "Instellingen openen"
 
-#: admin/class-admin.php:69
+#: admin/class-admin.php:70
 msgid ""
 "no terms page is set. The review form asks for agreement but cannot link to "
 "the terms."
 msgstr "er is geen voorwaardenpagina ingesteld. Het formulier vraagt om akkoord maar kan niet naar de voorwaarden linken."
 
-#: admin/class-admin.php:74
+#: admin/class-admin.php:75
 msgid ""
 "the review form is hidden for visitors until you add Cloudflare Turnstile "
 "keys."
 msgstr "het beoordelingsformulier is verborgen voor bezoekers totdat je Cloudflare Turnstile-sleutels toevoegt."
 
-#: admin/class-admin.php:87
+#: admin/class-admin.php:104
 msgid "You are not allowed to do this."
 msgstr "Je mag dit niet doen."
 
-#: admin/class-admin.php:308
+#: admin/class-admin.php:326
 msgid "Community reviews"
 msgstr "Community-beoordelingen"
 
-#: admin/class-admin.php:318
+#: admin/class-admin.php:336
 msgid "Open the reviews of this recipe"
 msgstr "Open de beoordelingen van dit recept"
 
-#: admin/class-admin.php:320
+#: admin/class-admin.php:338
 msgid "No reviews yet."
 msgstr "Nog geen beoordelingen."
 
-#: admin/class-admin.php:322
+#: admin/class-admin.php:340
 msgid "Reviews enabled for this recipe"
 msgstr "Beoordelingen aan voor dit recept"
 
@@ -851,7 +856,7 @@ msgstr "E-mail"
 msgid "BBQ"
 msgstr "BBQ"
 
-#: admin/class-table.php:25 admin/class-table.php:56
+#: admin/class-table.php:25 admin/class-table.php:56 admin/class-views.php:513
 msgid "Status"
 msgstr "Status"
 
@@ -933,6 +938,10 @@ msgstr "Bevestigd"
 #: admin/class-table.php:166
 msgid "Unverified"
 msgstr "Niet bevestigd"
+
+#: admin/class-table.php:167
+msgid "Demo"
+msgstr "Demo"
 
 #: admin/class-table.php:175
 msgid "No reviews found."
@@ -1420,17 +1429,17 @@ msgid "Keys missing"
 msgstr "Sleutels ontbreken"
 
 #. translators: %s: link to the General settings
-#: admin/class-views.php:485 admin/class-views.php:530
+#: admin/class-views.php:485 admin/class-views.php:537
 #, php-format
 msgid "The credit link below this block is set under %s."
 msgstr "De credit-link onder dit blok stel je in bij %s."
 
-#: admin/class-views.php:485 admin/class-views.php:530
-#: admin/class-views.php:577
+#: admin/class-views.php:485 admin/class-views.php:537
+#: admin/class-views.php:584
 msgid "General"
 msgstr "Algemeen"
 
-#: admin/class-views.php:487 admin/class-views.php:532
+#: admin/class-views.php:487 admin/class-views.php:539
 msgid "Active on"
 msgstr "Actief op"
 
@@ -1526,313 +1535,379 @@ msgstr "Kopieën worden nooit automatisch verwijderd zolang beoordelingen ernaar
 msgid "Newsletter checkbox text"
 msgstr "Tekst bij het nieuwsbriefvakje"
 
-#: admin/class-views.php:515 admin/class-views.php:516
+#: admin/class-views.php:512
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+#: admin/class-views.php:512
+msgid ""
+"The plugin ships structure and a neutral default style built on CSS custom "
+"properties (--rcom-accent, --rcom-text, --rcom-surface, ...). A site links "
+"those tokens to its own variables in one small snippet (a skin). The filter "
+"rcom_load_default_css turns the default style off completely."
+msgstr "De plugin levert structuur en een neutrale standaardstijl op basis van CSS-variabelen (--rcom-accent, --rcom-text, --rcom-surface, ...). Een site koppelt die tokens in één klein snippet (een skin) aan de eigen variabelen. Het filter rcom_load_default_css zet de standaardstijl helemaal uit."
+
+#: admin/class-views.php:513
+msgid "Site skin connected"
+msgstr "Site-skin gekoppeld"
+
+#: admin/class-views.php:513
+msgid "No skin: neutral default style"
+msgstr "Geen skin: neutrale standaardstijl"
+
+#: admin/class-views.php:513
+msgid "Default style is off"
+msgstr "Standaardstijl staat uit"
+
+#: admin/class-views.php:513
+msgid "How theming works (docs/theming.md)"
+msgstr "Hoe de styling werkt (docs/theming.md)"
+
+#: admin/class-views.php:522 admin/class-views.php:523
 msgid "Account page"
 msgstr "Accountpagina"
 
-#: admin/class-views.php:515
+#: admin/class-views.php:522
 msgid ""
 "Visitors manage their reviews, votes and data on one page with the shortcode "
 "[rcom_account]. Without a page there are no links to it anywhere. "
 "[rcom_account_link] prints a small link, for example for the footer."
 msgstr "Bezoekers beheren hun beoordelingen, stemmen en gegevens op één pagina met de shortcode [rcom_account]. Zonder pagina zijn er nergens links naartoe. [rcom_account_link] toont een kleine link, bijvoorbeeld voor de footer."
 
-#: admin/class-views.php:516
+#: admin/class-views.php:523
 msgid ""
 "Exclude this page from page caches (it is sent with no-store headers and "
 "noindex)."
 msgstr "Sluit deze pagina uit van paginacaches (hij wordt verstuurd met no-store-headers en noindex)."
 
-#: admin/class-views.php:517
+#: admin/class-views.php:524
 msgid "Name of the account"
 msgstr "Naam van het account"
 
-#: admin/class-views.php:517
+#: admin/class-views.php:524
 msgid ""
 "Used in the link text and in the emails (\"Go to your Pitmaster page\")."
 msgstr "Wordt gebruikt in de linktekst en in de e-mails (\"Ga naar je Pitmaster-pagina\")."
 
-#: admin/class-views.php:518
+#: admin/class-views.php:525
 msgid "Create the page"
 msgstr "Pagina aanmaken"
 
-#: admin/class-views.php:518
-msgid "Slug"
-msgstr "Slug"
+#: admin/class-views.php:525
+msgid "Page URL"
+msgstr "Pagina-URL"
 
-#: admin/class-views.php:518
+#: admin/class-views.php:525
+msgid "Letters, numbers and hyphens. Checked before the page is created."
+msgstr "Letters, cijfers en streepjes. Wordt gecontroleerd voordat de pagina wordt aangemaakt."
+
+#: admin/class-views.php:525
 msgid "Page title"
 msgstr "Paginatitel"
 
-#: admin/class-views.php:518
+#: admin/class-views.php:525
+msgid "Shown as the heading of the page."
+msgstr "Wordt getoond als kop van de pagina."
+
+#: admin/class-views.php:525
 msgid "Create page"
 msgstr "Pagina aanmaken"
 
-#: admin/class-views.php:518
+#: admin/class-views.php:525
 msgid ""
-"Creates a published page with [rcom_account]. The slug is checked first; an "
-"existing page with the shortcode is chosen instead of making a second one."
-msgstr "Maakt een gepubliceerde pagina met [rcom_account]. De slug wordt eerst gecontroleerd; een bestaande pagina met de shortcode wordt gekozen in plaats van een tweede aan te maken."
+"Creates a published page with [rcom_account]. An existing page with the "
+"shortcode is chosen instead of making a second one."
+msgstr "Maakt een gepubliceerde pagina met [rcom_account]. Een bestaande pagina met de shortcode wordt gekozen in plaats van een tweede aan te maken."
 
-#: admin/class-views.php:529
+#: admin/class-views.php:536
 msgid "Helpful? (was this article helpful)"
 msgstr "Nuttig? (was dit artikel nuttig)"
 
-#: admin/class-views.php:532
+#: admin/class-views.php:539
 msgid ""
 "Shortcode [rcom_helpful]. Votes are anonymous unless the visitor is "
 "identified through a review link."
 msgstr "Shortcode [rcom_helpful]. Stemmen zijn anoniem, tenzij de bezoeker is geïdentificeerd via een beoordelingslink."
 
-#: admin/class-views.php:533
+#: admin/class-views.php:540
 msgid "Show the count from"
 msgstr "Toon het aantal vanaf"
 
-#: admin/class-views.php:533
+#: admin/class-views.php:540
 msgid "The public sentence appears once this many people voted Yes."
 msgstr "De publieke zin verschijnt zodra zoveel mensen Ja stemden."
 
-#: admin/class-views.php:534
+#: admin/class-views.php:541
 msgid "Question after Yes"
 msgstr "Vraag na Ja"
 
-#: admin/class-views.php:535
+#: admin/class-views.php:542
 msgid "Question after No"
 msgstr "Vraag na Nee"
 
-#: admin/class-views.php:536
+#: admin/class-views.php:543
 msgid "Feedback text"
 msgstr "Feedbacktekst"
 
-#: admin/class-views.php:536
+#: admin/class-views.php:543
 msgid "Require Turnstile for the feedback text (votes never use a captcha)"
 msgstr "Vereis Turnstile voor de feedbacktekst (stemmen gebruiken nooit een captcha)"
 
-#: admin/class-views.php:536
+#: admin/class-views.php:543
 msgid "Allow links in the text"
 msgstr "Sta links toe in de tekst"
 
-#: admin/class-views.php:546
+#: admin/class-views.php:553
 msgid ""
 "Only visitors who tick the newsletter box and confirm their email address "
 "are sent to the service."
 msgstr "Alleen bezoekers die het nieuwsbriefvakje aanvinken en hun e-mailadres bevestigen worden naar de dienst gestuurd."
 
-#: admin/class-views.php:547
+#: admin/class-views.php:554
 msgid "Service"
 msgstr "Dienst"
 
-#: admin/class-views.php:549
+#: admin/class-views.php:556
 msgid "Laposta API key"
 msgstr "Laposta API-sleutel"
 
-#: admin/class-views.php:549
+#: admin/class-views.php:556
 msgid "Connect"
 msgstr "Verbinden"
 
-#: admin/class-views.php:549
+#: admin/class-views.php:556
 msgid ""
 "Leave empty to keep the saved key. Only the last 4 characters are ever shown."
 msgstr "Laat leeg om de opgeslagen sleutel te houden. Alleen de laatste 4 tekens worden getoond."
 
-#: admin/class-views.php:553
+#: admin/class-views.php:560
 msgid ""
 "Could not load your lists: the API key is invalid or Laposta is unreachable."
 msgstr "Je lijsten konden niet worden geladen: de API-sleutel is ongeldig of Laposta is niet bereikbaar."
 
-#: admin/class-views.php:560
+#: admin/class-views.php:567
 msgid "Laposta list"
 msgstr "Laposta-lijst"
 
-#: admin/class-views.php:560
+#: admin/class-views.php:567
 msgid "The saved list was not found in this account."
 msgstr "De opgeslagen lijst is niet gevonden in dit account."
 
-#: admin/class-views.php:560
+#: admin/class-views.php:567
 msgid ""
 "Pick a list and save: the first-name field is then suggested automatically."
 msgstr "Kies een lijst en sla op: het voornaamveld wordt dan automatisch voorgesteld."
 
-#: admin/class-views.php:567
+#: admin/class-views.php:574
 msgid "Field for the first name"
 msgstr "Veld voor de voornaam"
 
-#: admin/class-views.php:567
+#: admin/class-views.php:574
 msgid "The email address is always sent. Change the suggestion if needed."
 msgstr "Het e-mailadres wordt altijd meegestuurd. Pas het voorstel aan als dat nodig is."
 
-#: admin/class-views.php:570
+#: admin/class-views.php:577
 msgid "Laposta list ID"
 msgstr "Laposta lijst-ID"
 
-#: admin/class-views.php:570
+#: admin/class-views.php:577
 msgid "Connect an API key to pick from your lists."
 msgstr "Verbind een API-sleutel om uit je lijsten te kiezen."
 
-#: admin/class-views.php:572
+#: admin/class-views.php:579
 msgid "Confirmation"
 msgstr "Bevestiging"
 
-#: admin/class-views.php:572
+#: admin/class-views.php:579
 msgid "We confirm: the review email link counts, no second email"
 msgstr "Wij bevestigen: de link in de review-mail telt, geen tweede e-mail"
 
-#: admin/class-views.php:572
+#: admin/class-views.php:579
 msgid "Laposta sends its own confirmation email"
 msgstr "Laposta stuurt zelf een bevestigingsmail"
 
-#: admin/class-views.php:572
+#: admin/class-views.php:579
 msgid ""
 "With the first choice the visitor gets one email in total; with the second a "
 "second email from Laposta that must be confirmed too."
 msgstr "Bij de eerste keuze krijgt de bezoeker in totaal één e-mail; bij de tweede ook een e-mail van Laposta die bevestigd moet worden."
 
-#: admin/class-views.php:573
+#: admin/class-views.php:580
 msgid "Test connection"
 msgstr "Test verbinding"
 
-#: admin/class-views.php:573
+#: admin/class-views.php:580
 msgid "Use existing Laposta settings"
 msgstr "Bestaande Laposta-instellingen overnemen"
 
-#: admin/class-views.php:578
+#: admin/class-views.php:585
 msgid "Credit link"
 msgstr "Naamsvermelding"
 
-#: admin/class-views.php:578
+#: admin/class-views.php:585
 msgid "Show \"Powered by J-Concept\" below the reviews and below Helpful?"
 msgstr "Toon \"Mogelijk gemaakt door J-Concept\" onder reviews en onder Nuttig?"
 
-#: admin/class-views.php:578
+#: admin/class-views.php:585
 msgid "One switch for both blocks. Anyone may switch it off."
 msgstr "Eén schakelaar voor beide blokken. Iedereen mag hem uitzetten."
 
-#: admin/class-views.php:579
+#: admin/class-views.php:586
 msgid "Sender email for mails"
 msgstr "Afzender van de mails"
 
-#: admin/class-views.php:579
+#: admin/class-views.php:586
 msgid "Default: the WordPress admin address."
 msgstr "Standaard: het e-mailadres van de WordPress-beheerder."
 
-#: admin/class-views.php:580
+#: admin/class-views.php:587
 msgid "Updates"
 msgstr "Updates"
 
-#: admin/class-views.php:580
+#: admin/class-views.php:587
 msgid "Do not check GitHub for plugin updates"
 msgstr "Controleer GitHub niet op plugin-updates"
 
-#: admin/class-views.php:582
+#: admin/class-views.php:589
 msgid "AI abilities"
 msgstr "AI-abilities"
 
-#: admin/class-views.php:582
+#: admin/class-views.php:589
 msgid "Allow AI abilities (WordPress Abilities API, administrators only)"
 msgstr "AI-abilities toestaan (WordPress Abilities API, alleen beheerders)"
 
-#: admin/class-views.php:582
+#: admin/class-views.php:589
 msgid ""
 "Lets an AI assistant read statistics and reviews and reply, approve photos "
 "or hide reviews. Off by default."
 msgstr "Laat een AI-assistent statistieken en beoordelingen lezen en reageren, foto's goedkeuren of beoordelingen verbergen. Standaard uit."
 
-#: admin/class-views.php:584
+#: admin/class-views.php:591
 msgid "When a recipe is deleted for good"
 msgstr "Als een recept definitief wordt verwijderd"
 
-#: admin/class-views.php:584
+#: admin/class-views.php:591
 msgid "Delete its reviews and photos"
 msgstr "Verwijder de beoordelingen en foto's"
 
-#: admin/class-views.php:584
+#: admin/class-views.php:591
 msgid "Keep them hidden (filter \"Recipe deleted\")"
 msgstr "Bewaar ze verborgen (filter \"Recept verwijderd\")"
 
-#: admin/class-views.php:584
+#: admin/class-views.php:591
 msgid ""
 "Emptying the trash deletes recipes for good. Choose \"keep\" to protect "
 "reviews against an accidentally emptied trash."
 msgstr "Het legen van de prullenbak verwijdert recepten definitief. Kies \"bewaren\" om beoordelingen te beschermen tegen een per ongeluk geleegde prullenbak."
 
-#: admin/class-views.php:585
+#: admin/class-views.php:592
 msgid "Cached ratings"
 msgstr "Gecachete beoordelingen"
 
-#: admin/class-views.php:585
+#: admin/class-views.php:592
 msgid "Recalculate cache"
 msgstr "Cache herberekenen"
 
 #. translators: %d: number of posts
-#: admin/class-views.php:585
+#: admin/class-views.php:592
 #, php-format
 msgid "%d posts recalculated"
 msgstr "%d berichten herberekend"
 
-#: admin/class-views.php:585
+#: admin/class-views.php:592
 msgid ""
 "Averages and counts are cached in post meta and can always be rebuilt from "
 "the tables."
 msgstr "Gemiddelden en aantallen staan gecachet in postmeta en kunnen altijd opnieuw uit de tabellen worden opgebouwd."
 
-#: admin/class-views.php:586
+#: admin/class-views.php:593
 msgid "Keep data on uninstall"
 msgstr "Gegevens bewaren bij verwijderen"
 
-#: admin/class-views.php:586
+#: admin/class-views.php:593
 msgid "Do not delete reviews and photos when the plugin is deleted"
 msgstr "Verwijder beoordelingen en foto's niet als de plugin wordt verwijderd"
 
-#: admin/class-views.php:587
+#: admin/class-views.php:594
 msgid "Save changes"
 msgstr "Wijzigingen opslaan"
 
-#: admin/class-views.php:596
+#: admin/class-views.php:603
 msgid "OK"
 msgstr "OK"
 
-#: admin/class-views.php:596
+#: admin/class-views.php:603
 msgid "Check"
 msgstr "Controleer"
 
 #. translators: %s: link to the author
-#: admin/class-views.php:602
+#: admin/class-views.php:609
 #, php-format
 msgid "Recipe Community by %s"
 msgstr "Recipe Community door %s"
 
-#: admin/class-views.php:605
+#: admin/class-views.php:612
 msgid "System check"
 msgstr "Systeemcontrole"
 
-#: admin/class-views.php:606
+#: admin/class-views.php:613
 msgid "PHP 8.0 or newer"
 msgstr "PHP 8.0 of nieuwer"
 
-#: admin/class-views.php:607
+#: admin/class-views.php:614
 msgid "Photo processing with WebP"
 msgstr "Fotoverwerking met WebP"
 
-#: admin/class-views.php:608
+#: admin/class-views.php:615
 msgid "Photo folder writable"
 msgstr "Fotomap beschrijfbaar"
 
-#: admin/class-views.php:609
+#: admin/class-views.php:616
 msgid "Turnstile keys present"
 msgstr "Turnstile-sleutels aanwezig"
 
-#: admin/class-views.php:610
+#: admin/class-views.php:617
 msgid "Newsletter service"
 msgstr "Nieuwsbriefdienst"
 
-#: admin/class-views.php:611
+#: admin/class-views.php:618
 msgid "Update check"
 msgstr "Updatecontrole"
 
-#: admin/class-views.php:611
+#: admin/class-views.php:618
 msgid "disabled"
 msgstr "uitgeschakeld"
 
-#: admin/class-views.php:611
+#: admin/class-views.php:618
 msgid "GitHub releases"
 msgstr "GitHub-releases"
+
+#: admin/class-views.php:625
+msgid "Demo data"
+msgstr "Demo-gegevens"
+
+#: admin/class-views.php:625
+msgid ""
+"Adds example reviews (with a photo and replies) or votes to one post so you "
+"can preview the look. Demo data shows on that page only: it is left out of "
+"the dashboard, people, exports, newsletter and rcom_get_rating(). Command "
+"line: wp rcom demo add --post=ID and wp rcom demo clear."
+msgstr "Voegt voorbeeldbeoordelingen (met foto en reacties) of stemmen toe aan één bericht, zodat je het uiterlijk kunt bekijken. Demo-gegevens zijn alleen op die pagina zichtbaar: ze tellen niet mee in het dashboard, personen, exports, nieuwsbrief en rcom_get_rating(). Via de opdrachtregel: wp rcom demo add --post=ID en wp rcom demo clear."
+
+#: admin/class-views.php:628
+msgid "Post"
+msgstr "Bericht"
+
+#: admin/class-views.php:628
+msgid "Add demo data"
+msgstr "Demo-gegevens toevoegen"
+
+#: admin/class-views.php:628
+msgid "Remove demo data"
+msgstr "Demo-gegevens verwijderen"
+
+#. translators: %d: number of demo rows
+#: admin/class-views.php:629
+#, php-format
+msgid "%d demo rows present"
+msgstr "%d demo-regels aanwezig"

@@ -32,6 +32,7 @@ class RCOM_Helpful {
   vote varchar(3) NOT NULL,
   token_hash char(64) NOT NULL DEFAULT '',
   identity_id char(64) NOT NULL DEFAULT '',
+  is_demo tinyint(1) unsigned NOT NULL DEFAULT 0,
   device varchar(20) NOT NULL DEFAULT '',
   created_at datetime NOT NULL,
   updated_at datetime NOT NULL,
@@ -58,7 +59,7 @@ class RCOM_Helpful {
 		add_shortcode( 'rcom_helpful', array( __CLASS__, 'shortcode' ) );
 		add_action( 'before_delete_post', array( __CLASS__, 'delete_for_post' ) );
 		add_action( 'wp_enqueue_scripts', function () {
-			wp_register_style( 'rcom-helpful', RCOM_URL . 'assets/rcom-helpful.css', array(), RCOM_VERSION );
+			wp_register_style( 'rcom-helpful', apply_filters( 'rcom_load_default_css', true ) ? RCOM_URL . 'assets/rcom-helpful.css' : false, array(), RCOM_VERSION );
 			wp_register_script( 'rcom-helpful', RCOM_URL . 'assets/rcom-helpful.js', array(), RCOM_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		} );
 	}
@@ -116,7 +117,7 @@ class RCOM_Helpful {
 
 	public static function refresh( $post_id ) {
 		global $wpdb;
-		$y = (int) $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM ' . self::votes() . " WHERE post_id = %d AND vote = 'yes'", $post_id ) );
+		$y = (int) $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM ' . self::votes() . " WHERE post_id = %d AND vote = 'yes'", $post_id ) ); // incl. demo: shown on the page only
 		$n = (int) $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM ' . self::votes() . " WHERE post_id = %d AND vote = 'no'", $post_id ) );
 		update_post_meta( $post_id, '_rcom_helpful_yes', $y );
 		update_post_meta( $post_id, '_rcom_helpful_no', $n );
@@ -170,7 +171,8 @@ class RCOM_Helpful {
 			'thr'   => max( 1, (int) RCOM_Settings::get( 'helpful_threshold' ) ),
 		);
 		list( $y ) = self::counts( $id );
-		return '<div class="rcom-helpful" role="group" aria-labelledby="rcom-h' . $id . '" data-post="' . $id . '" data-api="' . esc_url( rest_url( 'rcom/v1/' ) ) . '" data-ts="' . esc_attr( RCOM_Settings::get( 'helpful_ts' ) && RCOM_Settings::turnstile_ready() ? RCOM_Settings::turnstile_site() : '' ) . '" data-yes="' . $y . '" data-t="' . esc_attr( wp_json_encode( $t ) ) . '"><strong id="rcom-h' . $id . '">' . esc_html( $t['ask'] ) . '</strong>'
+		RCOM_Front::i18n( 'hf', $t );
+		return '<div class="rcom-helpful" role="group" aria-labelledby="rcom-h' . $id . '" data-post="' . $id . '" data-ts="' . esc_attr( RCOM_Settings::get( 'helpful_ts' ) && RCOM_Settings::turnstile_ready() ? RCOM_Settings::turnstile_site() : '' ) . '" data-yes="' . $y . '"><strong id="rcom-h' . $id . '">' . esc_html( $t['ask'] ) . '</strong>'
 			. '<button type="button" class="rcom-hbtn" data-v="yes" aria-pressed="false">' . esc_html__( 'Yes', 'recipe-community' ) . '</button><button type="button" class="rcom-hbtn" data-v="no" aria-pressed="false">' . esc_html__( 'No', 'recipe-community' ) . '</button>'
 			. '<span class="rcom-hcount" aria-live="polite">' . esc_html( self::count_text( $y ) ) . '</span>'
 			. '<form class="rcom-hform" hidden><label for="rcom-hf' . $id . '"></label><textarea id="rcom-hf' . $id . '" name="body" maxlength="1000" rows="3"></textarea><div class="rcom-hp" aria-hidden="true" style="position:absolute;left:-9999px"><input type="text" name="website" tabindex="-1" autocomplete="off"></div><div class="rcom-hts"></div><div class="rcom-hrow"><button type="submit" class="rcom-hbtn go">' . esc_html__( 'Send', 'recipe-community' ) . '</button><span class="rcom-hsmall">' . esc_html__( 'Anonymous. Optional.', 'recipe-community' ) . '</span></div></form>'

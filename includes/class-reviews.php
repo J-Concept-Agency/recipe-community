@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 /** Reviews domain: table, CRUD and cached rating stats. All queries are prepared. */
 class RCOM_Reviews {
 
-	const DB_VERSION = '7';
+	const DB_VERSION = '8';
 
 	public static function table() {
 		global $wpdb;
@@ -30,6 +30,7 @@ class RCOM_Reviews {
   newsletter_optin tinyint(1) unsigned NOT NULL DEFAULT 0,
   token_hash char(64) NOT NULL DEFAULT '',
   identity_id char(64) NOT NULL DEFAULT '',
+  is_demo tinyint(1) unsigned NOT NULL DEFAULT 0,
   device varchar(20) NOT NULL DEFAULT '',
   terms_accepted_at datetime DEFAULT NULL,
   terms_page_id bigint(20) unsigned NOT NULL DEFAULT 0,
@@ -47,6 +48,7 @@ class RCOM_Reviews {
   KEY token_hash (token_hash)
 ) " . $wpdb->get_charset_collate() . ';' );
 		add_option( 'rcom_ai_on', 0, '', true ); // autoloaded flag read on every request
+		add_option( 'rcom_account_pid', 0, '', true );
 		RCOM_Helpful::install();
 		RCOM_Terms::install();
 		RCOM_Account::install();
@@ -149,16 +151,21 @@ class RCOM_Reviews {
 		) );
 	}
 
-	/** Recompute the cached values in postmeta. Called after every change. */
+	/** Recompute the cached values in postmeta. Demo reviews only count in the "shown" cache (recipe page). */
 	public static function refresh( $post_id ) {
 		global $wpdb;
 		$rows = $wpdb->get_results( $wpdb->prepare(
-			'SELECT rating, verified, COUNT(*) AS n FROM ' . self::table() . " WHERE post_id = %d AND status = 'published' GROUP BY rating, verified",
+			'SELECT rating, verified, is_demo, COUNT(*) AS n FROM ' . self::table() . " WHERE post_id = %d AND status = 'published' GROUP BY rating, verified, is_demo",
 			$post_id
 		) );
 		$dist = array_fill( 1, 5, 0 );
+		$all  = array_fill( 1, 5, 0 );
 		$vsum = $vcnt = 0;
 		foreach ( $rows as $r ) {
+			$all[ (int) $r->rating ] += (int) $r->n;
+			if ( $r->is_demo ) {
+				continue;
+			}
 			$dist[ (int) $r->rating ] += (int) $r->n;
 			if ( $r->verified ) {
 				$vsum += $r->rating * $r->n;
@@ -169,6 +176,7 @@ class RCOM_Reviews {
 		update_post_meta( $post_id, '_rcom_count', array_sum( $dist ) );
 		update_post_meta( $post_id, '_rcom_vcount', $vcnt );
 		update_post_meta( $post_id, '_rcom_dist', $dist );
+		update_post_meta( $post_id, '_rcom_dist_all', $all );
 		delete_transient( 'rcom_pending' );
 		RCOM_Stats::flush();
 		do_action( 'rcom_reviews_changed', $post_id );
@@ -178,6 +186,16 @@ class RCOM_Reviews {
 		}
 	}
 
+	private static function summarize( $dist ) {
+		$n   = array_sum( $dist );
+		$sum = 0;
+		foreach ( $dist as $s => $c ) {
+			$sum += $s * $c;
+		}
+		return array( 'count' => (int) $n, 'avg_all' => $n ? round( $sum / $n, 2 ) : 0.0, 'dist' => $dist );
+	}
+
+	/** Real numbers only (no demo reviews). Used by rcom_get_rating(). */
 	public static function rating( $post_id ) {
 		$dist = get_post_meta( $post_id, '_rcom_dist', true );
 		if ( ! is_array( $dist ) ) { // cache missing (cleanup plugin, import): rebuild once from the table
@@ -185,18 +203,21 @@ class RCOM_Reviews {
 			$dist = get_post_meta( $post_id, '_rcom_dist', true );
 			$dist = is_array( $dist ) ? $dist : array_fill( 1, 5, 0 );
 		}
-		$n    = array_sum( $dist );
-		$sum  = 0;
-		foreach ( $dist as $s => $c ) {
-			$sum += $s * $c;
-		}
 		return array(
 			'avg'            => (float) get_post_meta( $post_id, '_rcom_avg', true ),
-			'count'          => (int) $n,
 			'verified_count' => (int) get_post_meta( $post_id, '_rcom_vcount', true ),
-			'avg_all'        => $n ? round( $sum / $n, 2 ) : 0.0,
-			'dist'           => $dist,
-		);
+		) + self::summarize( $dist );
+	}
+
+	/** What the recipe page shows: real reviews plus demo reviews (if any). */
+	public static function shown( $post_id ) {
+		$all = get_post_meta( $post_id, '_rcom_dist_all', true );
+		if ( ! is_array( $all ) ) {
+			self::refresh( $post_id );
+			$all = get_post_meta( $post_id, '_rcom_dist_all', true );
+			$all = is_array( $all ) ? $all : array_fill( 1, 5, 0 );
+		}
+		return self::summarize( $all );
 	}
 
 	public static function pending_photos() {
