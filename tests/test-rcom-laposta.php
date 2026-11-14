@@ -15,7 +15,9 @@ add_filter( 'pre_http_request', function ( $pre, $a, $url ) {
 	} else { $body = []; }
 	return [ 'response' => [ 'code' => 200, 'message' => '' ], 'body' => wp_json_encode( $body ), 'headers' => [], 'cookies' => [] ];
 }, 10, 3 );
+delete_transient( 'rcom_lp_f_' . md5( 'L1' ) );
 $f = ( new RCOM_Laposta() )->fields( 'L1' );
+delete_transient( 'rcom_lp_f_' . md5( 'L1' ) ); // the provider caches in the DB; leave nothing behind
 t( 'velden: sleutel is custom_name (zonder accolades), e-mail en verwijderd veld uitgesloten', $f === [ 'voornaam' => 'Voornaam' ], json_encode( $f ) );
 t( 'voornaamveld wordt herkend', 'voornaam' === RCOM_Laposta::guess_name_field( (array) $f ) );
 echo $GLOBALS['fails'] ? "\n{$GLOBALS['fails']} FOUT(EN)\n" : "\nALLES OK\n";
