@@ -14,6 +14,8 @@ This text is a starting point for your privacy statement; it is not legal advice
 
 Cookies: `rcom_id` (30 days, HttpOnly, only after the visitor clicked an email link) and `rcom_v_{post}` (30 days, HttpOnly, only after voting).
 
+**Account page (optional, `[rcom_account]`)**: when a visitor logs in by emailed link, a session row is stored: a hash of the session id, a keyed hash of the identity, a masked email hint (`a***@example.test`), and timestamps. Login links are stored as hashes with their expiry. No user agent, no IP address. A small security log keeps identity hash + event type + time for 90 days. From the account page the person can see, change (votes), delete and download their data, unsubscribe from the newsletter (when the service supports it), end all sessions, or delete everything (reviews, photos, votes, feedback, sessions, tokens and log entries). The WordPress privacy exporter and eraser cover the same data.
+
 ## Why
 
 Showing reviews, confirming the author's address, proving agreement to the terms, and (only if ticked and confirmed) the newsletter (consent, double opt-in). A review does not depend on the newsletter.

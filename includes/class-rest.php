@@ -164,7 +164,7 @@ class RCOM_Rest {
 		$tv  = $tp ? RCOM_Terms::current( $tp ) : '';
 		$new = RCOM_Reviews::insert( array(
 			'post_id' => $id, 'rating' => $rating, 'body' => $body, 'name' => $name, 'email' => $email, 'bbq_type' => $bbq,
-			'terms_accepted_at' => current_time( 'mysql', true ), 'terms_page_id' => $tp, 'terms_version' => $tv, 'photo_file' => $file, 'photo_status' => $status, 'device' => RCOM_Device::detect(), 'newsletter_optin' => $q->get_param( 'newsletter' ) ? 1 : 0,
+			'terms_accepted_at' => current_time( 'mysql', true ), 'terms_page_id' => $tp, 'terms_version' => $tv, 'photo_file' => $file, 'photo_status' => $status, 'device' => RCOM_Device::detect(), 'identity_id' => RCOM_Helpful::identity_for( $email ), 'newsletter_optin' => $q->get_param( 'newsletter' ) ? 1 : 0,
 		) );
 		if ( ! $new ) {
 			RCOM_Photo::remove( $file );

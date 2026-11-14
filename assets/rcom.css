@@ -64,8 +64,11 @@
 .rcom-del{align-self:flex-start;background:none;border:0;padding:0;color:var(--c-m);text-decoration:underline;font:inherit;font-size:var(--text-s,.875rem);cursor:pointer}
 .rcom-more{display:inline-block;background:none;border:0;padding:var(--space-s,1rem) 0;color:var(--tertiary,#c94300);text-align:left;text-decoration:none;cursor:pointer}
 .rcom-item:focus{outline:none}
-.rcom-credit a{color:inherit}
-@media (max-width:767px){.rcom-sum{grid-template-columns:1fr;gap:var(--space-xs,.75rem);width:auto}.rcom-two{grid-template-columns:1fr}.rcom-inline{flex-direction:column}}
+p.rcom-credit.rcom-small{margin:var(--space-m,1.5rem) 0 0;padding:0;font-size:var(--text-s,.875rem);line-height:1.4;color:var(--text-muted,#666)}
+.rcom p.rcom-credit.rcom-small{margin:calc(var(--space-2xs,.5rem) * -1) 0 0}
+.rcom-credit.rcom-small a{display:inline-block;min-height:24px;padding:4px 0;color:inherit;text-decoration:underline;text-underline-offset:2px}
+.rcom-credit.rcom-small a:hover{color:var(--primary,#ff5b00)}
+@media (max-width:767px){p.rcom-credit.rcom-small{margin-top:1.125rem}.rcom p.rcom-credit.rcom-small{margin-top:0}.rcom-sum{grid-template-columns:1fr;gap:var(--space-xs,.75rem);width:auto}.rcom-two{grid-template-columns:1fr}.rcom-inline{flex-direction:column}}
 .rcom-manage{margin-top:var(--space-2xs,.5rem)}.rcom-credit{margin-top:var(--space-2xs,.5rem)}
 .rcom-photo-f{gap:var(--space-2xs,.5rem)}
 .rcom-lbl{font-weight:600;color:var(--c-t)}

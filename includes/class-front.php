@@ -13,8 +13,9 @@ class RCOM_Front {
 		}
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'register' ) );
 		add_filter( 'wp_robots', array( __CLASS__, 'robots' ) );
-		add_action( 'wp_head', array( __CLASS__, 'canonical' ), 1 );
+		add_action( 'wp_head', array( __CLASS__, 'canonical' ), 0 );
 		add_filter( 'rank_math/frontend/robots', array( __CLASS__, 'rm_robots' ) );
+		add_filter( 'rank_math/frontend/canonical', array( __CLASS__, 'rm_canonical' ) );
 	}
 
 	/** Register only; the shortcodes enqueue when they actually render, so nothing loads elsewhere. */
@@ -33,11 +34,23 @@ class RCOM_Front {
 		return $r;
 	}
 
+	/** Plain recipe URL as canonical of ?rcom_page=N. The head output is checked once: only when nobody printed a canonical (Rank Math skips it on noindex pages) we add ours, so there is never a duplicate. */
 	public static function canonical() {
-		if ( isset( $_GET['rcom_page'] ) && is_singular( RCOM_Settings::post_types() ) && ! defined( 'RANK_MATH_VERSION' ) ) {
-			remove_action( 'wp_head', 'rel_canonical' );
-			echo '<link rel="canonical" href="' . esc_url( get_permalink() ) . '" />' . "\n";
+		if ( ! isset( $_GET['rcom_page'] ) || ! is_singular( RCOM_Settings::post_types() ) ) {
+			return;
 		}
+		ob_start();
+		add_action( 'wp_head', static function () {
+			$h = ob_get_clean();
+			echo $h; // phpcs:ignore WordPress.Security.EscapeOutput
+			if ( ! preg_match( '/rel=["\']canonical["\']/i', $h ) ) {
+				echo '<link rel="canonical" href="' . esc_url( get_permalink() ) . '" />' . "\n";
+			}
+		}, 9999 );
+	}
+
+	public static function rm_canonical( $c ) {
+		return ( isset( $_GET['rcom_page'] ) && is_singular( RCOM_Settings::post_types() ) ) ? get_permalink() : $c;
 	}
 
 	public static function rm_robots( $r ) {
@@ -71,7 +84,7 @@ class RCOM_Front {
 		) );
 	}
 
-	private static function symbol() {
+	public static function symbol() {
 		if ( self::$symbol ) {
 			return '';
 		}
@@ -184,7 +197,7 @@ class RCOM_Front {
 		foreach ( self::bbq_types() as $k => $v ) {
 			$h .= '<option value="' . esc_attr( $k ) . '">' . esc_html( $v[0] ) . '</option>';
 		}
-		$h .= '</select></div><div class="rcom-f rcom-photo-f"><span class="rcom-lbl">' . esc_html__( 'Photo', 'recipe-community' ) . ' <small>(' . esc_html__( 'optional', 'recipe-community' ) . ')</small></span><input id="rcom' . $n . '-p" class="rcom-file" name="photo" type="file" accept="image/jpeg,image/png,image/webp"><label for="rcom' . $n . '-p" class="rcom-fbtn"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span class="rcom-fbtn-t">' . esc_html__( 'Add photo', 'recipe-community' ) . '</span></label><div class="rcom-prev" hidden><img alt="" width="56" height="56"><span class="rcom-pn"></span><button type="button" class="rcom-del">' . esc_html__( 'Remove', 'recipe-community' ) . '</button></div><p class="rcom-ferr" role="alert"></p></div>';
+		$h .= '</select></div><div class="rcom-f rcom-photo-f"><span class="rcom-lbl">' . esc_html__( 'Photo', 'recipe-community' ) . ' <small>(' . esc_html__( 'optional', 'recipe-community' ) . ')</small></span><input id="rcom' . $n . '-p" class="rcom-file" name="photo" type="file" accept="image/jpeg,image/png,image/webp"><label for="rcom' . $n . '-p" class="rcom-fbtn"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span class="rcom-fbtn-t">' . esc_html__( 'Add photo', 'recipe-community' ) . '</span></label><div class="rcom-prev" hidden><img alt="" width="56" height="56"><span class="rcom-pn"></span><button type="button" class="rcom-del">' . esc_html__( 'Remove', 'recipe-community' ) . '</button></div><p class="rcom-ferr" role="alert"></p></div></div>';
 		$h .= '<label class="rcom-check"><input type="checkbox" name="newsletter" value="1"> <span>' . esc_html( '' !== (string) RCOM_Settings::get( 'newsletter_label' ) ? RCOM_Settings::get( 'newsletter_label' ) : __( 'Yes, send me the newsletter', 'recipe-community' ) ) . '</span></label>';
 		$tp  = (int) RCOM_Settings::get( 'terms_page' ) ?: (int) RCOM_Settings::get( 'privacy_page' );
 		$tl  = $tp ? '<a href="' . esc_url( get_permalink( $tp ) ) . '" target="_blank" rel="noopener">' . esc_html__( 'terms', 'recipe-community' ) . '</a>' : esc_html__( 'terms', 'recipe-community' );

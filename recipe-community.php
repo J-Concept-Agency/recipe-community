@@ -38,6 +38,7 @@ require_once RCOM_DIR . 'includes/class-newsletter.php';
 require_once RCOM_DIR . 'includes/class-laposta.php';
 require_once RCOM_DIR . 'includes/class-helpful.php';
 require_once RCOM_DIR . 'includes/class-abilities.php';
+require_once RCOM_DIR . 'includes/class-account.php';
 require_once RCOM_DIR . 'includes/class-front.php';
 require_once RCOM_DIR . 'includes/class-rest.php';
 require_once RCOM_DIR . 'includes/class-privacy.php';
@@ -65,7 +66,9 @@ add_action( 'init', function () {
 add_action( 'before_delete_post', array( 'RCOM_Reviews', 'delete_for_post' ) );
 add_action( 'rest_api_init', array( 'RCOM_Rest', 'routes' ) );
 add_action( 'rest_api_init', array( 'RCOM_Helpful', 'routes' ) );
+add_action( 'rest_api_init', array( 'RCOM_Account', 'routes' ) );
 RCOM_Front::init();
+RCOM_Account::init();
 RCOM_Helpful::init();
 RCOM_Privacy::init();
 RCOM_Updater::init();

@@ -55,6 +55,7 @@ class RCOM_Privacy {
 			RCOM_Reviews::delete( $r->id );
 		}
 		$votes = RCOM_Helpful::erase_identity( $email );
+		RCOM_Account::purge( RCOM_Helpful::identity_for( $email ) );
 		return array( 'items_removed' => count( $rows ) + $votes, 'items_retained' => 0, 'messages' => array(), 'done' => true );
 	}
 }

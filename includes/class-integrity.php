@@ -15,7 +15,7 @@ class RCOM_Integrity {
 	}
 
 	public static function tables() {
-		return array( RCOM_Reviews::table(), RCOM_Helpful::votes(), RCOM_Helpful::feedback(), RCOM_Terms::table() );
+		return array( RCOM_Reviews::table(), RCOM_Helpful::votes(), RCOM_Helpful::feedback(), RCOM_Terms::table(), RCOM_Account::t( 'sessions' ), RCOM_Account::t( 'tokens' ), RCOM_Account::t( 'audit' ) );
 	}
 
 	/** @return string[] names of missing tables (one query) */
@@ -29,6 +29,7 @@ class RCOM_Integrity {
 		$m = self::missing();
 		update_option( 'rcom_integrity', $m, false );
 		RCOM_Stats::flush();
+		RCOM_Account::cleanup();
 	}
 
 	/** Recreate missing tables. Lost rows cannot be recovered. */

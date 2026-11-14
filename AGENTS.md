@@ -8,6 +8,8 @@ WordPress plugin (PHP 8.0+, no Composer, no build step, no jQuery). Prefix `rcom
 ## Shortcodes
 `[rcom_stars]`, `[rcom_summary]`, `[rcom_form]`, `[rcom_list per_page="3"]`, `[rcom_reviews heading="0"]`, `[rcom_helpful]`. Helper: `rcom_get_rating( $post_id )`.
 
+Account: `class-account.php` (tables `rcom_sessions`, `rcom_tokens`, `rcom_audit`, shortcodes `[rcom_account]`, `[rcom_account_link]`, REST `rcom/v1/account/*`). Never consume a login token on GET; every account action must check object ownership by `identity_id`.
+
 ## Hooks
 Action `rcom_newsletter_optin( $email, $name, $post_id )` (confirmed opt-in), `rcom_reviews_changed( $post_id )`. Filters `rcom_post_types`, `rcom_helpful_post_types`, `rcom_load_assets`, `rcom_bbq_types`, `rcom_client_ip`, `rcom_newsletter_providers`.
 

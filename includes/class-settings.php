@@ -24,6 +24,8 @@ class RCOM_Settings {
 			'laposta_doi'      => 'ours',
 			'disable_updates'  => 0,
 			'ai_abilities'     => 0,
+			'account_page'     => 0,
+			'account_label'    => '',
 			'terms_snapshots'  => 1,
 			'on_delete'        => 'delete',
 			'newsletter_label' => '',

@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 /** Reviews domain: table, CRUD and cached rating stats. All queries are prepared. */
 class RCOM_Reviews {
 
-	const DB_VERSION = '6';
+	const DB_VERSION = '7';
 
 	public static function table() {
 		global $wpdb;
@@ -29,6 +29,7 @@ class RCOM_Reviews {
   verified tinyint(1) unsigned NOT NULL DEFAULT 0,
   newsletter_optin tinyint(1) unsigned NOT NULL DEFAULT 0,
   token_hash char(64) NOT NULL DEFAULT '',
+  identity_id char(64) NOT NULL DEFAULT '',
   device varchar(20) NOT NULL DEFAULT '',
   terms_accepted_at datetime DEFAULT NULL,
   terms_page_id bigint(20) unsigned NOT NULL DEFAULT 0,
@@ -42,11 +43,13 @@ class RCOM_Reviews {
   KEY status_date (status,created_at),
   KEY created (created_at),
   KEY email (email),
+  KEY identity_id (identity_id),
   KEY token_hash (token_hash)
 ) " . $wpdb->get_charset_collate() . ';' );
 		add_option( 'rcom_ai_on', 0, '', true ); // autoloaded flag read on every request
 		RCOM_Helpful::install();
 		RCOM_Terms::install();
+		RCOM_Account::install();
 		$quiet = $wpdb->suppress_errors( true );
 		$wpdb->query( 'ALTER TABLE ' . $t . ' DROP INDEX post_status' ); // superseded by post_status_date; absent on fresh installs
 		$wpdb->suppress_errors( $quiet );

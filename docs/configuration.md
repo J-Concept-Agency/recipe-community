@@ -34,6 +34,15 @@ Cloudflare publishes test keys that always pass. They are only used when you add
 
 Posting a review requires ticking "I agree to the terms". Choose the terms page (and optionally a privacy page) under Settings > Terms and consent; the checkbox links there. The moment, the page and the version are stored per review; the version is automatic: the last-modified date of the terms page (every edit counts, keep post revisions enabled so the applicable text can be found; the review detail links to the matching revision). The plugin does not supply terms text.
 
+## Account page
+
+Visitors manage their reviews, votes and data on one page with the shortcode `[rcom_account]` (WordPress does not get user accounts).
+
+1. Settings > Account page: choose an existing page, or enter a slug (default `pitmaster`) and a title (default "Pitmaster") and press **Create page**. The slug is checked against posts of every type, terms, post type archives and core paths; if it is taken a free alternative is suggested. A page that already contains the shortcode is chosen instead of creating a second one.
+2. "Name of the account" (default "Pitmaster") is used in link texts and mails ("Go to your Pitmaster page"). `[rcom_account_link]` prints a small link to the page, for the footer or a menu. Without a chosen page there are no links to it anywhere.
+3. All links use the page's permalink, so renaming the slug later keeps everything working.
+4. The page is sent with `no-store` and `noindex`. Exclude it and `/wp-json/rcom/v1/` from page caches. Turnstile keys are required (login form).
+
 ## Helpful? (was this article helpful)
 
 Choose the post types, the count threshold, the two follow-up questions, and whether the feedback text needs Turnstile and may contain links. Place `[rcom_helpful]` on the article template.

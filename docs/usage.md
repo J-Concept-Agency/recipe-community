@@ -11,6 +11,9 @@ Shortcodes work in any editor or page builder (Bricks: Shortcode element). They 
 | `[rcom_helpful]` | "Was this article helpful?" with Yes/No buttons and an optional feedback box. Active on the post types chosen under Settings > Helpful (default `kennis`). Shows the public count from a threshold (default 5). |
 | `[rcom_reviews heading="1" per_page="3"]` | Everything in one `<section id="rcom-reviews">`: H2, summary, form, list. `heading="0"` omits the H2 (for a theme heading). |
 
+| `[rcom_account]` | The account page: login by emailed link, then "My reviews", "My votes" and "My data" (a section registry, filter `rcom_account_sections`, lets a later module add sections). |
+| `[rcom_account_link]` | Small link to the account page (label = "Name of the account"); empty when no page is set. |
+
 ## Typical recipe template
 
 Hero: `[rcom_stars href="#reviews"]`. Lower down, an element with id `reviews`, an H2 "Reviews" and `[rcom_reviews heading="0"]`.

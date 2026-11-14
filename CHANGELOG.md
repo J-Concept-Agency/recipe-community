@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 ## [Unreleased]
 
+## [0.2.0-dev]
+
+### Added
+- Account page `[rcom_account]` ("Pitmaster"): passwordless login by emailed single-use link (mail-scanner safe landing page, 15 minutes), server-side sessions with rotation, "My reviews / My votes / My data", change or remove votes, delete reviews, download data, newsletter unsubscribe (Laposta), log out everywhere, delete everything; re-authentication for sensitive actions; security log (90 days); admin can end sessions under People.
+- Settings: choose or create the account page (slug check, existing page detection), editable name of the account, `[rcom_account_link]`.
+- `rank_math/frontend/canonical` plus a duplicate-free own canonical on `?rcom_page=N` variants.
+- Credit link spacing and clearer settings label ("Show Powered by J-Concept below the reviews and below Helpful?").
+
+### Fixed
+- Review form: an unclosed element after the photo field put the checkboxes in the two-column row.
+
 ## [0.1.0] - 2026-11-14
 
 ### Added

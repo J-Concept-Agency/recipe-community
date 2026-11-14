@@ -112,6 +112,10 @@ class RCOM_Identity {
 		if ( $r->newsletter_optin ) {
 			$body .= "\n\n" . __( 'You also ticked the newsletter box. Clicking the link confirms your newsletter signup too. If you did not mean to sign up, simply do not click the link.', 'recipe-community' );
 		}
+		if ( RCOM_Account::url() ) {
+			/* translators: 1: name of the account page, 2: link */
+			$body .= "\n\n" . sprintf( __( 'Go to your %1$s page to manage your reviews and data: %2$s (you get a login link by email).', 'recipe-community' ), RCOM_Account::label(), RCOM_Account::url() );
+		}
 		$body .= "\n\n" . __( 'Did not write this review? Ignore this email.', 'recipe-community' );
 		self::send( $r->email, $subject, $body );
 	}

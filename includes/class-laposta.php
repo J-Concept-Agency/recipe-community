@@ -100,6 +100,16 @@ class RCOM_Laposta implements RCOM_Newsletter_Provider {
 		return array( 'ok' => true, 'message' => sprintf( _n( 'Connected. Laposta returned %d list.', 'Connected. Laposta returned %d lists.', count( (array) ( $d['data'] ?? array() ) ), 'recipe-community' ), count( (array) ( $d['data'] ?? array() ) ) ) );
 	}
 
+	/** Unsubscribe a member (needs the list id). Returns true on success. */
+	public function unsubscribe( $email ) {
+		$list = (string) RCOM_Settings::get( 'laposta_list' );
+		if ( '' === $list || '' === self::key() ) {
+			return false;
+		}
+		list( $code ) = $this->api( 'PUT', 'member/' . rawurlencode( $email ), array( 'list_id' => $list, 'state' => 'unsubscribed' ) );
+		return 200 === $code;
+	}
+
 	public function subscribe( $email, $name, $post_id ) {
 		$list = (string) RCOM_Settings::get( 'laposta_list' );
 		$ip   = RCOM_Identity::ip();
