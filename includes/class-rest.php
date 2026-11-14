@@ -31,7 +31,7 @@ class RCOM_Rest {
 	}
 
 	private static function post_ok( $id ) {
-		return $id && 'publish' === get_post_status( $id ) && in_array( get_post_type( $id ), RCOM_Settings::post_types(), true );
+		return $id && 'publish' === get_post_status( $id ) && RCOM_Settings::enabled_for( $id );
 	}
 
 	private static function nonce_ok( WP_REST_Request $q, $post_id ) {
@@ -112,6 +112,9 @@ class RCOM_Rest {
 			return self::err( 'turnstile', __( 'The spam check failed. Please try again.', 'recipe-community' ), 403 );
 		}
 
+		if ( ! $q->get_param( 'terms' ) ) {
+			return self::err( 'terms', __( 'Please agree to the terms to post your review.', 'recipe-community' ) );
+		}
 		$rating = (int) $q->get_param( 'rating' );
 		$name   = trim( sanitize_text_field( (string) $q->get_param( 'name' ) ) );
 		$body   = trim( sanitize_textarea_field( (string) $q->get_param( 'body' ) ) );
@@ -155,9 +158,11 @@ class RCOM_Rest {
 		}
 
 		RCOM_Identity::allow( 'post', 3 );
+		$tp  = (int) RCOM_Settings::get( 'terms_page' ); // only read when a review is saved
+		$tv  = $tp ? (string) get_post_field( 'post_modified_gmt', $tp ) : '';
 		$new = RCOM_Reviews::insert( array(
 			'post_id' => $id, 'rating' => $rating, 'body' => $body, 'name' => $name, 'email' => $email, 'bbq_type' => $bbq,
-			'photo_file' => $file, 'photo_status' => $status, 'newsletter_optin' => $q->get_param( 'newsletter' ) ? 1 : 0,
+			'terms_accepted_at' => current_time( 'mysql', true ), 'terms_page_id' => $tp, 'terms_version' => $tv, 'photo_file' => $file, 'photo_status' => $status, 'device' => RCOM_Device::detect(), 'newsletter_optin' => $q->get_param( 'newsletter' ) ? 1 : 0,
 		) );
 		if ( ! $new ) {
 			RCOM_Photo::remove( $file );

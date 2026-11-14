@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 /** Reviews domain: table, CRUD and cached rating stats. All queries are prepared. */
 class RCOM_Reviews {
 
-	const DB_VERSION = '1';
+	const DB_VERSION = '4';
 
 	public static function table() {
 		global $wpdb;
@@ -29,6 +29,10 @@ class RCOM_Reviews {
   verified tinyint(1) unsigned NOT NULL DEFAULT 0,
   newsletter_optin tinyint(1) unsigned NOT NULL DEFAULT 0,
   token_hash char(64) NOT NULL DEFAULT '',
+  device varchar(20) NOT NULL DEFAULT '',
+  terms_accepted_at datetime DEFAULT NULL,
+  terms_page_id bigint(20) unsigned NOT NULL DEFAULT 0,
+  terms_version varchar(40) NOT NULL DEFAULT '',
   reply_text text NOT NULL,
   reply_at datetime DEFAULT NULL,
   created_at datetime NOT NULL,
@@ -38,7 +42,8 @@ class RCOM_Reviews {
   KEY email (email),
   KEY token_hash (token_hash)
 ) " . $wpdb->get_charset_collate() . ';' );
-		update_option( 'rcom_db_version', self::DB_VERSION, false );
+		RCOM_Helpful::install();
+		update_option( 'rcom_db_version', self::DB_VERSION, true ); // autoloaded: read on every request
 		RCOM_Photo::ensure_dir();
 	}
 
@@ -58,7 +63,7 @@ class RCOM_Reviews {
 		$now = current_time( 'mysql', true );
 		$row = wp_parse_args( $d, array(
 			'body' => '', 'name' => '', 'email' => '', 'bbq_type' => '', 'photo_file' => '', 'photo_status' => 'none',
-			'status' => 'published', 'verified' => 0, 'newsletter_optin' => 0, 'token_hash' => '', 'reply_text' => '',
+			'status' => 'published', 'verified' => 0, 'newsletter_optin' => 0, 'token_hash' => '', 'device' => '', 'reply_text' => '',
 		) );
 		$row['created_at'] = $now;
 		$row['updated_at'] = $now;
@@ -136,6 +141,7 @@ class RCOM_Reviews {
 		update_post_meta( $post_id, '_rcom_vcount', $vcnt );
 		update_post_meta( $post_id, '_rcom_dist', $dist );
 		delete_transient( 'rcom_pending' );
+		RCOM_Stats::flush();
 		do_action( 'rcom_reviews_changed', $post_id );
 		do_action( 'litespeed_purge_post', $post_id );
 		if ( function_exists( 'rocket_clean_post' ) ) {

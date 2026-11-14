@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class RCOM_Updater {
 
-	const REPO = 'J-Concept/recipe-community';
+	const REPO = 'J-Concept-Agency/recipe-community';
 	const SLUG = 'recipe-community';
 
 	public static function init() {

@@ -8,7 +8,9 @@ if ( ! empty( $rcom_opt['keep_data'] ) ) {
 
 global $wpdb;
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}rcom_reviews" );
-$wpdb->query( "DELETE FROM {$wpdb->postmeta} WHERE meta_key IN ('_rcom_avg','_rcom_count','_rcom_vcount','_rcom_dist')" );
+$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}rcom_votes" );
+$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}rcom_feedback" );
+$wpdb->query( "DELETE FROM {$wpdb->postmeta} WHERE meta_key IN ('_rcom_avg','_rcom_count','_rcom_vcount','_rcom_dist','_rcom_helpful_yes','_rcom_helpful_no','_rcom_off')" );
 $wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s", $wpdb->esc_like( '_transient_rcom_' ) . '%', $wpdb->esc_like( '_transient_timeout_rcom_' ) . '%' ) );
 delete_option( 'rcom_settings' );
 delete_option( 'rcom_db_version' );

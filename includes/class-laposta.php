@@ -31,7 +31,7 @@ class RCOM_Laposta implements RCOM_Newsletter_Provider {
 		return array( (int) wp_remote_retrieve_response_code( $res ), is_array( $d ) ? $d : array(), '' );
 	}
 
-	/** @return array<string,string>|null list id => name (cached 10 min), null when unavailable. */
+	/** @return array<string,array{name:string,members:?int}>|null list id => details (cached 10 min), null when unavailable. */
 	public function lists( $refresh = false ) {
 		$c = get_transient( 'rcom_lp_lists' );
 		if ( ! $refresh && is_array( $c ) ) {
@@ -43,12 +43,45 @@ class RCOM_Laposta implements RCOM_Newsletter_Provider {
 		}
 		$out = array();
 		foreach ( (array) ( $d['data'] ?? array() ) as $row ) {
-			if ( ! empty( $row['list']['list_id'] ) ) {
-				$out[ $row['list']['list_id'] ] = (string) ( $row['list']['name'] ?? $row['list']['list_id'] );
+			$l = $row['list'] ?? array();
+			if ( ! empty( $l['list_id'] ) ) {
+				$out[ $l['list_id'] ] = array( 'name' => (string) ( $l['name'] ?? $l['list_id'] ), 'members' => isset( $l['members']['active_count'] ) ? (int) $l['members']['active_count'] : null );
 			}
 		}
 		set_transient( 'rcom_lp_lists', $out, 10 * MINUTE_IN_SECONDS );
 		return $out;
+	}
+
+	/** @return array<string,string>|null custom field tag => name of a list (email excluded), cached 10 min. */
+	public function fields( $list_id ) {
+		$k = 'rcom_lp_f_' . md5( $list_id );
+		$c = get_transient( $k );
+		if ( is_array( $c ) ) {
+			return $c;
+		}
+		list( $code, $d ) = $this->api( 'GET', 'field?list_id=' . rawurlencode( $list_id ) );
+		if ( 200 !== $code ) {
+			return null;
+		}
+		$out = array();
+		foreach ( (array) ( $d['data'] ?? array() ) as $row ) {
+			$f = $row['field'] ?? array();
+			if ( ! empty( $f['tag'] ) && 'email' !== $f['tag'] ) {
+				$out[ $f['tag'] ] = (string) ( $f['name'] ?? $f['tag'] );
+			}
+		}
+		set_transient( $k, $out, 10 * MINUTE_IN_SECONDS );
+		return $out;
+	}
+
+	/** Pick the first-name field by tag or name. */
+	public static function guess_name_field( array $fields ) {
+		foreach ( $fields as $tag => $name ) {
+			if ( preg_match( '/^(voornaam|firstname|first_name|first|naam|name)$/i', $tag ) || preg_match( '/^(voornaam|first ?name|naam|name)$/i', $name ) ) {
+				return $tag;
+			}
+		}
+		return '';
 	}
 
 	public function test() {

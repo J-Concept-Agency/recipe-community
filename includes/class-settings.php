@@ -15,7 +15,7 @@ class RCOM_Settings {
 			'reply_label'      => '',
 			'mail_from'        => '',
 			'keep_data'        => 0,
-			'post_types'       => 'recipe,recept',
+			'post_types'       => 'recept',
 			'show_credit'      => 1,
 			'newsletter_provider' => 'none',
 			'laposta_key'      => '',
@@ -23,6 +23,17 @@ class RCOM_Settings {
 			'laposta_name_field' => '',
 			'laposta_doi'      => 'ours',
 			'disable_updates'  => 0,
+			'ai_abilities'     => 0,
+			'newsletter_label' => '',
+			'terms_page'       => 0,
+			'privacy_page'     => 0,
+			'terms_label'      => '',
+			'helpful_types'    => 'kennis',
+			'helpful_threshold' => 5,
+			'helpful_ts'       => 0,
+			'helpful_links'    => 0,
+			'helpful_yes_label' => '',
+			'helpful_no_label' => '',
 		);
 	}
 
@@ -38,6 +49,19 @@ class RCOM_Settings {
 	public static function post_types() {
 		$t = array_filter( array_map( 'sanitize_key', explode( ',', (string) self::get( 'post_types' ) ) ) );
 		return (array) apply_filters( 'rcom_post_types', $t );
+	}
+
+	public static function helpful_types() {
+		return (array) apply_filters( 'rcom_helpful_post_types', array_filter( array_map( 'sanitize_key', explode( ',', (string) self::get( 'helpful_types' ) ) ) ) );
+	}
+
+	public static function helpful_enabled_for( $post_id ) {
+		return in_array( get_post_type( $post_id ), self::helpful_types(), true );
+	}
+
+	/** Reviews active for this post: allowed post type, published or viewable, and not switched off on the post. */
+	public static function enabled_for( $post_id ) {
+		return in_array( get_post_type( $post_id ), self::post_types(), true ) && ! get_post_meta( $post_id, '_rcom_off', true );
 	}
 
 	/** True when a wp-config.php constant supplies the value. */

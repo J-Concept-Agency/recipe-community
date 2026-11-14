@@ -37,6 +37,15 @@ class RCOM_Privacy {
 			}
 			$items[] = array( 'group_id' => 'rcom-reviews', 'group_label' => __( 'Recipe reviews', 'recipe-community' ), 'item_id' => 'rcom-' . $r->id, 'data' => $d );
 		}
+		global $wpdb;
+		foreach ( $wpdb->get_results( $wpdb->prepare( 'SELECT v.id, v.post_id, v.vote, v.created_at, f.body FROM ' . RCOM_Helpful::votes() . ' v LEFT JOIN ' . RCOM_Helpful::feedback() . ' f ON f.vote_id = v.id WHERE v.identity_id = %s', RCOM_Helpful::identity_for( $email ) ) ) as $v ) {
+			$items[] = array( 'group_id' => 'rcom-votes', 'group_label' => __( 'Helpful votes', 'recipe-community' ), 'item_id' => 'rcom-v-' . $v->id, 'data' => array(
+				array( 'name' => __( 'Article', 'recipe-community' ), 'value' => get_the_title( $v->post_id ) ),
+				array( 'name' => __( 'Vote', 'recipe-community' ), 'value' => $v->vote ),
+				array( 'name' => __( 'Feedback', 'recipe-community' ), 'value' => (string) $v->body ),
+				array( 'name' => __( 'Date', 'recipe-community' ), 'value' => $v->created_at ),
+			) );
+		}
 		return array( 'data' => $items, 'done' => true );
 	}
 
@@ -45,6 +54,7 @@ class RCOM_Privacy {
 		foreach ( $rows as $r ) {
 			RCOM_Reviews::delete( $r->id );
 		}
-		return array( 'items_removed' => count( $rows ), 'items_retained' => 0, 'messages' => array(), 'done' => true );
+		$votes = RCOM_Helpful::erase_identity( $email );
+		return array( 'items_removed' => count( $rows ) + $votes, 'items_retained' => 0, 'messages' => array(), 'done' => true );
 	}
 }
