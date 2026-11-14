@@ -36,7 +36,7 @@ class RCOM_Helpful {
   created_at datetime NOT NULL,
   updated_at datetime NOT NULL,
   PRIMARY KEY  (id),
-  KEY post_id (post_id),
+  KEY post_vote (post_id,vote),
   KEY identity_post (identity_id,post_id),
   KEY token_hash (token_hash)
 ) {$c};" );
@@ -49,7 +49,7 @@ class RCOM_Helpful {
   status varchar(10) NOT NULL DEFAULT 'published',
   created_at datetime NOT NULL,
   PRIMARY KEY  (id),
-  KEY post_id (post_id),
+  KEY post_status (post_id,status),
   KEY vote_id (vote_id)
 ) {$c};" );
 	}

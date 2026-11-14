@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recipe Community\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-14 14:53+0100\n"
+"POT-Creation-Date: 2026-11-14 15:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,46 +22,46 @@ msgstr ""
 msgid "Reviews and helpful votes of recipe pages."
 msgstr ""
 
-#: includes/class-front.php:42
+#: includes/class-front.php:66
 msgid "Charcoal"
 msgstr ""
 
-#: includes/class-front.php:42
+#: includes/class-front.php:66
 msgid "made on charcoal"
 msgstr ""
 
-#: includes/class-front.php:43
+#: includes/class-front.php:67
 msgid "Gas grill"
 msgstr ""
 
-#: includes/class-front.php:43
+#: includes/class-front.php:67
 msgid "made on a gas grill"
 msgstr ""
 
-#: includes/class-front.php:44
+#: includes/class-front.php:68
 msgid "Kamado"
 msgstr ""
 
-#: includes/class-front.php:44
+#: includes/class-front.php:68
 msgid "made on a kamado"
 msgstr ""
 
-#: includes/class-front.php:45
+#: includes/class-front.php:69
 msgid "Pellet grill"
 msgstr ""
 
-#: includes/class-front.php:45
+#: includes/class-front.php:69
 msgid "made on a pellet grill"
 msgstr ""
 
-#: includes/class-front.php:46
+#: includes/class-front.php:70
 msgid "Something else"
 msgstr ""
 
 #. translators: %s: number of reviews
 #. translators: 1: average rating, 2: number of reviews
-#: includes/class-front.php:76 admin/class-admin.php:234
-#: admin/class-views.php:235 admin/class-views.php:352
+#: includes/class-front.php:100 admin/class-admin.php:256
+#: admin/class-views.php:279 admin/class-views.php:404
 #, php-format
 msgid "%s review"
 msgid_plural "%s reviews"
@@ -69,81 +69,81 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of stars
-#: includes/class-front.php:81
+#: includes/class-front.php:105
 #, php-format
 msgid "%d star"
 msgid_plural "%d stars"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-front.php:85
+#: includes/class-front.php:109
 msgid "Powered by J-Concept"
 msgstr ""
 
-#: includes/class-front.php:99
+#: includes/class-front.php:123
 msgid "No reviews yet. Be the first to rate this recipe."
 msgstr ""
 
 #. translators: %s: average rating, e.g. 4,5
-#: includes/class-front.php:102
+#: includes/class-front.php:126
 #, php-format
 msgid "%s out of 5"
 msgstr ""
 
-#: includes/class-front.php:114
+#: includes/class-front.php:138
 msgid ""
 "This recipe has no reviews yet. Did you make it? Let me know what you "
 "thought."
 msgstr ""
 
-#: includes/class-front.php:116
+#: includes/class-front.php:140
 msgid "Distribution of the reviews"
 msgstr ""
 
-#: includes/class-front.php:130
+#: includes/class-front.php:154
 msgid ""
 "Recipe Community: the review form is hidden because the Turnstile keys are "
 "missing. Add them under Recipe community > Settings (only you can see this "
 "message)."
 msgstr ""
 
-#: includes/class-front.php:134
+#: includes/class-front.php:158
 msgid "Thanks, your email address is confirmed."
 msgstr ""
 
-#: includes/class-front.php:135
+#: includes/class-front.php:159
 msgid "Done. You can now remove your review on this device for 30 days."
 msgstr ""
 
 #. translators: %s: masked email address
-#: includes/class-front.php:137
+#: includes/class-front.php:161
 #, php-format
 msgid "Posting with %s."
 msgstr ""
 
-#: includes/class-front.php:138
+#: includes/class-front.php:162
 msgid "Not you?"
 msgstr ""
 
-#: includes/class-front.php:139 admin/class-table.php:39
-#: admin/class-table.php:142 admin/class-views.php:273
-#: admin/class-views.php:299
+#: includes/class-front.php:163 admin/class-table.php:39
+#: admin/class-table.php:143 admin/class-views.php:318
+#: admin/class-views.php:344
 msgid "Delete"
 msgstr ""
 
-#: includes/class-front.php:140
+#: includes/class-front.php:164
 msgid "Your review"
 msgstr ""
 
-#: includes/class-front.php:141
+#: includes/class-front.php:165
 msgid "Thanks for your review."
 msgstr ""
 
-#: includes/class-front.php:142
+#: includes/class-front.php:166
 msgid "Remove your review?"
 msgstr ""
 
-#: includes/class-front.php:143 includes/class-helpful.php:167
+#: includes/class-front.php:167 includes/class-helpful.php:167
 #: includes/class-helpful.php:216 includes/class-helpful.php:239
 #: includes/class-helpful.php:247 includes/class-helpful.php:257
 #: includes/class-helpful.php:280 includes/class-helpful.php:292
@@ -151,106 +151,146 @@ msgstr ""
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: includes/class-front.php:146
+#: includes/class-front.php:168
+msgid "Change photo"
+msgstr ""
+
+#: includes/class-front.php:169 includes/class-front.php:187
+msgid "Add photo"
+msgstr ""
+
+#: includes/class-front.php:170
+msgid "Please choose a JPG, PNG or WebP image."
+msgstr ""
+
+#: includes/class-front.php:171
+msgid "This photo is too large (max 8 MB)."
+msgstr ""
+
+#: includes/class-front.php:174
 msgid "Rate this recipe"
 msgstr ""
 
-#: includes/class-front.php:147
+#: includes/class-front.php:175
 msgid "Your rating"
 msgstr ""
 
-#: includes/class-front.php:152
+#: includes/class-front.php:180
 msgid "What did you think? (optional)"
 msgstr ""
 
-#: includes/class-front.php:152
+#: includes/class-front.php:180
 msgid "How did it go and what did you cook it on?"
 msgstr ""
 
-#: includes/class-front.php:153
+#: includes/class-front.php:181
 msgid "First name"
 msgstr ""
 
-#: includes/class-front.php:154
+#: includes/class-front.php:182
 msgid "Email address (never shown)"
 msgstr ""
 
-#: includes/class-front.php:155
+#: includes/class-front.php:183
 msgid "Which BBQ? (optional)"
 msgstr ""
 
-#: includes/class-front.php:155
+#: includes/class-front.php:183
 msgid "Choose your BBQ"
 msgstr ""
 
-#: includes/class-front.php:159
-msgid "Photo (optional)"
+#: includes/class-front.php:187 includes/class-privacy.php:36
+#: admin/class-table.php:24
+msgid "Photo"
 msgstr ""
 
-#: includes/class-front.php:160 admin/class-views.php:421
+#: includes/class-front.php:187
+msgid "optional"
+msgstr ""
+
+#: includes/class-front.php:187
+msgid "Remove"
+msgstr ""
+
+#: includes/class-front.php:188 admin/class-views.php:474
 msgid "Yes, send me the newsletter"
 msgstr ""
 
-#: includes/class-front.php:161 admin/class-views.php:417
-msgid "I agree to the terms"
+#: includes/class-front.php:190
+msgid "terms"
 msgstr ""
 
-#: includes/class-front.php:167
-msgid ""
-"Your email address is never shown. We only use it to send you one "
-"confirmation link."
+#. translators: %1$s: the word "terms", linked to the terms page
+#: includes/class-front.php:193
+#, php-format
+msgid "I agree to the %1$s"
 msgstr ""
 
-#: includes/class-front.php:168
+#: includes/class-front.php:197
 msgid "Post review"
 msgstr ""
 
-#: includes/class-front.php:169
+#. translators: %1$s: the words "privacy policy", linked to the privacy page
+#: includes/class-front.php:201
+#, php-format
+msgid ""
+"Your email address is never visible and only used for the confirmation (and "
+"for the newsletter if you tick it). More in the %1$s."
+msgstr ""
+
+#: includes/class-front.php:201
+msgid "privacy policy"
+msgstr ""
+
+#: includes/class-front.php:203
+msgid ""
+"Your email address is never visible and only used for the confirmation (and "
+"for the newsletter if you tick it)."
+msgstr ""
+
+#: includes/class-front.php:205
 msgid "JavaScript is needed to post a review."
 msgstr ""
 
 #. translators: %d: stars
-#: includes/class-front.php:177
+#: includes/class-front.php:213
 #, php-format
 msgid "%d out of 5 stars."
 msgstr ""
 
 #. translators: %s: first name
-#: includes/class-front.php:186
+#: includes/class-front.php:222
 #, php-format
 msgid "Photo of the dish by %s"
 msgstr ""
 
-#: includes/class-front.php:189
+#: includes/class-front.php:225
 msgid "Photo is being checked"
 msgstr ""
 
-#: includes/class-front.php:193 admin/class-views.php:403
+#: includes/class-front.php:229 admin/class-views.php:455
 msgid "Reply from the author"
 msgstr ""
 
-#. translators: %s: number of reviews
-#: includes/class-front.php:216
+#: includes/class-front.php:244
 #, php-format
-msgid "Read all %s reviews"
+msgid "Show more (%s left)"
 msgstr ""
 
-#: includes/class-front.php:228 admin/class-admin.php:33
-#: admin/class-views.php:85 admin/class-views.php:181 admin/class-views.php:214
-#: admin/class-views.php:401
+#: includes/class-front.php:244
+msgid "More reviews loaded."
+msgstr ""
+
+#. translators: %s: number of reviews
+#: includes/class-front.php:254
+#, php-format
+msgid "Show all %s reviews"
+msgstr ""
+
+#: includes/class-front.php:267 admin/class-admin.php:35
+#: admin/class-views.php:110 admin/class-views.php:217
+#: admin/class-views.php:259 admin/class-views.php:453
 msgid "Reviews"
-msgstr ""
-
-#: includes/class-front.php:230
-msgid "Manage my review"
-msgstr ""
-
-#: includes/class-front.php:230
-msgid "Send me a link to manage my review"
-msgstr ""
-
-#: includes/class-front.php:230
-msgid "Send link"
 msgstr ""
 
 #. translators: %s: number of people
@@ -269,11 +309,11 @@ msgstr ""
 msgid "Thanks for your feedback."
 msgstr ""
 
-#: includes/class-helpful.php:162 admin/class-views.php:435
+#: includes/class-helpful.php:162 admin/class-views.php:488
 msgid "What did you like?"
 msgstr ""
 
-#: includes/class-helpful.php:163 admin/class-views.php:436
+#: includes/class-helpful.php:163 admin/class-views.php:489
 msgid "What could be better?"
 msgstr ""
 
@@ -294,14 +334,14 @@ msgid "Remove my vote"
 msgstr ""
 
 #: includes/class-helpful.php:174 includes/class-privacy.php:32
-#: admin/class-views.php:290 admin/class-views.php:299
-#: admin/class-views.php:317
+#: admin/class-views.php:335 admin/class-views.php:344
+#: admin/class-views.php:367
 msgid "Yes"
 msgstr ""
 
 #: includes/class-helpful.php:174 includes/class-privacy.php:32
-#: admin/class-views.php:290 admin/class-views.php:299
-#: admin/class-views.php:317
+#: admin/class-views.php:335 admin/class-views.php:344
+#: admin/class-views.php:367
 msgid "No"
 msgstr ""
 
@@ -313,11 +353,11 @@ msgstr ""
 msgid "Anonymous. Optional."
 msgstr ""
 
-#: includes/class-helpful.php:219 includes/class-rest.php:106
+#: includes/class-helpful.php:219 includes/class-rest.php:108
 msgid "Please wait a moment and try again."
 msgstr ""
 
-#: includes/class-helpful.php:298 includes/class-rest.php:112
+#: includes/class-helpful.php:298 includes/class-rest.php:114
 msgid "The spam check failed. Please try again."
 msgstr ""
 
@@ -338,12 +378,13 @@ msgid ""
 "Hi %1$s,\n"
 "\n"
 "Thanks for your review of \"%2$s\". It is already online. Click this link to "
-"confirm that this is your email address:\n"
+"confirm that this is your email address and to manage your review:\n"
 "\n"
 "%3$s\n"
 "\n"
 "The link works once and expires in %4$d days. After confirming you can "
-"remove your review yourself on this device."
+"remove your review yourself on this device (look for \"Your review\" and "
+"\"Delete\" next to it)."
 msgstr ""
 
 #: includes/class-identity.php:113
@@ -405,7 +446,7 @@ msgstr[1] ""
 msgid "None"
 msgstr ""
 
-#: includes/class-photo.php:39
+#: includes/class-photo.php:45
 msgid ""
 "This photo could not be used. Please choose a JPG, PNG or WebP image up to 8 "
 "MB."
@@ -417,7 +458,7 @@ msgid "Recipe reviews"
 msgstr ""
 
 #: includes/class-privacy.php:27 admin/class-table.php:18
-#: admin/class-table.php:48 admin/class-views.php:214
+#: admin/class-table.php:48 admin/class-views.php:259
 msgid "Recipe"
 msgstr ""
 
@@ -437,8 +478,8 @@ msgstr ""
 msgid "Email address"
 msgstr ""
 
-#: includes/class-privacy.php:32 admin/class-views.php:352
-#: admin/class-views.php:447
+#: includes/class-privacy.php:32 admin/class-views.php:404
+#: admin/class-views.php:500
 msgid "Newsletter"
 msgstr ""
 
@@ -447,15 +488,11 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: includes/class-privacy.php:36 admin/class-table.php:24
-msgid "Photo"
-msgstr ""
-
 #: includes/class-privacy.php:42
 msgid "Helpful votes"
 msgstr ""
 
-#: includes/class-privacy.php:43 admin/class-views.php:317
+#: includes/class-privacy.php:43 admin/class-views.php:367
 msgid "Article"
 msgstr ""
 
@@ -463,71 +500,71 @@ msgstr ""
 msgid "Vote"
 msgstr ""
 
-#: includes/class-privacy.php:45 admin/class-views.php:317
+#: includes/class-privacy.php:45 admin/class-views.php:367
 msgid "Feedback"
 msgstr ""
 
 #: includes/class-rest.php:59 includes/class-rest.php:77
-#: includes/class-rest.php:89
+#: includes/class-rest.php:91
 msgid "Unknown recipe."
 msgstr ""
 
-#: includes/class-rest.php:92
+#: includes/class-rest.php:94
 msgid "Reviews are temporarily closed."
 msgstr ""
 
-#: includes/class-rest.php:95 includes/class-rest.php:103
-#: includes/class-rest.php:191
+#: includes/class-rest.php:97 includes/class-rest.php:105
+#: includes/class-rest.php:193
 msgid "The form has expired. Please reload the page and try again."
 msgstr ""
 
-#: includes/class-rest.php:97
+#: includes/class-rest.php:99
 msgid ""
 "Thanks! Your review is online. We sent you an email: click the link in it to "
 "confirm your review."
 msgstr ""
 
-#: includes/class-rest.php:109
+#: includes/class-rest.php:111
 msgid "You have posted a few reviews already. Please try again later."
 msgstr ""
 
-#: includes/class-rest.php:116
+#: includes/class-rest.php:118
 msgid "Please agree to the terms to post your review."
 msgstr ""
 
-#: includes/class-rest.php:129
+#: includes/class-rest.php:131
 msgid "Please choose a star rating."
 msgstr ""
 
-#: includes/class-rest.php:132
+#: includes/class-rest.php:134
 msgid "Please enter your first name (max 40 characters)."
 msgstr ""
 
-#: includes/class-rest.php:135 includes/class-rest.php:194
+#: includes/class-rest.php:137 includes/class-rest.php:196
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: includes/class-rest.php:138
+#: includes/class-rest.php:140
 msgid "Your text is too long (max 1500 characters)."
 msgstr ""
 
-#: includes/class-rest.php:169
+#: includes/class-rest.php:171
 msgid "Something went wrong. Please try again later."
 msgstr ""
 
-#: includes/class-rest.php:181
+#: includes/class-rest.php:183
 msgid "You cannot remove this review."
 msgstr ""
 
-#: includes/class-rest.php:184
+#: includes/class-rest.php:186
 msgid "Your review has been removed."
 msgstr ""
 
-#: includes/class-rest.php:197
+#: includes/class-rest.php:199
 msgid "Too many requests. Please try again later."
 msgstr ""
 
-#: includes/class-rest.php:200
+#: includes/class-rest.php:202
 msgid "If this address has reviews, a link is on its way. Check your inbox."
 msgstr ""
 
@@ -537,69 +574,88 @@ msgid ""
 "verified reviewers, no WordPress comments."
 msgstr ""
 
-#: admin/class-admin.php:22 admin/class-admin.php:37 admin/class-views.php:366
+#: admin/class-admin.php:24 admin/class-admin.php:39 admin/class-views.php:418
 msgid "Settings"
 msgstr ""
 
-#: admin/class-admin.php:30 admin/class-admin.php:41 admin/class-views.php:71
+#: admin/class-admin.php:32 admin/class-admin.php:43 admin/class-views.php:96
 msgid "Community"
 msgstr ""
 
-#: admin/class-admin.php:32
+#: admin/class-admin.php:34
 msgid "Dashboard"
 msgstr ""
 
-#: admin/class-admin.php:34 admin/class-views.php:209
+#: admin/class-admin.php:36 admin/class-views.php:252
 msgid "By recipe"
 msgstr ""
 
-#: admin/class-admin.php:35 admin/class-views.php:290 admin/class-views.php:312
-#: admin/class-views.php:317
+#: admin/class-admin.php:37 admin/class-views.php:335 admin/class-views.php:360
+#: admin/class-views.php:367
 msgid "Helpful"
 msgstr ""
 
-#: admin/class-admin.php:36 admin/class-views.php:346
+#: admin/class-admin.php:38 admin/class-views.php:397
 msgid "People"
 msgstr ""
 
-#: admin/class-admin.php:38 admin/class-views.php:492
+#: admin/class-admin.php:40 admin/class-views.php:547
 msgid "About"
 msgstr ""
 
-#: admin/class-admin.php:60
+#. translators: %s: table names
+#: admin/class-admin.php:63
+#, php-format
+msgid ""
+"database tables are missing (%s). Data in them cannot be recovered; the "
+"tables can be recreated empty."
+msgstr ""
+
+#: admin/class-admin.php:63
+msgid "Repair tables"
+msgstr ""
+
+#: admin/class-admin.php:66
+msgid ""
+"no privacy page is set, so the privacy line under the review button is not "
+"shown."
+msgstr ""
+
+#: admin/class-admin.php:66 admin/class-admin.php:69 admin/class-admin.php:74
+#: admin/class-views.php:31 admin/class-views.php:35 admin/class-views.php:362
+#: admin/class-views.php:399
+msgid "Open settings"
+msgstr ""
+
+#: admin/class-admin.php:69
 msgid ""
 "no terms page is set. The review form asks for agreement but cannot link to "
 "the terms."
 msgstr ""
 
-#: admin/class-admin.php:60 admin/class-admin.php:65
-msgid "Open settings"
-msgstr ""
-
-#: admin/class-admin.php:65
+#: admin/class-admin.php:74
 msgid ""
 "the review form is hidden for visitors until you add Cloudflare Turnstile "
 "keys."
 msgstr ""
 
-#: admin/class-admin.php:70
+#: admin/class-admin.php:87
 msgid "You are not allowed to do this."
 msgstr ""
 
-#: admin/class-admin.php:224
+#: admin/class-admin.php:246
 msgid "Community reviews"
 msgstr ""
 
-#: admin/class-admin.php:234
+#: admin/class-admin.php:256
 msgid "Open the reviews of this recipe"
 msgstr ""
 
-#: admin/class-admin.php:236 admin/class-views.php:212
-#: admin/class-views.php:242
+#: admin/class-admin.php:258
 msgid "No reviews yet."
 msgstr ""
 
-#: admin/class-admin.php:238
+#: admin/class-admin.php:260
 msgid "Reviews enabled for this recipe"
 msgstr ""
 
@@ -619,21 +675,21 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: admin/class-table.php:36 admin/class-table.php:141 admin/class-views.php:273
-#: admin/class-views.php:299
+#: admin/class-table.php:36 admin/class-table.php:142 admin/class-views.php:318
+#: admin/class-views.php:344
 msgid "Hide"
 msgstr ""
 
-#: admin/class-table.php:37 admin/class-table.php:141 admin/class-views.php:273
-#: admin/class-views.php:299
+#: admin/class-table.php:37 admin/class-table.php:142 admin/class-views.php:318
+#: admin/class-views.php:344
 msgid "Show"
 msgstr ""
 
-#: admin/class-table.php:38 admin/class-table.php:139 admin/class-views.php:269
+#: admin/class-table.php:38 admin/class-table.php:140 admin/class-views.php:314
 msgid "Approve photo"
 msgstr ""
 
-#: admin/class-table.php:48 admin/class-views.php:232
+#: admin/class-table.php:48 admin/class-views.php:276
 msgid "All recipes"
 msgstr ""
 
@@ -649,9 +705,13 @@ msgstr ""
 msgid "Published"
 msgstr ""
 
-#: admin/class-table.php:56 admin/class-table.php:166 admin/class-views.php:54
-#: admin/class-views.php:299
+#: admin/class-table.php:56 admin/class-table.php:167 admin/class-views.php:79
+#: admin/class-views.php:344
 msgid "Hidden"
+msgstr ""
+
+#: admin/class-table.php:56 admin/class-table.php:167
+msgid "Recipe deleted"
 msgstr ""
 
 #: admin/class-table.php:57
@@ -670,40 +730,40 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: admin/class-table.php:135
+#: admin/class-table.php:136
 msgid "Edit"
 msgstr ""
 
-#: admin/class-table.php:136
+#: admin/class-table.php:137
 msgid "Reply"
 msgstr ""
 
-#: admin/class-table.php:142 admin/class-views.php:273
+#: admin/class-table.php:143 admin/class-views.php:318
 msgid "Delete this review?"
 msgstr ""
 
-#: admin/class-table.php:151
+#: admin/class-table.php:152
 msgid "Has a reply"
 msgstr ""
 
-#: admin/class-table.php:163
+#: admin/class-table.php:164
 msgid "Waiting"
 msgstr ""
 
-#: admin/class-table.php:163
+#: admin/class-table.php:164
 msgid "Approved"
 msgstr ""
 
-#: admin/class-table.php:165 admin/class-views.php:49 admin/class-views.php:90
-#: admin/class-views.php:352
+#: admin/class-table.php:166 admin/class-views.php:74 admin/class-views.php:115
+#: admin/class-views.php:404
 msgid "Verified"
 msgstr ""
 
-#: admin/class-table.php:165
+#: admin/class-table.php:166
 msgid "Unverified"
 msgstr ""
 
-#: admin/class-table.php:174
+#: admin/class-table.php:175
 msgid "No reviews found."
 msgstr ""
 
@@ -711,622 +771,792 @@ msgstr ""
 msgid "Done."
 msgstr ""
 
-#: admin/class-views.php:51
+#: admin/class-views.php:31
+msgid "Set up spam protection first"
+msgstr ""
+
+#: admin/class-views.php:31
+msgid ""
+"The review form stays hidden for visitors until the Cloudflare Turnstile "
+"keys are added."
+msgstr ""
+
+#: admin/class-views.php:35
+msgid "No recipes yet"
+msgstr ""
+
+#: admin/class-views.php:35
+msgid ""
+"Reviews are active on the post types chosen in the settings, but none of "
+"them has content yet."
+msgstr ""
+
+#: admin/class-views.php:37
+msgid "No reviews yet"
+msgstr ""
+
+#: admin/class-views.php:37
+msgid ""
+"As soon as someone rates a recipe it shows up here, with the average and the "
+"distribution. Make sure [rcom_reviews] is on your recipe template."
+msgstr ""
+
+#: admin/class-views.php:37
+msgid "View a recipe page"
+msgstr ""
+
+#. translators: %s: number of items
+#: admin/class-views.php:43
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: post id
+#: admin/class-views.php:62
+#, php-format
+msgid "#%d (deleted)"
+msgstr ""
+
+#: admin/class-views.php:76
 msgid "Photo waiting"
 msgstr ""
 
 #. translators: %d: number of days
-#: admin/class-views.php:69
+#: admin/class-views.php:94
 #, php-format
 msgid "%d days"
 msgstr ""
 
-#: admin/class-views.php:69
+#: admin/class-views.php:94
 msgid "All time"
 msgstr ""
 
-#: admin/class-views.php:71
+#: admin/class-views.php:96
 msgid "How your recipes are rated and what needs your attention."
 msgstr ""
 
 #. translators: %s: signed number of reviews compared with the previous period
-#: admin/class-views.php:82
+#: admin/class-views.php:107
 #, php-format
 msgid "%s vs previous period"
 msgstr ""
 
 #. translators: %s: previous average
-#: admin/class-views.php:86
+#: admin/class-views.php:111
 #, php-format
 msgid "was %s"
 msgstr ""
 
-#: admin/class-views.php:87 admin/class-views.php:235
+#: admin/class-views.php:112 admin/class-views.php:279
 msgid "Average rating"
 msgstr ""
 
-#: admin/class-views.php:88
+#: admin/class-views.php:113
 msgid "With text"
 msgstr ""
 
-#: admin/class-views.php:89
+#: admin/class-views.php:114
 msgid "With photo"
 msgstr ""
 
 #. translators: %d: confirmed newsletter signups
-#: admin/class-views.php:92
+#: admin/class-views.php:117
 msgid "Newsletter opt-in"
 msgstr ""
 
-#: admin/class-views.php:92
+#: admin/class-views.php:117
 #, php-format
 msgid "%d confirmed"
 msgstr ""
 
-#: admin/class-views.php:93
+#: admin/class-views.php:118
 msgid "Photos waiting"
 msgstr ""
 
-#: admin/class-views.php:97
+#: admin/class-views.php:122
 msgid "Star distribution"
 msgstr ""
 
-#: admin/class-views.php:108
+#: admin/class-views.php:133
 msgid "Reviews per week"
 msgstr ""
 
-#: admin/class-views.php:108
+#: admin/class-views.php:133
 msgid "Reviews per week, last 12 weeks"
 msgstr ""
 
 #. translators: 1: ISO week, 2: number of reviews
-#: admin/class-views.php:117
+#: admin/class-views.php:142
 #, php-format
 msgid "Week %1$s: %2$d"
 msgstr ""
 
-#: admin/class-views.php:120
+#: admin/class-views.php:145
 msgid "ISO week number on the axis, last 12 weeks. Hover a bar for its value."
 msgstr ""
 
-#: admin/class-views.php:126
-msgid "Nothing to show yet."
+#: admin/class-views.php:151
+msgid "Nothing to show yet"
 msgstr ""
 
-#: admin/class-views.php:133
+#: admin/class-views.php:151
+msgid "This fills as reviews come in."
+msgstr ""
+
+#: admin/class-views.php:158
 msgid "Most reviewed recipes"
 msgstr ""
 
-#: admin/class-views.php:134
+#: admin/class-views.php:159
 msgid "Highest rated"
 msgstr ""
 
-#: admin/class-views.php:135
+#: admin/class-views.php:160
 msgid "Lowest rated"
 msgstr ""
 
-#: admin/class-views.php:138
+#: admin/class-views.php:163
 msgid "Least helpful articles"
 msgstr ""
 
-#: admin/class-views.php:140 admin/class-views.php:315
-msgid "No votes yet. Put [rcom_helpful] on your article template."
+#: admin/class-views.php:165 admin/class-views.php:362
+msgid "No votes yet"
 msgstr ""
 
-#: admin/class-views.php:153
-msgid "No data yet."
+#: admin/class-views.php:165
+msgid "Put [rcom_helpful] on your article template."
 msgstr ""
 
-#: admin/class-views.php:160
+#: admin/class-views.php:178
+msgid "No data yet"
+msgstr ""
+
+#: admin/class-views.php:178
+msgid "Counts appear as visitors reply."
+msgstr ""
+
+#: admin/class-views.php:185
 msgid "Devices, reviews"
 msgstr ""
 
-#: admin/class-views.php:161
+#: admin/class-views.php:186
 msgid "Devices, helpful votes"
 msgstr ""
 
-#: admin/class-views.php:164
+#: admin/class-views.php:189
 msgid "Recent reviews"
 msgstr ""
 
-#: admin/class-views.php:166
-msgid ""
-"No reviews yet. Put [rcom_reviews] on your recipe template and they will "
-"show up here."
+#: admin/class-views.php:204
+msgid "Terms"
 msgstr ""
 
-#: admin/class-views.php:181
+#. translators: %s: date
+#: admin/class-views.php:204
+#, php-format
+msgid "Terms text as it was on %s (read-only copy)."
+msgstr ""
+
+#: admin/class-views.php:204
+msgid "All reviews"
+msgstr ""
+
+#: admin/class-views.php:205
+msgid "Not found"
+msgstr ""
+
+#: admin/class-views.php:217
 msgid "Every review, newest first. Filter, search and handle several at once."
 msgstr ""
 
-#: admin/class-views.php:181 admin/class-views.php:312
-#: admin/class-views.php:346
+#: admin/class-views.php:217 admin/class-views.php:360
+#: admin/class-views.php:397
 msgid "Export CSV"
 msgstr ""
 
-#: admin/class-views.php:183
+#: admin/class-views.php:219
 msgid "review"
 msgstr ""
 
-#: admin/class-views.php:183
+#: admin/class-views.php:219
 msgid "reviews"
 msgstr ""
 
-#: admin/class-views.php:209
+#: admin/class-views.php:252
 msgid "Which recipes get reviews, and how they score."
 msgstr ""
 
-#: admin/class-views.php:214
+#: admin/class-views.php:259
 msgid "Average"
 msgstr ""
 
-#: admin/class-views.php:214
+#: admin/class-views.php:259
 msgid "Distribution"
 msgstr ""
 
-#: admin/class-views.php:214
+#: admin/class-views.php:259
 msgid "Last review"
 msgstr ""
 
-#: admin/class-views.php:214
+#: admin/class-views.php:259
 msgid "Photos"
 msgstr ""
 
-#: admin/class-views.php:232
+#: admin/class-views.php:276
 msgid "All reviews of this recipe."
 msgstr ""
 
-#: admin/class-views.php:232 admin/class-views.php:289
+#: admin/class-views.php:276 admin/class-views.php:286
+#: admin/class-views.php:334
 msgid "View on site"
 msgstr ""
 
 #. translators: %d: verified reviews
-#: admin/class-views.php:235
+#: admin/class-views.php:279
 #, php-format
 msgid "%d verified"
 msgstr ""
 
+#: admin/class-views.php:286
+msgid "No reviews for this recipe yet"
+msgstr ""
+
+#: admin/class-views.php:286
+msgid "Reviews appear here as soon as visitors post them."
+msgstr ""
+
+#: admin/class-views.php:299
+msgid "View text"
+msgstr ""
+
+#: admin/class-views.php:303
+msgid "View revision"
+msgstr ""
+
 #. translators: 1: date of agreement, 2: date of the terms version
-#: admin/class-views.php:265
+#: admin/class-views.php:310
 #, php-format
 msgid "Agreed on %1$s to the terms of %2$s"
 msgstr ""
 
-#: admin/class-views.php:265
+#: admin/class-views.php:310
 #, php-format
 msgid "Agreed on %s"
 msgstr ""
 
-#: admin/class-views.php:267
+#: admin/class-views.php:312
 msgid "(stars only)"
 msgstr ""
 
-#: admin/class-views.php:269
+#: admin/class-views.php:314
 msgid "Photo approved"
 msgstr ""
 
-#: admin/class-views.php:269
+#: admin/class-views.php:314
 msgid "Delete photo"
 msgstr ""
 
-#: admin/class-views.php:273
+#: admin/class-views.php:318
 msgid "Your reply"
 msgstr ""
 
-#: admin/class-views.php:273
+#: admin/class-views.php:318
 msgid "Write a reply, shown under the review. Leave empty for none."
 msgstr ""
 
-#: admin/class-views.php:273
+#: admin/class-views.php:318
 msgid "Save reply"
 msgstr ""
 
-#: admin/class-views.php:289
+#: admin/class-views.php:334
 msgid "Votes and feedback for this article."
 msgstr ""
 
-#: admin/class-views.php:289
+#: admin/class-views.php:334
 msgid "All articles"
 msgstr ""
 
-#: admin/class-views.php:293
-msgid "No feedback texts yet."
+#: admin/class-views.php:338
+msgid "No feedback texts yet"
 msgstr ""
 
-#: admin/class-views.php:299
+#: admin/class-views.php:338
+msgid "Visitors can leave an optional text after they vote. It shows up here."
+msgstr ""
+
+#: admin/class-views.php:344
 msgid "Handled"
 msgstr ""
 
-#: admin/class-views.php:299
+#: admin/class-views.php:344
 msgid "Mark as handled"
 msgstr ""
 
-#: admin/class-views.php:299
+#: admin/class-views.php:344
 msgid "Delete this feedback?"
 msgstr ""
 
-#: admin/class-views.php:312
+#: admin/class-views.php:360
 msgid ""
 "Was this article helpful? Votes and feedback per article, least helpful "
 "first."
 msgstr ""
 
-#: admin/class-views.php:312
+#: admin/class-views.php:360
 msgid "More No than Yes"
 msgstr ""
 
-#: admin/class-views.php:312
+#: admin/class-views.php:360
 msgid "With feedback text"
 msgstr ""
 
-#: admin/class-views.php:317
+#: admin/class-views.php:362
+msgid ""
+"Place [rcom_helpful] on your article template. Votes and feedback texts per "
+"article show up here, least helpful first."
+msgstr ""
+
+#: admin/class-views.php:367
 msgid "Last 30 days"
 msgstr ""
 
-#: admin/class-views.php:346
+#: admin/class-views.php:397
 msgid "Everyone who left a review, one row per email address."
 msgstr ""
 
-#: admin/class-views.php:349
-msgid "No people yet."
+#: admin/class-views.php:399
+msgid "No people yet"
+msgstr ""
+
+#: admin/class-views.php:399
+msgid ""
+"Everyone who leaves a review appears here once, with their number of reviews "
+"and votes. Email addresses are only visible in the admin."
 msgstr ""
 
 #. translators: %d: helpful votes
-#: admin/class-views.php:352
+#: admin/class-views.php:404
 #, php-format
 msgid "%d vote"
 msgid_plural "%d votes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/class-views.php:366
+#: admin/class-views.php:418
 msgid "Spam protection, newsletter and where reviews are active."
 msgstr ""
 
-#: admin/class-views.php:369
+#: admin/class-views.php:421
 msgid ""
 "Your secret key is accepted by Cloudflare. (The site key cannot be checked "
 "from the server: test the form on the site.)"
 msgstr ""
 
-#: admin/class-views.php:370
+#: admin/class-views.php:422
 msgid ""
 "Cloudflare rejected the secret key. Check that you copied it completely."
 msgstr ""
 
-#: admin/class-views.php:371
+#: admin/class-views.php:423
 msgid "Enter and save both keys first."
 msgstr ""
 
-#: admin/class-views.php:372
+#: admin/class-views.php:424
 msgid "Could not reach Cloudflare. Try again later."
 msgstr ""
 
-#: admin/class-views.php:387
+#: admin/class-views.php:439
 msgid "Spam protection (Cloudflare Turnstile)"
 msgstr ""
 
-#: admin/class-views.php:387
+#: admin/class-views.php:439
 msgid ""
 "Without both keys the review form is hidden for visitors. Create a Turnstile "
 "widget in the Cloudflare dashboard (mode Managed, your hostname) and paste "
 "the keys here, or define them in wp-config.php."
 msgstr ""
 
-#: admin/class-views.php:388
+#: admin/class-views.php:440
 msgid "Site key"
 msgstr ""
 
-#: admin/class-views.php:389
+#: admin/class-views.php:441
 msgid "Secret key"
 msgstr ""
 
-#: admin/class-views.php:389
+#: admin/class-views.php:441
 msgid "Leave empty to keep the saved key."
 msgstr ""
 
-#: admin/class-views.php:390
+#: admin/class-views.php:442
 msgid "Test my keys"
 msgstr ""
 
-#: admin/class-views.php:390
+#: admin/class-views.php:442
 msgid "Keys present"
 msgstr ""
 
-#: admin/class-views.php:390
+#: admin/class-views.php:442
 msgid "Keys missing"
 msgstr ""
 
-#: admin/class-views.php:402 admin/class-views.php:433
+#: admin/class-views.php:454 admin/class-views.php:486
 msgid "Active on"
 msgstr ""
 
-#: admin/class-views.php:402
+#: admin/class-views.php:454
 msgid ""
 "The shortcodes only work on these post types. CSS and JS load only where a "
 "shortcode renders."
 msgstr ""
 
-#: admin/class-views.php:403
+#: admin/class-views.php:455
 msgid "Label for your reply"
 msgstr ""
 
-#: admin/class-views.php:404
+#: admin/class-views.php:456
 msgid "Credit link"
 msgstr ""
 
-#: admin/class-views.php:404
+#: admin/class-views.php:456
 msgid "Show a \"Powered by J-Concept\" link below the reviews"
 msgstr ""
 
-#: admin/class-views.php:414
+#: admin/class-views.php:466
 msgid "Terms and consent"
 msgstr ""
 
-#: admin/class-views.php:414
+#: admin/class-views.php:466
 msgid ""
 "Posting a review requires ticking the terms box. The moment and the terms "
 "version are stored with the review."
 msgstr ""
 
-#: admin/class-views.php:415
+#: admin/class-views.php:467
 msgid "Terms page"
 msgstr ""
 
-#: admin/class-views.php:415
+#: admin/class-views.php:467
 msgid "No page chosen: the checkbox shows plain text without a link."
 msgstr ""
 
-#: admin/class-views.php:416
+#: admin/class-views.php:468
 msgid "Privacy page"
 msgstr ""
 
-#: admin/class-views.php:416
-msgid "Optional. Used for the link when no terms page is chosen."
+#: admin/class-views.php:468
+msgid ""
+"Linked in a small line under the review button, and used for the checkbox "
+"link when no terms page is chosen. Without a privacy page that line is not "
+"shown."
 msgstr ""
 
-#: admin/class-views.php:417
+#: admin/class-views.php:469
 msgid "Checkbox text"
 msgstr ""
 
-#: admin/class-views.php:420
+#: admin/class-views.php:469
+#, php-format
+msgid "I agree to the %s"
+msgstr ""
+
+#: admin/class-views.php:469
+#, php-format
+msgid ""
+"Optional. Use %s where the link to the terms should go. Leave empty for the "
+"default sentence."
+msgstr ""
+
+#: admin/class-views.php:472
 msgid "Terms version"
 msgstr ""
 
 #. translators: %s: date
-#: admin/class-views.php:420
+#: admin/class-views.php:472
 #, php-format
 msgid ""
 "Automatic: last modified %s. Every edit of the page counts as a new version."
 msgstr ""
 
-#: admin/class-views.php:420
+#: admin/class-views.php:472
 msgid "Automatic, from the last modified date of the terms page."
 msgstr ""
 
-#: admin/class-views.php:420
+#: admin/class-views.php:472
 msgid ""
-"Post revisions are disabled: you cannot look up later which text applied. "
-"Enable revisions for pages."
+"Snapshots are off and post revisions are disabled: you cannot look up later "
+"which text applied."
 msgstr ""
 
-#: admin/class-views.php:421
+#: admin/class-views.php:473
+msgid "Keep a copy of the terms"
+msgstr ""
+
+#: admin/class-views.php:473
+msgid "Store a text copy per version (independent of post revisions)"
+msgstr ""
+
+#: admin/class-views.php:473
+msgid "Copies are never deleted automatically while reviews refer to them."
+msgstr ""
+
+#: admin/class-views.php:474
 msgid "Newsletter checkbox text"
 msgstr ""
 
-#: admin/class-views.php:432
+#: admin/class-views.php:485
 msgid "Helpful? (was this article helpful)"
 msgstr ""
 
-#: admin/class-views.php:433
+#: admin/class-views.php:486
 msgid ""
 "Shortcode [rcom_helpful]. Votes are anonymous unless the visitor is "
 "identified through a review link."
 msgstr ""
 
-#: admin/class-views.php:434
+#: admin/class-views.php:487
 msgid "Show the count from"
 msgstr ""
 
-#: admin/class-views.php:434
+#: admin/class-views.php:487
 msgid "The public sentence appears once this many people voted Yes."
 msgstr ""
 
-#: admin/class-views.php:435
+#: admin/class-views.php:488
 msgid "Question after Yes"
 msgstr ""
 
-#: admin/class-views.php:436
+#: admin/class-views.php:489
 msgid "Question after No"
 msgstr ""
 
-#: admin/class-views.php:437
+#: admin/class-views.php:490
 msgid "Feedback text"
 msgstr ""
 
-#: admin/class-views.php:437
+#: admin/class-views.php:490
 msgid "Require Turnstile for the feedback text (votes never use a captcha)"
 msgstr ""
 
-#: admin/class-views.php:437
+#: admin/class-views.php:490
 msgid "Allow links in the text"
 msgstr ""
 
-#: admin/class-views.php:447
+#: admin/class-views.php:500
 msgid ""
 "Only visitors who tick the newsletter box and confirm their email address "
 "are sent to the service."
 msgstr ""
 
-#: admin/class-views.php:448
+#: admin/class-views.php:501
 msgid "Service"
 msgstr ""
 
-#: admin/class-views.php:450
+#: admin/class-views.php:503
 msgid "Laposta API key"
 msgstr ""
 
-#: admin/class-views.php:450
+#: admin/class-views.php:503
 msgid "Connect"
 msgstr ""
 
-#: admin/class-views.php:450
+#: admin/class-views.php:503
 msgid ""
 "Leave empty to keep the saved key. Only the last 4 characters are ever shown."
 msgstr ""
 
-#: admin/class-views.php:454
+#: admin/class-views.php:507
 msgid ""
 "Could not load your lists: the API key is invalid or Laposta is unreachable."
 msgstr ""
 
-#: admin/class-views.php:461
+#: admin/class-views.php:514
 msgid "Laposta list"
 msgstr ""
 
-#: admin/class-views.php:461
+#: admin/class-views.php:514
 msgid "The saved list was not found in this account."
 msgstr ""
 
-#: admin/class-views.php:461
+#: admin/class-views.php:514
 msgid ""
 "Pick a list and save: the first-name field is then suggested automatically."
 msgstr ""
 
-#: admin/class-views.php:468
+#: admin/class-views.php:521
 msgid "Field for the first name"
 msgstr ""
 
-#: admin/class-views.php:468
+#: admin/class-views.php:521
 msgid "The email address is always sent. Change the suggestion if needed."
 msgstr ""
 
-#: admin/class-views.php:471
+#: admin/class-views.php:524
 msgid "Laposta list ID"
 msgstr ""
 
-#: admin/class-views.php:471
+#: admin/class-views.php:524
 msgid "Connect an API key to pick from your lists."
 msgstr ""
 
-#: admin/class-views.php:473
+#: admin/class-views.php:526
 msgid "Confirmation"
 msgstr ""
 
-#: admin/class-views.php:473
+#: admin/class-views.php:526
 msgid "We confirm: the review email link counts, no second email"
 msgstr ""
 
-#: admin/class-views.php:473
+#: admin/class-views.php:526
 msgid "Laposta sends its own confirmation email"
 msgstr ""
 
-#: admin/class-views.php:473
+#: admin/class-views.php:526
 msgid ""
 "With the first choice the visitor gets one email in total; with the second a "
 "second email from Laposta that must be confirmed too."
 msgstr ""
 
-#: admin/class-views.php:474
+#: admin/class-views.php:527
 msgid "Test connection"
 msgstr ""
 
-#: admin/class-views.php:474
+#: admin/class-views.php:527
 msgid "Use existing Laposta settings"
 msgstr ""
 
-#: admin/class-views.php:478
+#: admin/class-views.php:531
 msgid "Email, updates and data"
 msgstr ""
 
-#: admin/class-views.php:479
+#: admin/class-views.php:532
 msgid "Sender email for mails"
 msgstr ""
 
-#: admin/class-views.php:479
+#: admin/class-views.php:532
 msgid "Default: the WordPress admin address."
 msgstr ""
 
-#: admin/class-views.php:480
+#: admin/class-views.php:533
 msgid "Updates"
 msgstr ""
 
-#: admin/class-views.php:480
+#: admin/class-views.php:533
 msgid "Do not check GitHub for plugin updates"
 msgstr ""
 
-#: admin/class-views.php:482
+#: admin/class-views.php:535
 msgid "AI abilities"
 msgstr ""
 
-#: admin/class-views.php:482
+#: admin/class-views.php:535
 msgid "Allow AI abilities (WordPress Abilities API, administrators only)"
 msgstr ""
 
-#: admin/class-views.php:482
+#: admin/class-views.php:535
 msgid ""
 "Lets an AI assistant read statistics and reviews and reply, approve photos "
 "or hide reviews. Off by default."
 msgstr ""
 
-#: admin/class-views.php:484
+#: admin/class-views.php:537
+msgid "When a recipe is deleted for good"
+msgstr ""
+
+#: admin/class-views.php:537
+msgid "Delete its reviews and photos"
+msgstr ""
+
+#: admin/class-views.php:537
+msgid "Keep them hidden (filter \"Recipe deleted\")"
+msgstr ""
+
+#: admin/class-views.php:537
+msgid ""
+"Emptying the trash deletes recipes for good. Choose \"keep\" to protect "
+"reviews against an accidentally emptied trash."
+msgstr ""
+
+#: admin/class-views.php:538
+msgid "Cached ratings"
+msgstr ""
+
+#: admin/class-views.php:538
+msgid "Recalculate cache"
+msgstr ""
+
+#. translators: %d: number of posts
+#: admin/class-views.php:538
+#, php-format
+msgid "%d posts recalculated"
+msgstr ""
+
+#: admin/class-views.php:538
+msgid ""
+"Averages and counts are cached in post meta and can always be rebuilt from "
+"the tables."
+msgstr ""
+
+#: admin/class-views.php:539
 msgid "Keep data on uninstall"
 msgstr ""
 
-#: admin/class-views.php:484
+#: admin/class-views.php:539
 msgid "Do not delete reviews and photos when the plugin is deleted"
 msgstr ""
 
-#: admin/class-views.php:485
+#: admin/class-views.php:540
 msgid "Save changes"
 msgstr ""
 
-#: admin/class-views.php:494
+#: admin/class-views.php:549
 msgid "OK"
 msgstr ""
 
-#: admin/class-views.php:494
+#: admin/class-views.php:549
 msgid "Check"
 msgstr ""
 
 #. translators: %s: link to the author
-#: admin/class-views.php:500
+#: admin/class-views.php:555
 #, php-format
 msgid "Recipe Community by %s"
 msgstr ""
 
-#: admin/class-views.php:503
+#: admin/class-views.php:558
 msgid "System check"
 msgstr ""
 
-#: admin/class-views.php:504
+#: admin/class-views.php:559
 msgid "PHP 8.0 or newer"
 msgstr ""
 
-#: admin/class-views.php:505
+#: admin/class-views.php:560
 msgid "Photo processing with WebP"
 msgstr ""
 
-#: admin/class-views.php:506
+#: admin/class-views.php:561
 msgid "Photo folder writable"
 msgstr ""
 
-#: admin/class-views.php:507
+#: admin/class-views.php:562
 msgid "Turnstile keys present"
 msgstr ""
 
-#: admin/class-views.php:508
+#: admin/class-views.php:563
 msgid "Newsletter service"
 msgstr ""
 
-#: admin/class-views.php:509
+#: admin/class-views.php:564
 msgid "Update check"
 msgstr ""
 
-#: admin/class-views.php:509
+#: admin/class-views.php:564
 msgid "disabled"
 msgstr ""
 
-#: admin/class-views.php:509
+#: admin/class-views.php:564
 msgid "GitHub releases"
 msgstr ""

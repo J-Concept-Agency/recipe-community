@@ -18,6 +18,12 @@ class RCOM_Photo {
 		return trailingslashit( $u['baseurl'] ) . 'rcom/' . rawurlencode( $file );
 	}
 
+	/** Thumbnail URL when it exists, otherwise the main file. */
+	public static function thumb_url( $file ) {
+		$t = substr( $file, 0, -5 ) . '-t.webp';
+		return is_file( self::dir() . '/' . $t ) ? self::url( $t ) : self::url( $file );
+	}
+
 	public static function ensure_dir() {
 		$d = self::dir();
 		if ( ! wp_mkdir_p( $d ) ) {
@@ -78,6 +84,11 @@ class RCOM_Photo {
 			return $bad;
 		}
 		self::strip_webp_meta( $path ); // safety net: depending on the engine the editor may keep metadata
+		$th = wp_get_image_editor( $path ); // small thumbnail for the admin lists (the main file is up to 1600 px)
+		if ( ! is_wp_error( $th ) && ! is_wp_error( $th->resize( 200, 200, true ) ) ) {
+			$th->set_quality( 70 );
+			$th->save( self::dir() . '/' . substr( $name, 0, -5 ) . '-t.webp', 'image/webp' );
+		}
 		return $name;
 	}
 
@@ -110,6 +121,7 @@ class RCOM_Photo {
 	public static function remove( $file ) {
 		if ( $file && preg_match( '/^[a-f0-9]{32}\.webp$/', $file ) ) {
 			wp_delete_file( self::dir() . '/' . $file );
+			wp_delete_file( self::dir() . '/' . substr( $file, 0, -5 ) . '-t.webp' );
 		}
 	}
 }

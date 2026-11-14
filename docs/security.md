@@ -21,3 +21,7 @@ Report vulnerabilities privately, see [SECURITY.md](../SECURITY.md).
 
 ## Helpful votes
 Signed per-article cookie, honeypot, minimum time, rate limits, nonce via REST, text limited to 1000 characters with HTML stripped, links rejected by default, identical texts de-duplicated. Votes never use a captcha; Turnstile for the feedback text is optional.
+
+## Data robustness
+
+Persistent data is only in the plugin's own tables. Transients hold temporary counters only; post meta holds rebuildable caches. A light integrity check (plugin screens and a daily wp-cron job `rcom_daily`) reports missing tables. See the FAQ for safe and unsafe cleanup tools. When a recipe is deleted for good the reviews and photos are deleted, or kept hidden (status `orphan`) when so configured.

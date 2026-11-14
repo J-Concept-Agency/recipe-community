@@ -28,6 +28,8 @@ define( 'RCOM_URL', plugin_dir_url( __FILE__ ) );
 require_once RCOM_DIR . 'includes/class-settings.php';
 require_once RCOM_DIR . 'includes/class-reviews.php';
 require_once RCOM_DIR . 'includes/class-device.php';
+require_once RCOM_DIR . 'includes/class-terms.php';
+require_once RCOM_DIR . 'includes/class-integrity.php';
 require_once RCOM_DIR . 'includes/class-photo.php';
 require_once RCOM_DIR . 'includes/class-stats.php';
 require_once RCOM_DIR . 'includes/class-identity.php';
@@ -67,6 +69,7 @@ RCOM_Front::init();
 RCOM_Helpful::init();
 RCOM_Privacy::init();
 RCOM_Updater::init();
+RCOM_Integrity::init();
 RCOM_Newsletter::init();
 RCOM_Abilities::init();
 

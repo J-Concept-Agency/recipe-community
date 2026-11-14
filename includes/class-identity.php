@@ -108,7 +108,7 @@ class RCOM_Identity {
 		/* translators: %s: site name */
 		$subject = sprintf( __( 'Confirm your review on %s', 'recipe-community' ), $site );
 		/* translators: 1: first name, 2: recipe title, 3: link, 4: days */
-		$body = sprintf( __( "Hi %1\$s,\n\nThanks for your review of \"%2\$s\". It is already online. Click this link to confirm that this is your email address:\n\n%3\$s\n\nThe link works once and expires in %4\$d days. After confirming you can remove your review yourself on this device.", 'recipe-community' ), $r->name, wp_strip_all_tags( get_the_title( $r->post_id ) ), self::link( $t ), 7 );
+		$body = sprintf( __( "Hi %1\$s,\n\nThanks for your review of \"%2\$s\". It is already online. Click this link to confirm that this is your email address and to manage your review:\n\n%3\$s\n\nThe link works once and expires in %4\$d days. After confirming you can remove your review yourself on this device (look for \"Your review\" and \"Delete\" next to it).", 'recipe-community' ), $r->name, wp_strip_all_tags( get_the_title( $r->post_id ) ), self::link( $t ), 7 );
 		if ( $r->newsletter_optin ) {
 			$body .= "\n\n" . __( 'You also ticked the newsletter box. Clicking the link confirms your newsletter signup too. If you did not mean to sign up, simply do not click the link.', 'recipe-community' );
 		}

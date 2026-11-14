@@ -11,18 +11,27 @@
 	var gone = function (n) { n.parentNode.removeChild(n); };
 
 	$$('.rcom-list').forEach(function (l) {
-		var b = $('.rcom-more', l);
+		var b = $('.rcom-more', l), T = {}, live = $('.rcom-sr', l);
+		try { T = JSON.parse(l.dataset.t || '{}'); } catch (x) {}
 		if (!b) { return; }
-		b.addEventListener('click', function () {
-			b.disabled = true;
-			(function next() {
-				var n = $$('.rcom-item', l).length;
-				j(l.dataset.api + 'reviews?post=' + l.dataset.post + '&offset=' + n + '&per_page=50').then(function (d) {
-					var t = document.createElement('div'); t.innerHTML = d.html;
-					while (t.firstChild) { l.insertBefore(t.firstChild, b); }
-					if (d.html && $$('.rcom-item', l).length < +l.dataset.total) { next(); } else { gone(b); document.dispatchEvent(new Event('rcom:loaded')); }
-				}).catch(function () { b.disabled = false; });
-			})();
+		b.addEventListener('click', function (ev) {
+			ev.preventDefault();
+			if (b.getAttribute('aria-disabled')) { return; }
+			b.setAttribute('aria-disabled', 'true');
+			var items = $$('.rcom-item', l), last = items[items.length - 1];
+			j(l.dataset.api + 'reviews?post=' + l.dataset.post + '&limit=10&cursor=' + encodeURIComponent(last ? last.dataset.c : '')).then(function (d) {
+				var t = document.createElement('div'); t.innerHTML = d.html;
+				var fresh = t.firstChild;
+				while (t.firstChild) { l.insertBefore(t.firstChild, b); }
+				var left = +l.dataset.total - $$('.rcom-item', l).length;
+				if (!d.count || left <= 0) { gone(b); } else {
+					b.textContent = (T.more || '%s').replace('%s', left.toLocaleString());
+					b.removeAttribute('aria-disabled');
+				}
+				if (fresh) { fresh.tabIndex = -1; fresh.focus({ preventScroll: true }); }
+				if (live) { live.textContent = ''; setTimeout(function () { live.textContent = T.loaded || ''; }, 50); }
+				document.dispatchEvent(new Event('rcom:loaded'));
+			}).catch(function () { b.removeAttribute('aria-disabled'); });
 		});
 	});
 
@@ -90,12 +99,35 @@
 			io2.observe(li);
 		}
 
+		var fi = $('.rcom-file', f), pv = $('.rcom-prev', f), pe = $('.rcom-ferr', f), pt = $('.rcom-fbtn-t', f), url;
+		function clearPhoto() {
+			fi.value = ''; pv.hidden = true; pe.textContent = ''; pt.textContent = T.padd;
+			if (url) { URL.revokeObjectURL(url); url = null; }
+		}
+		fi.addEventListener('change', function () {
+			var x = fi.files[0];
+			if (!x) { clearPhoto(); return; }
+			if (!/^image\/(jpeg|png|webp)$/.test(x.type) || x.size > 8388608) {
+				var m = /^image\/(jpeg|png|webp)$/.test(x.type) ? T.pbig : T.ptype;
+				clearPhoto(); pe.textContent = m; return;
+			}
+			pe.textContent = '';
+			if (url) { URL.revokeObjectURL(url); }
+			url = URL.createObjectURL(x);
+			$('img', pv).src = url;
+			var n = x.name.length > 24 ? x.name.slice(0, 14) + '…' + x.name.slice(-8) : x.name;
+			$('.rcom-pn', pv).textContent = n + ' · ' + (x.size > 1048576 ? (x.size / 1048576).toFixed(1) + ' MB' : Math.round(x.size / 1024) + ' KB');
+			pv.hidden = false; pt.textContent = T.pchange;
+		});
+		$('.rcom-del', pv).addEventListener('click', function () { clearPhoto(); fi.focus(); });
+		f.addEventListener('reset', function () { setTimeout(clearPhoto, 0); });
+
 		var sub = $('button[type=submit]', f);
 		f.addEventListener('submit', function (ev) {
 			ev.preventDefault();
 			sub.disabled = true;
 			loadState().then(function () {
-				var d = new FormData(f); d.delete('manage_email'); d.append('post', pid);
+				var d = new FormData(f); d.append('post', pid);
 				return j(api + 'reviews', { method: 'POST', body: d });
 			}).then(function (r) {
 				say(r.message);
@@ -108,15 +140,5 @@
 				.then(function () { sub.disabled = false; if (wid !== undefined) { window.turnstile.reset(wid); } });
 		});
 
-		var lk = $('.rcom-link');
-		if (lk) {
-			lk.addEventListener('click', function () {
-				var m = $('input[name=manage_email]');
-				if (!m.value) { m.focus(); return; }
-				loadState().then(function () { return post(api, 'link', { post: pid, nonce: E.nonce.value, email: m.value }); })
-					.then(function (r) { say(r.message); m.value = ''; })
-					.catch(function (x) { say((x && x.message) || T.err, 1); });
-			});
-		}
 	});
 })();

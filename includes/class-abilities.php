@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 class RCOM_Abilities {
 
 	public static function init() {
-		if ( ! function_exists( 'wp_register_ability' ) || ! RCOM_Settings::get( 'ai_abilities' ) ) {
+		if ( ! function_exists( 'wp_register_ability' ) || ! get_option( 'rcom_ai_on' ) ) { // tiny autoloaded flag: no settings query on every request
 			return;
 		}
 		add_action( 'wp_abilities_api_categories_init', function () {

@@ -17,3 +17,12 @@
 **Can I hide the "Powered by J-Concept" link?** Yes, it is on by default and can be switched off in Settings > Credit link. See [licensing](licensing.md).
 
 **Does it work without Bricks?** Yes, it only provides shortcodes.
+
+**Do database cleaners and optimisation plugins delete reviews?**
+All plugin data lives in its own tables (`rcom_reviews`, `rcom_votes`, `rcom_feedback`, `rcom_terms_versions`), not in comments, post meta or transients. Safe to run: removing post revisions, expired transients, spam comments, optimising/repairing tables. The cached values in post meta (`_rcom_*`) and transients can disappear at any time; they are rebuilt automatically (Settings > "Recalculate cache" forces it). Not safe: "remove unused/orphan tables" tools (they may drop the `rcom_` tables), emptying the trash of recipes (deleting a recipe for good deletes its reviews unless Settings > "When a recipe is deleted for good" is set to keep them hidden), and anything that bulk-deletes tables or the `uploads/rcom/` folder.
+
+**What can the plugin not prevent?** Another plugin or a person that deliberately drops its tables, deletes the uploads folder, or restores an old database. A daily check and a notice on the plugin screens report missing tables and offer "Repair tables"; that recreates the tables empty, lost data cannot be recovered.
+
+**Back-up tip:** include the database and `wp-content/uploads/rcom/` in every back-up.
+
+**Is the version of my terms provable without revisions?** Yes: per version a text copy is stored in `rcom_terms_versions` (Settings > Keep a copy of the terms, on by default). Copies are not deleted automatically while reviews refer to them.

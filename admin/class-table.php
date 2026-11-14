@@ -53,7 +53,7 @@ class RCOM_Table extends WP_List_Table {
 		for ( $i = 5; $i >= 1; $i-- ) {
 			echo '<option value="' . $i . '"' . selected( $cur['rating'], $i, false ) . '>' . $i . ' ★</option>';
 		}
-		echo '</select><select name="status" aria-label="' . esc_attr__( 'Status', 'recipe-community' ) . '"><option value="">' . esc_html__( 'All statuses', 'recipe-community' ) . '</option><option value="published"' . selected( $cur['status'], 'published', false ) . '>' . esc_html__( 'Published', 'recipe-community' ) . '</option><option value="hidden"' . selected( $cur['status'], 'hidden', false ) . '>' . esc_html__( 'Hidden', 'recipe-community' ) . '</option></select>';
+		echo '</select><select name="status" aria-label="' . esc_attr__( 'Status', 'recipe-community' ) . '"><option value="">' . esc_html__( 'All statuses', 'recipe-community' ) . '</option><option value="published"' . selected( $cur['status'], 'published', false ) . '>' . esc_html__( 'Published', 'recipe-community' ) . '</option><option value="hidden"' . selected( $cur['status'], 'hidden', false ) . '>' . esc_html__( 'Hidden', 'recipe-community' ) . '</option><option value="orphan"' . selected( $cur['status'], 'orphan', false ) . '>' . esc_html__( 'Recipe deleted', 'recipe-community' ) . '</option></select>';
 		echo '<label class="rcom-chk"><input type="checkbox" name="photo" value="1"' . checked( $cur['photo'], true, false ) . '> ' . esc_html__( 'Photo pending', 'recipe-community' ) . '</label>';
 		echo '<input type="search" name="s" value="' . esc_attr( wp_unslash( $_GET['s'] ?? '' ) ) . '" placeholder="' . esc_attr__( 'Search reviews', 'recipe-community' ) . '" aria-label="' . esc_attr__( 'Search reviews', 'recipe-community' ) . '">';
 		echo '<button class="rcom-btn-a primary">' . esc_html__( 'Filter', 'recipe-community' ) . '</button>';
@@ -76,7 +76,7 @@ class RCOM_Table extends WP_List_Table {
 			$w[] = 'rating = %d';
 			$a[] = (int) $_GET['rating'];
 		}
-		if ( ! empty( $_GET['status'] ) && in_array( $_GET['status'], array( 'published', 'hidden' ), true ) ) {
+		if ( ! empty( $_GET['status'] ) && in_array( $_GET['status'], array( 'published', 'hidden', 'orphan' ), true ) ) {
 			$w[] = 'status = %s';
 			$a[] = $_GET['status'];
 		}
@@ -105,6 +105,7 @@ class RCOM_Table extends WP_List_Table {
 		$total = (int) $wpdb->get_var( $a ? $wpdb->prepare( "SELECT COUNT(*) FROM {$t} WHERE {$where}", $a ) : "SELECT COUNT(*) FROM {$t} WHERE {$where}" );
 		$sql   = "SELECT * FROM {$t} WHERE {$where} ORDER BY {$ob} {$od}, id DESC LIMIT %d OFFSET %d";
 		$this->items = $wpdb->get_results( $wpdb->prepare( $sql, array_merge( $a, array( $per, ( $page - 1 ) * $per ) ) ) );
+		_prime_post_caches( array_unique( array_map( 'intval', wp_list_pluck( $this->items, 'post_id' ) ) ), false, false ); // one query instead of one per row
 		$this->set_pagination_args( array( 'total_items' => $total, 'per_page' => $per ) );
 		$this->_column_headers = array( $this->get_columns(), array(), $this->get_sortable_columns() );
 	}
@@ -160,10 +161,10 @@ class RCOM_Table extends WP_List_Table {
 					return '<span class="rcom-muted">&ndash;</span>';
 				}
 				$u = esc_url( RCOM_Photo::url( $r->photo_file ) );
-				return '<a class="rcom-th" href="' . $u . '" target="_blank" rel="noopener"><img src="' . $u . '" width="40" height="40" loading="lazy" alt=""><img class="big" src="' . $u . '" loading="lazy" alt=""></a><span class="rcom-dot ' . ( 'pending' === $r->photo_status ? 'warn' : 'ok' ) . '" title="' . esc_attr( 'pending' === $r->photo_status ? __( 'Waiting', 'recipe-community' ) : __( 'Approved', 'recipe-community' ) ) . '"></span>';
+				return '<a class="rcom-th" href="' . $u . '" target="_blank" rel="noopener"><img src="' . esc_url( RCOM_Photo::thumb_url( $r->photo_file ) ) . '" width="40" height="40" loading="lazy" alt=""><img class="big" src="' . $u . '" loading="lazy" alt=""></a><span class="rcom-dot ' . ( 'pending' === $r->photo_status ? 'warn' : 'ok' ) . '" title="' . esc_attr( 'pending' === $r->photo_status ? __( 'Waiting', 'recipe-community' ) : __( 'Approved', 'recipe-community' ) ) . '"></span>';
 			case 'status':
 				$h = $r->verified ? '<span class="rcom-pill ok">' . esc_html__( 'Verified', 'recipe-community' ) . '</span>' : '<span class="rcom-pill">' . esc_html__( 'Unverified', 'recipe-community' ) . '</span>';
-				return $h . ( 'hidden' === $r->status ? ' <span class="rcom-pill off">' . esc_html__( 'Hidden', 'recipe-community' ) . '</span>' : '' );
+				return $h . ( 'hidden' === $r->status ? ' <span class="rcom-pill off">' . esc_html__( 'Hidden', 'recipe-community' ) . '</span>' : ( 'orphan' === $r->status ? ' <span class="rcom-pill off">' . esc_html__( 'Recipe deleted', 'recipe-community' ) . '</span>' : '' ) );
 			case 'created_at':
 				return '<span title="' . esc_attr( RCOM_Views::dt( $r->created_at, true ) ) . '">' . esc_html( RCOM_Views::dt( $r->created_at ) ) . '</span>';
 		}

@@ -13,6 +13,8 @@ class RCOM_Admin {
 		add_action( 'admin_init', array( __CLASS__, 'handle' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'notices' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'assets' ) );
+		add_action( 'admin_post_rcom_repair', array( __CLASS__, 'repair' ) );
+		add_action( 'admin_init', array( 'RCOM_Integrity', 'schedule' ) );
 		add_action( 'admin_post_rcom_export_fb', array( __CLASS__, 'export_feedback' ) );
 		add_action( 'admin_post_rcom_export', array( __CLASS__, 'export' ) );
 		add_action( 'admin_post_rcom_settings', array( __CLASS__, 'save_settings' ) );
@@ -56,6 +58,13 @@ class RCOM_Admin {
 		if ( ! current_user_can( 'manage_options' ) || ! self::is_screen() ) {
 			return;
 		}
+		$miss = RCOM_Integrity::missing();
+		if ( $miss ) {
+			echo '<div class="notice notice-error"><p><strong>Recipe Community:</strong> ' . esc_html( sprintf( /* translators: %s: table names */ __( 'database tables are missing (%s). Data in them cannot be recovered; the tables can be recreated empty.', 'recipe-community' ), implode( ', ', $miss ) ) ) . ' <a class="button" href="' . esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=rcom_repair' ), 'rcom_repair' ) ) . '">' . esc_html__( 'Repair tables', 'recipe-community' ) . '</a></p></div>';
+		}
+		if ( ! RCOM_Settings::get( 'privacy_page' ) ) {
+			echo '<div class="notice notice-warning"><p><strong>Recipe Community:</strong> ' . esc_html__( 'no privacy page is set, so the privacy line under the review button is not shown.', 'recipe-community' ) . ' <a href="' . esc_url( admin_url( 'admin.php?page=rcom-settings' ) ) . '">' . esc_html__( 'Open settings', 'recipe-community' ) . '</a></p></div>';
+		}
 		if ( ! RCOM_Settings::get( 'terms_page' ) && ! RCOM_Settings::get( 'privacy_page' ) ) {
 			echo '<div class="notice notice-warning"><p><strong>Recipe Community:</strong> ' . esc_html__( 'no terms page is set. The review form asks for agreement but cannot link to the terms.', 'recipe-community' ) . ' <a href="' . esc_url( admin_url( 'admin.php?page=rcom-settings' ) ) . '">' . esc_html__( 'Open settings', 'recipe-community' ) . '</a></p></div>';
 		}
@@ -63,6 +72,14 @@ class RCOM_Admin {
 			return;
 		}
 		echo '<div class="notice notice-warning"><p><strong>Recipe Community:</strong> ' . esc_html__( 'the review form is hidden for visitors until you add Cloudflare Turnstile keys.', 'recipe-community' ) . ' <a href="' . esc_url( admin_url( 'admin.php?page=rcom-settings' ) ) . '">' . esc_html__( 'Open settings', 'recipe-community' ) . '</a></p></div>';
+	}
+
+	public static function repair() {
+		self::guard();
+		check_admin_referer( 'rcom_repair' );
+		RCOM_Integrity::repair();
+		wp_safe_redirect( admin_url( 'admin.php?page=rcom&done=1' ) );
+		exit;
 	}
 
 	public static function guard() {
@@ -175,6 +192,8 @@ class RCOM_Admin {
 			'privacy_page'        => (int) ( $_POST['privacy_page'] ?? 0 ),
 			'terms_label'         => $str( 'terms_label' ),
 			'newsletter_label'    => $str( 'newsletter_label' ),
+			'terms_snapshots'     => empty( $_POST['terms_snapshots'] ) ? 0 : 1,
+			'on_delete'           => 'keep' === ( $_POST['on_delete'] ?? '' ) ? 'keep' : 'delete',
 			'ai_abilities'        => empty( $_POST['ai_abilities'] ) ? 0 : 1,
 			'show_credit'         => empty( $_POST['show_credit'] ) ? 0 : 1,
 			'disable_updates'     => empty( $_POST['disable_updates'] ) ? 0 : 1,
@@ -192,10 +211,13 @@ class RCOM_Admin {
 			$new['laposta_list']        = $e['list'];
 		}
 		update_option( 'rcom_settings', $new, false );
+		update_option( 'rcom_ai_on', $new['ai_abilities'] ? 1 : 0, true );
 		delete_transient( 'rcom_update' );
 		delete_transient( 'rcom_lp_lists' );
 		$arg = array( 'done' => 1 );
-		if ( 'turnstile' === $after ) {
+		if ( 'rebuild' === $after ) {
+			$arg['rebuilt'] = RCOM_Integrity::rebuild_cache();
+		} elseif ( 'turnstile' === $after ) {
 			$arg['ts'] = RCOM_Turnstile::test_keys();
 		} elseif ( 'laposta' === $after || 'connect' === $after ) {
 			$r = ( new RCOM_Laposta() )->test();

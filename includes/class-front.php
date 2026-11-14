@@ -12,12 +12,36 @@ class RCOM_Front {
 			add_shortcode( 'rcom_' . $s, array( __CLASS__, 'sc_' . $s ) );
 		}
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'register' ) );
+		add_filter( 'wp_robots', array( __CLASS__, 'robots' ) );
+		add_action( 'wp_head', array( __CLASS__, 'canonical' ), 1 );
+		add_filter( 'rank_math/frontend/robots', array( __CLASS__, 'rm_robots' ) );
 	}
 
 	/** Register only; the shortcodes enqueue when they actually render, so nothing loads elsewhere. */
 	public static function register() {
 		wp_register_style( 'rcom', RCOM_URL . 'assets/rcom.css', array(), RCOM_VERSION );
 		wp_register_script( 'rcom', RCOM_URL . 'assets/rcom.js', array(), RCOM_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+	}
+
+	/** ?rcom_page=N variants stay out of the index; the canonical remains the plain recipe URL. */
+	public static function robots( $r ) {
+		if ( isset( $_GET['rcom_page'] ) ) {
+			$r['noindex'] = true;
+			$r['follow']  = true;
+			unset( $r['max-image-preview'] );
+		}
+		return $r;
+	}
+
+	public static function canonical() {
+		if ( isset( $_GET['rcom_page'] ) && is_singular( RCOM_Settings::post_types() ) && ! defined( 'RANK_MATH_VERSION' ) ) {
+			remove_action( 'wp_head', 'rel_canonical' );
+			echo '<link rel="canonical" href="' . esc_url( get_permalink() ) . '" />' . "\n";
+		}
+	}
+
+	public static function rm_robots( $r ) {
+		return isset( $_GET['rcom_page'] ) ? array_merge( (array) $r, array( 'index' => 'noindex', 'follow' => 'follow' ) ) : $r;
 	}
 
 	private static function enqueue() {
@@ -141,6 +165,10 @@ class RCOM_Front {
 			'done' => __( 'Thanks for your review.', 'recipe-community' ),
 			'sure'      => __( 'Remove your review?', 'recipe-community' ),
 			'err'       => __( 'Something went wrong. Please try again.', 'recipe-community' ),
+			'pchange'   => __( 'Change photo', 'recipe-community' ),
+			'padd'      => __( 'Add photo', 'recipe-community' ),
+			'ptype'     => __( 'Please choose a JPG, PNG or WebP image.', 'recipe-community' ),
+			'pbig'      => __( 'This photo is too large (max 8 MB).', 'recipe-community' ),
 		);
 		$h  = self::symbol() . '<form class="rcom-form" method="post" action="#" data-post="' . $id . '" data-api="' . esc_url( rest_url( 'rcom/v1/' ) ) . '" data-ts="' . esc_attr( RCOM_Settings::turnstile_site() ) . '" data-t="' . esc_attr( wp_json_encode( $t ) ) . '">';
 		$h .= '<p class="rcom-ft">' . esc_html__( 'Rate this recipe', 'recipe-community' ) . '</p><div class="rcom-msg" role="status" aria-live="polite"></div>';
@@ -156,16 +184,24 @@ class RCOM_Front {
 		foreach ( self::bbq_types() as $k => $v ) {
 			$h .= '<option value="' . esc_attr( $k ) . '">' . esc_html( $v[0] ) . '</option>';
 		}
-		$h .= '</select></div><div class="rcom-f"><label for="rcom' . $n . '-p">' . esc_html__( 'Photo (optional)', 'recipe-community' ) . '</label><input id="rcom' . $n . '-p" name="photo" type="file" accept="image/jpeg,image/png,image/webp"></div></div>';
+		$h .= '</select></div><div class="rcom-f rcom-photo-f"><span class="rcom-lbl">' . esc_html__( 'Photo', 'recipe-community' ) . ' <small>(' . esc_html__( 'optional', 'recipe-community' ) . ')</small></span><input id="rcom' . $n . '-p" class="rcom-file" name="photo" type="file" accept="image/jpeg,image/png,image/webp"><label for="rcom' . $n . '-p" class="rcom-fbtn"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span class="rcom-fbtn-t">' . esc_html__( 'Add photo', 'recipe-community' ) . '</span></label><div class="rcom-prev" hidden><img alt="" width="56" height="56"><span class="rcom-pn"></span><button type="button" class="rcom-del">' . esc_html__( 'Remove', 'recipe-community' ) . '</button></div><p class="rcom-ferr" role="alert"></p></div>';
 		$h .= '<label class="rcom-check"><input type="checkbox" name="newsletter" value="1"> <span>' . esc_html( '' !== (string) RCOM_Settings::get( 'newsletter_label' ) ? RCOM_Settings::get( 'newsletter_label' ) : __( 'Yes, send me the newsletter', 'recipe-community' ) ) . '</span></label>';
-		$tl  = '' !== (string) RCOM_Settings::get( 'terms_label' ) ? RCOM_Settings::get( 'terms_label' ) : __( 'I agree to the terms', 'recipe-community' );
 		$tp  = (int) RCOM_Settings::get( 'terms_page' ) ?: (int) RCOM_Settings::get( 'privacy_page' );
-		$tu  = $tp ? get_permalink( $tp ) : '';
-		$h  .= '<label class="rcom-check"><input type="checkbox" name="terms" value="1" required> <span>' . ( $tu ? '<a href="' . esc_url( $tu ) . '" target="_blank" rel="noopener">' . esc_html( $tl ) . '</a>' : esc_html( $tl ) ) . '</span></label>';
+		$tl  = $tp ? '<a href="' . esc_url( get_permalink( $tp ) ) . '" target="_blank" rel="noopener">' . esc_html__( 'terms', 'recipe-community' ) . '</a>' : esc_html__( 'terms', 'recipe-community' );
+		$ts  = (string) RCOM_Settings::get( 'terms_label' ); // optional custom sentence, %s marks the link
+		/* translators: %1$s: the word "terms", linked to the terms page */
+		$tx  = '' !== $ts ? sprintf( esc_html( $ts ), $tl ) : sprintf( esc_html__( 'I agree to the %1$s', 'recipe-community' ), $tl );
+		$h  .= '<label class="rcom-check"><input type="checkbox" name="terms" value="1" required> <span>' . $tx . '</span></label>';
 		$h .= '<div class="rcom-hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>';
 		$h .= '<input type="hidden" name="nonce"><input type="hidden" name="stamp"><div class="rcom-ts"></div>';
-		$h .= '<p class="rcom-small">' . esc_html__( 'Your email address is never shown. We only use it to send you one confirmation link.', 'recipe-community' ) . '</p>';
 		$h .= '<div><button type="submit" class="rcom-btn">' . esc_html__( 'Post review', 'recipe-community' ) . '</button></div>';
+		$pp = (int) RCOM_Settings::get( 'privacy_page' );
+		if ( $pp ) {
+			/* translators: %1$s: the words "privacy policy", linked to the privacy page */
+			$h .= '<p class="rcom-small rcom-priv">' . sprintf( esc_html__( 'Your email address is never visible and only used for the confirmation (and for the newsletter if you tick it). More in the %1$s.', 'recipe-community' ), '<a href="' . esc_url( get_permalink( $pp ) ) . '" target="_blank" rel="noopener">' . esc_html__( 'privacy policy', 'recipe-community' ) . '</a>' ) . '</p>';
+		} else {
+			$h .= '<p class="rcom-small rcom-priv">' . esc_html__( 'Your email address is never visible and only used for the confirmation (and for the newsletter if you tick it).', 'recipe-community' ) . '</p>';
+		}
 		return $h . '<noscript><p class="rcom-small">' . esc_html__( 'JavaScript is needed to post a review.', 'recipe-community' ) . '</p></noscript></form>';
 	}
 
@@ -174,7 +210,7 @@ class RCOM_Front {
 		$bbq  = self::bbq_types()[ $r->bbq_type ][1] ?? '';
 		$meta = wp_date( get_option( 'date_format' ), strtotime( $r->created_at . ' UTC' ) ) . ( $bbq ? ' · ' . $bbq : '' );
 		/* translators: %d: stars */
-		$h    = '<article class="rcom-item" data-id="' . (int) $r->id . '"><header>' . self::stars( (int) $r->rating ) . '<strong class="rcom-name">' . esc_html( $r->name ) . '</strong><span class="rcom-sr">' . esc_html( sprintf( __( '%d out of 5 stars.', 'recipe-community' ), $r->rating ) ) . '</span><span class="rcom-small">' . esc_html( $meta ) . '</span></header>';
+		$h    = '<article class="rcom-item" data-id="' . (int) $r->id . '" data-c="' . (int) strtotime( $r->created_at . ' UTC' ) . '.' . (int) $r->id . '"><header>' . self::stars( (int) $r->rating ) . '<strong class="rcom-name">' . esc_html( $r->name ) . '</strong><span class="rcom-sr">' . esc_html( sprintf( __( '%d out of 5 stars.', 'recipe-community' ), $r->rating ) ) . '</span><span class="rcom-small">' . esc_html( $meta ) . '</span></header>';
 		if ( '' !== $r->body ) {
 			$h .= '<p>' . esc_html( $r->body ) . '</p>';
 		}
@@ -202,19 +238,22 @@ class RCOM_Front {
 			return '';
 		}
 		$per  = max( 1, min( 50, (int) $atts['per_page'] ) );
-		$n    = RCOM_Reviews::rating( $id )['count'];
-		$open = '<div class="rcom-list" data-post="' . $id . '" data-api="' . esc_url( rest_url( 'rcom/v1/' ) ) . '" data-per="' . $per . '" data-total="' . $n . '">';
+		$n    = RCOM_Reviews::rating( $id )['count']; // from the cache, no count query
+		$pg   = isset( $_GET['rcom_page'] ) ? max( 1, min( 20, (int) $_GET['rcom_page'] ) ) : 1; // no-JS fallback: 10 more per step
+		$show = $per + ( $pg - 1 ) * 10;
+		$open = '<div class="rcom-list" id="rcom-list" data-post="' . $id . '" data-api="' . esc_url( rest_url( 'rcom/v1/' ) ) . '" data-total="' . $n . '" data-t="' . esc_attr( wp_json_encode( array( 'more' => __( 'Show more (%s left)', 'recipe-community' ), 'loaded' => __( 'More reviews loaded.', 'recipe-community' ) ) ) ) . '">';
 		if ( ! $n ) {
 			return $open . '</div>';
 		}
 		$h = self::symbol() . $open;
-		foreach ( RCOM_Reviews::list( $id, $per ) as $r ) {
+		foreach ( RCOM_Reviews::list( $id, $show ) as $r ) {
 			$h .= self::item( $r );
 		}
-		if ( $n > $per ) {
+		if ( $n > $show ) {
 			/* translators: %s: number of reviews */
-			$h .= '<button type="button" class="rcom-more">' . esc_html( sprintf( __( 'Read all %s reviews', 'recipe-community' ), number_format_i18n( $n ) ) ) . '</button>';
+			$h .= '<a class="rcom-more" rel="nofollow" href="' . esc_url( add_query_arg( 'rcom_page', $pg + 1 ) . '#rcom-list' ) . '">' . esc_html( sprintf( __( 'Show all %s reviews', 'recipe-community' ), number_format_i18n( $n ) ) ) . '</a>';
 		}
+		$h .= '<p class="rcom-sr" role="status" aria-live="polite"></p>';
 		return $h . '</div>';
 	}
 
@@ -226,9 +265,7 @@ class RCOM_Front {
 		}
 		$a = array( 'post_id' => $id, 'per_page' => $atts['per_page'] );
 		$h = '<section class="rcom" id="rcom-reviews"' . ( '0' !== $atts['heading'] ? ' aria-labelledby="rcom-h"><h2 id="rcom-h">' . esc_html__( 'Reviews', 'recipe-community' ) . '</h2>' : '>' ) . self::sc_summary( $a ) . self::sc_form( $a ) . self::sc_list( $a );
-		if ( RCOM_Settings::turnstile_ready() ) {
-			$h .= '<details class="rcom-manage"><summary>' . esc_html__( 'Manage my review', 'recipe-community' ) . '</summary><div class="rcom-f"><label for="rcom-m">' . esc_html__( 'Send me a link to manage my review', 'recipe-community' ) . '</label><div class="rcom-inline"><input id="rcom-m" name="manage_email" type="email" maxlength="190" autocomplete="email"><button type="button" class="rcom-btn rcom-link">' . esc_html__( 'Send link', 'recipe-community' ) . '</button></div></div></details>';
-		}
+		// A future [rcom_account] page can reuse the REST route POST /rcom/v1/link (RCOM_Identity::send_manage); no link on the recipe page.
 		$h .= self::credit();
 		return $h . '</section>';
 	}

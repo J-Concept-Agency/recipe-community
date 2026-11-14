@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 /** Reviews domain: table, CRUD and cached rating stats. All queries are prepared. */
 class RCOM_Reviews {
 
-	const DB_VERSION = '4';
+	const DB_VERSION = '6';
 
 	public static function table() {
 		global $wpdb;
@@ -38,11 +38,18 @@ class RCOM_Reviews {
   created_at datetime NOT NULL,
   updated_at datetime NOT NULL,
   PRIMARY KEY  (id),
-  KEY post_status (post_id,status),
+  KEY post_status_date (post_id,status,created_at),
+  KEY status_date (status,created_at),
+  KEY created (created_at),
   KEY email (email),
   KEY token_hash (token_hash)
 ) " . $wpdb->get_charset_collate() . ';' );
+		add_option( 'rcom_ai_on', 0, '', true ); // autoloaded flag read on every request
 		RCOM_Helpful::install();
+		RCOM_Terms::install();
+		$quiet = $wpdb->suppress_errors( true );
+		$wpdb->query( 'ALTER TABLE ' . $t . ' DROP INDEX post_status' ); // superseded by post_status_date; absent on fresh installs
+		$wpdb->suppress_errors( $quiet );
 		update_option( 'rcom_db_version', self::DB_VERSION, true ); // autoloaded: read on every request
 		RCOM_Photo::ensure_dir();
 	}
@@ -104,6 +111,11 @@ class RCOM_Reviews {
 		if ( ! $wpdb->get_var( $wpdb->prepare( 'SELECT id FROM ' . self::table() . ' WHERE post_id = %d LIMIT 1', $post_id ) ) ) {
 			return;
 		}
+		if ( 'keep' === RCOM_Settings::get( 'on_delete' ) ) { // safeguard against an accidentally emptied trash: hidden, kept, filter "Recipe deleted"
+			$wpdb->update( self::table(), array( 'status' => 'orphan' ), array( 'post_id' => (int) $post_id ) );
+			self::refresh( (int) $post_id );
+			return;
+		}
 		foreach ( $wpdb->get_col( $wpdb->prepare( 'SELECT photo_file FROM ' . self::table() . " WHERE post_id = %d AND photo_file <> ''", $post_id ) ) as $f ) {
 			RCOM_Photo::remove( $f );
 		}
@@ -117,6 +129,20 @@ class RCOM_Reviews {
 		return $wpdb->get_results( $wpdb->prepare(
 			'SELECT id, rating, body, name, bbq_type, photo_file, photo_status, reply_text, reply_at, created_at FROM ' . self::table() . " WHERE post_id = %d AND status = 'published' ORDER BY created_at DESC, id DESC LIMIT %d OFFSET %d",
 			$post_id, $limit, $offset
+		) );
+	}
+
+	/** Next published reviews after a cursor "unixtime.id" (stable order created_at DESC, id DESC). */
+	public static function after( $post_id, $limit, $cursor ) {
+		global $wpdb;
+		$c = explode( '.', $cursor );
+		if ( 2 !== count( $c ) || ! ctype_digit( $c[0] ) || ! ctype_digit( $c[1] ) ) {
+			return self::list( $post_id, $limit );
+		}
+		$ts = gmdate( 'Y-m-d H:i:s', (int) $c[0] );
+		return $wpdb->get_results( $wpdb->prepare(
+			'SELECT id, rating, body, name, bbq_type, photo_file, photo_status, reply_text, reply_at, created_at FROM ' . self::table() . " WHERE post_id = %d AND status = 'published' AND (created_at < %s OR (created_at = %s AND id < %d)) ORDER BY created_at DESC, id DESC LIMIT %d",
+			$post_id, $ts, $ts, (int) $c[1], $limit
 		) );
 	}
 
@@ -151,7 +177,11 @@ class RCOM_Reviews {
 
 	public static function rating( $post_id ) {
 		$dist = get_post_meta( $post_id, '_rcom_dist', true );
-		$dist = is_array( $dist ) ? $dist : array_fill( 1, 5, 0 );
+		if ( ! is_array( $dist ) ) { // cache missing (cleanup plugin, import): rebuild once from the table
+			self::refresh( $post_id );
+			$dist = get_post_meta( $post_id, '_rcom_dist', true );
+			$dist = is_array( $dist ) ? $dist : array_fill( 1, 5, 0 );
+		}
 		$n    = array_sum( $dist );
 		$sum  = 0;
 		foreach ( $dist as $s => $c ) {

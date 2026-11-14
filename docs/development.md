@@ -34,6 +34,14 @@ msgfmt -o languages/recipe-community-nl_NL.mo languages/recipe-community-nl_NL.p
 
 The compiled `.mo` is committed (no build step on installs).
 
+Check that every source string has a Dutch translation (also run by the release workflow, which fails otherwise):
+
+```
+./bin/check-translations.sh
+```
+
+It re-extracts the strings, compares them with `languages/recipe-community-nl_NL.po` (`msgcmp`) and reports missing, untranslated and fuzzy entries.
+
 ## Tests
 
 There is no test framework dependency. Before a release check on a local site: `php -l` on all files, then run the flow in a browser (submit, mail link, verify, remove, reply, photo approve, CSV, delete recipe), and the security cases from [security.md](security.md): missing/bad nonce, honeypot, too-fast submit, rate limit, oversized and disguised files, EXIF removal, XSS and SQL strings, CSV formula cells. Intercept mail with a `pre_wp_mail` filter and block external calls with `pre_http_request`.
@@ -47,5 +55,5 @@ There is no test framework dependency. Before a release check on a local site: `
 1. Update the version in the plugin header (`Version:`) and `RCOM_VERSION`.
 2. Move the `[Unreleased]` notes in `CHANGELOG.md` to a new `## [x.y.z] - date` section (Keep a Changelog, SemVer).
 3. Commit, then tag and push: `git tag vX.Y.Z && git push origin main vX.Y.Z`.
-4. The workflow `.github/workflows/release.yml` checks that tag and header agree, builds `recipe-community.zip` (folder `recipe-community/`, without dev files such as `docs/`, `.github/`, `.po`), and creates the release with the changelog section as notes.
+4. The workflow `.github/workflows/release.yml` checks that tag and header agree, checks translations, builds `recipe-community.zip` (JS and CSS minified in the release copy only) (folder `recipe-community/`, without dev files such as `docs/`, `.github/`, `.po`), and creates the release with the changelog section as notes.
 5. Sites pick it up within 12 hours (or clear the `rcom_update` transient).

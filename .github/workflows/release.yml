@@ -19,11 +19,19 @@ jobs:
           VER="$(grep -m1 '^ \* Version:' recipe-community.php | awk '{print $3}')"
           test "$TAG" = "$VER" || { echo "Tag $TAG does not match plugin version $VER"; exit 1; }
 
+      - name: Check translations (fails on untranslated strings)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq gettext
+          ./bin/check-translations.sh
+
       - name: Build zip (folder name recipe-community/)
         run: |
           mkdir -p dist/recipe-community
-          rsync -a --exclude='.git' --exclude='.github' --exclude='dist' --exclude='docs' --exclude='.gitignore' \
+          rsync -a --exclude='.git' --exclude='.github' --exclude='dist' --exclude='bin' --exclude='docs' --exclude='.gitignore' \
             --exclude='AGENTS.md' --exclude='llms.txt' --exclude='skills' --exclude='CONTRIBUTING.md' --exclude='SECURITY.md' --exclude='*.po' --exclude='*.pot' ./ dist/recipe-community/
+          # minify only in the release copy; the source stays readable
+          for f in dist/recipe-community/assets/*.js; do npx --yes terser@5 "$f" --compress --mangle -o "$f"; done
+          for f in dist/recipe-community/assets/*.css dist/recipe-community/admin/*.css; do npx --yes csso-cli@4 "$f" --output "$f"; done
           (cd dist && zip -qr recipe-community.zip recipe-community)
 
       - name: Release notes from CHANGELOG

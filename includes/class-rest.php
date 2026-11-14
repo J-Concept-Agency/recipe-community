@@ -13,7 +13,7 @@ class RCOM_Rest {
 	public static function routes() {
 		$pub = array( 'permission_callback' => '__return_true' );
 		register_rest_route( 'rcom/v1', '/state', $pub + array( 'methods' => 'GET', 'callback' => array( __CLASS__, 'state' ), 'args' => array( 'post' => array( 'type' => 'integer', 'required' => true ) ) ) );
-		register_rest_route( 'rcom/v1', '/reviews', $pub + array( 'methods' => 'GET', 'callback' => array( __CLASS__, 'listing' ), 'args' => array( 'post' => array( 'type' => 'integer', 'required' => true ), 'offset' => array( 'type' => 'integer', 'default' => 0 ), 'per_page' => array( 'type' => 'integer', 'default' => 50 ) ) ) );
+		register_rest_route( 'rcom/v1', '/reviews', $pub + array( 'methods' => 'GET', 'callback' => array( __CLASS__, 'listing' ), 'args' => array( 'post' => array( 'type' => 'integer', 'required' => true ), 'cursor' => array( 'type' => 'string', 'default' => '' ), 'limit' => array( 'type' => 'integer', 'default' => 10 ) ) ) );
 		register_rest_route( 'rcom/v1', '/reviews', $pub + array( 'methods' => 'POST', 'callback' => array( __CLASS__, 'submit' ) ) );
 		register_rest_route( 'rcom/v1', '/delete', $pub + array( 'methods' => 'POST', 'callback' => array( __CLASS__, 'delete' ) ) );
 		register_rest_route( 'rcom/v1', '/link', $pub + array( 'methods' => 'POST', 'callback' => array( __CLASS__, 'link' ) ) );
@@ -76,11 +76,13 @@ class RCOM_Rest {
 		if ( ! self::post_ok( $id ) ) {
 			return self::err( 'post', __( 'Unknown recipe.', 'recipe-community' ), 404 );
 		}
-		$html = '';
-		foreach ( RCOM_Reviews::list( $id, max( 1, min( 50, (int) $q['per_page'] ) ), max( 0, (int) $q['offset'] ) ) as $r ) {
+		$limit = max( 1, min( 20, (int) $q['limit'] ) );
+		$html  = '';
+		$rows  = RCOM_Reviews::after( $id, $limit, (string) $q['cursor'] ); // cursor "unixtime.id" of the last review shown
+		foreach ( $rows as $r ) {
 			$html .= RCOM_Front::item( $r );
 		}
-		return new WP_REST_Response( array( 'html' => $html ) );
+		return new WP_REST_Response( array( 'html' => $html, 'count' => count( $rows ) ) );
 	}
 
 	public static function submit( WP_REST_Request $q ) {
@@ -159,7 +161,7 @@ class RCOM_Rest {
 
 		RCOM_Identity::allow( 'post', 3 );
 		$tp  = (int) RCOM_Settings::get( 'terms_page' ); // only read when a review is saved
-		$tv  = $tp ? (string) get_post_field( 'post_modified_gmt', $tp ) : '';
+		$tv  = $tp ? RCOM_Terms::current( $tp ) : '';
 		$new = RCOM_Reviews::insert( array(
 			'post_id' => $id, 'rating' => $rating, 'body' => $body, 'name' => $name, 'email' => $email, 'bbq_type' => $bbq,
 			'terms_accepted_at' => current_time( 'mysql', true ), 'terms_page_id' => $tp, 'terms_version' => $tv, 'photo_file' => $file, 'photo_status' => $status, 'device' => RCOM_Device::detect(), 'newsletter_optin' => $q->get_param( 'newsletter' ) ? 1 : 0,
