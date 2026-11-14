@@ -26,6 +26,16 @@ define( 'RCOM_TURNSTILE_SITE_KEY', '0x...' );
 define( 'RCOM_TURNSTILE_SECRET_KEY', '0x...' );
 ```
 
+### Read order (fill in once)
+
+Each key is read in this order and the first one that is set wins:
+
+1. the `RCOM_TURNSTILE_SITE_KEY` / `RCOM_TURNSTILE_SECRET_KEY` constants in `wp-config.php`;
+2. the keys saved in this plugin (Settings > Spam protection);
+3. if the Bricks theme is active: the Turnstile keys in Bricks > Settings > API keys (`apiKeyTurnstile`, `apiSecretKeyTurnstile` in the option `bricks_global_settings`). They are only read, never copied; Settings shows "Taken from the Bricks settings (read only)" and the last 4 characters. **Test my keys** tests these keys too. Fill in your own key here to override the Bricks one.
+
+Without Bricks nothing changes. The secret key is never printed in HTML or REST output.
+
 ### Local development
 
 Cloudflare publishes test keys that always pass. They are only used when you add `define( 'RCOM_ALLOW_DEV_BYPASS', true );` to `wp-config.php` of a development site (never on production) and no real keys are set.
@@ -65,7 +75,8 @@ Laposta:
 - Flow: paste the key, press Connect (read-only check), pick a list (the dropdown shows member counts), the first-name field is suggested from the list's fields.
 - Confirmation: "Our email link confirms it" (default, the visitor receives one email; the member is added with `ignore_doubleoptin`) or "Laposta sends its own confirmation email".
 - **Test Laposta connection** only reads your lists, it never creates a member.
-- If another plugin on the site already holds a Laposta connection that can be read (Bricks Laposta or a `LAPOSTA_API_KEY` constant), the button **Use existing Laposta settings** copies key and list once into these settings.
+- Read order of the key, first one set wins: 1) `RCOM_LAPOSTA_API_KEY`, 2) `LAPOSTA_API_KEY` (also read by Bricks Laposta, so **one `define( 'LAPOSTA_API_KEY', 'your-key' );` serves both plugins**), 3) the key saved in this plugin, 4) the key of Bricks Laposta when that plugin is active (read live through `Bricks_Laposta::get_api_key()`, not copied). Settings shows where the key comes from and its last 4 characters, never the whole key. When the key comes from Bricks Laposta, the button **Copy to this plugin** saves a copy for those who want to switch Bricks Laposta off later.
+- **Do not send the Laposta notification email**: sends `suppress_email_notification` with every sign-up. Laposta can email the list owner for each sign-up through the API; this stops that email for sign-ups from this site (Laposta API documentation, member options). Off by default.
 
 Other services: use the `rcom_newsletter_optin` action or add a provider ([hooks](hooks-and-filters.md)).
 

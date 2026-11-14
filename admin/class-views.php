@@ -468,11 +468,25 @@ class RCOM_Views {
 		wp_nonce_field( 'rcom_settings' );
 
 		// Spam protection
-		$cs = RCOM_Settings::from_constant( 'site' );
-		$cx = RCOM_Settings::from_constant( 'secret' );
+		list( $ts_site, $ts_site_src ) = RCOM_Settings::turnstile_key( 'site' );
+		list( $ts_sec, $ts_sec_src )   = RCOM_Settings::turnstile_key( 'secret' );
+		$cs = 'constant' === $ts_site_src;
+		$cx = 'constant' === $ts_sec_src;
+		$src_note = function ( $src, $key, $const ) {
+			if ( '' === $src ) {
+				return '';
+			}
+			$t = array(
+				/* translators: %s: constant name */
+				'constant' => sprintf( __( 'Set via %s in wp-config.php', 'recipe-community' ), $const ),
+				'own'      => __( 'Saved in this plugin', 'recipe-community' ),
+				'bricks'   => __( 'Taken from the Bricks settings (read only)', 'recipe-community' ),
+			);
+			return '<span class="rcom-muted">' . esc_html( $t[ $src ] . ' · ••••' . substr( $key, -4 ) ) . '</span>';
+		};
 		echo '<section class="rcom-card"><h2>' . esc_html__( 'Spam protection (Cloudflare Turnstile)', 'recipe-community' ) . '</h2><p class="rcom-muted">' . esc_html__( 'Without both keys the review form is hidden for visitors. Create a Turnstile widget in the Cloudflare dashboard (mode Managed, your hostname) and paste the keys here, or define them in wp-config.php.', 'recipe-community' ) . '</p>';
-		echo self::field( __( 'Site key', 'recipe-community' ), $cs ? '<code>RCOM_TURNSTILE_SITE_KEY</code> <span class="rcom-muted">wp-config.php</span>' : '<input name="turnstile_site" value="' . esc_attr( $o['turnstile_site'] ) . '" autocomplete="off">' );
-		echo self::field( __( 'Secret key', 'recipe-community' ), $cx ? '<code>RCOM_TURNSTILE_SECRET_KEY</code> <span class="rcom-muted">wp-config.php</span>' : '<input name="turnstile_secret" type="password" autocomplete="new-password" placeholder="' . esc_attr( $o['turnstile_secret'] ? '••••' . substr( $o['turnstile_secret'], -4 ) : '' ) . '">', __( 'Leave empty to keep the saved key.', 'recipe-community' ) );
+		echo self::field( __( 'Site key', 'recipe-community' ), $cs ? '<code>RCOM_TURNSTILE_SITE_KEY</code> <span class="rcom-muted">wp-config.php</span>' : '<input name="turnstile_site" value="' . esc_attr( $o['turnstile_site'] ) . '" autocomplete="off">' . ( 'bricks' === $ts_site_src ? '<br>' . $src_note( 'bricks', $ts_site, '' ) : '' ) );
+		echo self::field( __( 'Secret key', 'recipe-community' ), $cx ? '<code>RCOM_TURNSTILE_SECRET_KEY</code> <span class="rcom-muted">wp-config.php</span>' : '<input name="turnstile_secret" type="password" autocomplete="new-password" placeholder="' . esc_attr( $o['turnstile_secret'] ? '••••' . substr( $o['turnstile_secret'], -4 ) : '' ) . '">' . ( 'bricks' === $ts_sec_src ? '<br>' . $src_note( 'bricks', $ts_sec, '' ) : '' ), __( 'Leave empty to keep the saved key. Fill in your own key to override the Bricks one.', 'recipe-community' ) );
 		echo '<div class="rcom-btns"><button class="rcom-btn-a" name="rcom_after" value="turnstile">' . esc_html__( 'Test my keys', 'recipe-community' ) . '</button> ' . ( RCOM_Settings::turnstile_ready() ? self::pill( 'ok', __( 'Keys present', 'recipe-community' ) ) : self::pill( 'warn', __( 'Keys missing', 'recipe-community' ) ) ) . '</div></section>';
 
 		// Content
@@ -557,12 +571,23 @@ class RCOM_Views {
 		foreach ( RCOM_Newsletter::providers() as $id => $pv ) {
 			$opts .= '<option value="' . esc_attr( $id ) . '"' . selected( $o['newsletter_provider'], $id, false ) . '>' . esc_html( $pv['label'] ) . '</option>';
 		}
-		$key  = RCOM_Laposta::key();
-		$hint = $key ? '••••' . substr( $key, -4 ) : '';
+		list( $key, $key_src ) = RCOM_Laposta::key_source();
+		$hint = ( $key && 'own' === $key_src ) ? '••••' . substr( $key, -4 ) : '';
+		$key_note = '';
+		if ( $key ) {
+			$kt = array(
+				'rcom_constant' => sprintf( /* translators: %s: constant name */ __( 'Set via %s in wp-config.php', 'recipe-community' ), 'RCOM_LAPOSTA_API_KEY' ),
+				'constant'      => sprintf( /* translators: %s: constant name */ __( 'Set via %s in wp-config.php', 'recipe-community' ), 'LAPOSTA_API_KEY' ),
+				'own'           => __( 'Saved in this plugin', 'recipe-community' ),
+				'bricks'        => __( 'Taken from Bricks Laposta (read live, not copied)', 'recipe-community' ),
+			);
+			$key_note = '<br><span class="rcom-muted">' . esc_html( $kt[ $key_src ] . ' · ••••' . substr( $key, -4 ) ) . '</span>';
+		}
+		$const_set = in_array( $key_src, array( 'rcom_constant', 'constant' ), true );
 		echo '<section class="rcom-card"><h2>' . esc_html__( 'Newsletter', 'recipe-community' ) . '</h2><p class="rcom-muted">' . esc_html__( 'Only visitors who tick the newsletter box and confirm their email address are sent to the service.', 'recipe-community' ) . '</p>';
 		echo self::field( __( 'Service', 'recipe-community' ), '<select name="newsletter_provider" id="rcom-nl">' . $opts . '</select>' );
 		echo '<div id="rcom-lp" data-for="laposta">';
-		echo self::field( __( 'Laposta API key', 'recipe-community' ), ( defined( 'RCOM_LAPOSTA_API_KEY' ) ? '<code>RCOM_LAPOSTA_API_KEY</code> <span class="rcom-muted">wp-config.php</span>' : '<input name="laposta_key" type="password" autocomplete="new-password" placeholder="' . esc_attr( $hint ) . '">' ) . ' <button class="rcom-btn-a" name="rcom_after" value="connect">' . esc_html__( 'Connect', 'recipe-community' ) . '</button>', __( 'Leave empty to keep the saved key. Only the last 4 characters are ever shown.', 'recipe-community' ) );
+		echo self::field( __( 'Laposta API key', 'recipe-community' ), ( $const_set ? '' : '<input name="laposta_key" type="password" autocomplete="new-password" placeholder="' . esc_attr( $hint ) . '">' ) . ' <button class="rcom-btn-a" name="rcom_after" value="connect">' . esc_html__( 'Connect', 'recipe-community' ) . '</button>' . $key_note, __( 'Fill this in only if the key is not set in wp-config.php (LAPOSTA_API_KEY works for both this plugin and Bricks Laposta). Only the last 4 characters are ever shown.', 'recipe-community' ) );
 		$lp    = new RCOM_Laposta();
 		$lists = $key ? $lp->lists() : null;
 		if ( $key && null === $lists ) {
@@ -586,7 +611,8 @@ class RCOM_Views {
 			echo self::field( __( 'Laposta list ID', 'recipe-community' ), '<input name="laposta_list" value="' . esc_attr( $o['laposta_list'] ) . '">', __( 'Connect an API key to pick from your lists.', 'recipe-community' ) );
 		}
 		echo self::field( __( 'Confirmation', 'recipe-community' ), '<select name="laposta_doi"><option value="ours"' . selected( $o['laposta_doi'], 'ours', false ) . '>' . esc_html__( 'We confirm: the review email link counts, no second email', 'recipe-community' ) . '</option><option value="laposta"' . selected( $o['laposta_doi'], 'laposta', false ) . '>' . esc_html__( 'Laposta sends its own confirmation email', 'recipe-community' ) . '</option></select>', __( 'With the first choice the visitor gets one email in total; with the second a second email from Laposta that must be confirmed too.', 'recipe-community' ) );
-		echo '<div class="rcom-btns"><button class="rcom-btn-a" name="rcom_after" value="laposta">' . esc_html__( 'Test connection', 'recipe-community' ) . '</button>' . ( RCOM_Admin::existing_laposta() ? ' <button class="rcom-btn-a" name="rcom_after" value="adopt">' . esc_html__( 'Use existing Laposta settings', 'recipe-community' ) . '</button>' : '' ) . '</div></div>';
+		echo self::field( __( 'Notification email', 'recipe-community' ), '<label class="rcom-chk"><input type="checkbox" name="laposta_quiet" value="1"' . checked( $o['laposta_quiet'], 1, false ) . '> ' . esc_html__( 'Do not send the Laposta notification email', 'recipe-community' ) . '</label>', __( 'Laposta can email you for every new sign-up through the API. This switches that email off for sign-ups from this site.', 'recipe-community' ) );
+		echo '<div class="rcom-btns"><button class="rcom-btn-a" name="rcom_after" value="laposta">' . esc_html__( 'Test connection', 'recipe-community' ) . '</button>' . ( 'bricks' === $key_src ? ' <button class="rcom-btn-a" name="rcom_after" value="adopt">' . esc_html__( 'Copy to this plugin', 'recipe-community' ) . '</button>' : '' ) . '</div></div>';
 		echo '<script>(function(){var s=document.getElementById("rcom-nl"),b=document.getElementById("rcom-lp");function t(){b.hidden=s.value!=="laposta"}s.addEventListener("change",t);t()})()</script></section>';
 
 		// Email, updates, data

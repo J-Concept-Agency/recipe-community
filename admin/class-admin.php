@@ -207,6 +207,7 @@ class RCOM_Admin {
 			'laposta_list'        => isset( $_POST['laposta_list'] ) ? $str( 'laposta_list' ) : $old['laposta_list'],
 			'laposta_name_field'  => $str( 'laposta_name_field' ),
 			'laposta_doi'         => 'laposta' === ( $_POST['laposta_doi'] ?? '' ) ? 'laposta' : 'ours',
+			'laposta_quiet'       => empty( $_POST['laposta_quiet'] ) ? 0 : 1,
 			'helpful_types'       => implode( ',', array_values( array_intersect( array_map( 'sanitize_key', (array) ( $_POST['helpful_types'] ?? array() ) ), array_keys( get_post_types( array( 'public' => true ) ) ) ) ) ),
 			'helpful_threshold'   => max( 1, min( 1000, (int) ( $_POST['helpful_threshold'] ?? 5 ) ) ),
 			'helpful_ts'          => empty( $_POST['helpful_ts'] ) ? 0 : 1,
@@ -324,7 +325,7 @@ class RCOM_Admin {
 	/** Settings of an already configured Laposta connection on this site (Bricks Laposta plugin or constant), if readable. No hard dependency. */
 	public static function existing_laposta() {
 		$has = class_exists( 'Bricks_Laposta' ) && is_callable( array( 'Bricks_Laposta', 'get_api_key' ) );
-		$key = $has ? (string) Bricks_Laposta::get_api_key() : ( defined( 'LAPOSTA_API_KEY' ) ? (string) LAPOSTA_API_KEY : '' );
+		$key = $has ? (string) Bricks_Laposta::get_api_key() : '';
 		if ( '' === $key ) {
 			return null;
 		}

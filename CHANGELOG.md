@@ -5,6 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 ## [Unreleased]
 
+### Added
+- Laposta key read order: `RCOM_LAPOSTA_API_KEY`, `LAPOSTA_API_KEY` (shared with Bricks Laposta), the saved key, the key of Bricks Laposta (read live, not copied). Settings shows the source and the last 4 characters. The "Use existing Laposta settings" button is now "Copy to this plugin" and only shown when the key comes from Bricks Laposta.
+- Turnstile keys fall back to the Bricks settings (read only) after the constants and the saved keys; the source is shown and "Test my keys" tests them.
+- Laposta option "Do not send the Laposta notification email" (`suppress_email_notification`, off by default).
+- `tests/` with mocked-API tests (`run-config-tests.sh`, `test-rcom-laposta.php`).
+
+### Fixed
+- Laposta fields are keyed by `custom_name` (not the `{{tag}}` campaign variable); the email field and deleted fields are no longer offered, so the first-name field is recognised and sent.
+
 ## [0.2.0] - 2026-11-14
 
 ### Added

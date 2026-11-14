@@ -6,8 +6,33 @@ class RCOM_Laposta implements RCOM_Newsletter_Provider {
 
 	const API = 'https://api.laposta.nl/v2/';
 
+	/**
+	 * The API key and where it comes from, in this order: RCOM_LAPOSTA_API_KEY, LAPOSTA_API_KEY (also read by Bricks Laposta,
+	 * so one define serves both plugins), the key saved in this plugin, the key of Bricks Laposta (read live, never copied).
+	 * @return array{0:string,1:string} key, source ('rcom_constant', 'constant', 'own', 'bricks' or '')
+	 */
+	public static function key_source() {
+		if ( defined( 'RCOM_LAPOSTA_API_KEY' ) && '' !== (string) RCOM_LAPOSTA_API_KEY ) {
+			return array( (string) RCOM_LAPOSTA_API_KEY, 'rcom_constant' );
+		}
+		if ( defined( 'LAPOSTA_API_KEY' ) && '' !== (string) LAPOSTA_API_KEY ) {
+			return array( (string) LAPOSTA_API_KEY, 'constant' );
+		}
+		$own = (string) RCOM_Settings::get( 'laposta_key' );
+		if ( '' !== $own ) {
+			return array( $own, 'own' );
+		}
+		if ( class_exists( 'Bricks_Laposta' ) && method_exists( 'Bricks_Laposta', 'get_api_key' ) ) {
+			$b = (string) Bricks_Laposta::get_api_key();
+			if ( '' !== $b ) {
+				return array( $b, 'bricks' );
+			}
+		}
+		return array( '', '' );
+	}
+
 	public static function key() {
-		return defined( 'RCOM_LAPOSTA_API_KEY' ) ? (string) RCOM_LAPOSTA_API_KEY : (string) RCOM_Settings::get( 'laposta_key' );
+		return self::key_source()[0];
 	}
 
 	/** @return array{0:int,1:array,2:string} http status, data, transport error */
@@ -125,6 +150,9 @@ class RCOM_Laposta implements RCOM_Newsletter_Provider {
 			'source_url' => get_permalink( $post_id ) ?: home_url( '/' ),
 			'options'    => array( 'upsert' => 'true', 'suppress_reactivation' => 'true' ),
 		);
+		if ( RCOM_Settings::get( 'laposta_quiet' ) ) {
+			$body['options']['suppress_email_notification'] = 'true'; // no notification email to the list owner for this sign-up
+		}
 		if ( 'ours' === RCOM_Settings::get( 'laposta_doi' ) ) {
 			$body['options']['ignore_doubleoptin'] = 'true'; // our own email link already confirmed the address
 		}

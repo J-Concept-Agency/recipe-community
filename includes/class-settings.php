@@ -22,6 +22,7 @@ class RCOM_Settings {
 			'laposta_list'     => '',
 			'laposta_name_field' => '',
 			'laposta_doi'      => 'ours',
+			'laposta_quiet'    => 0,
 			'disable_updates'  => 0,
 			'ai_abilities'     => 0,
 			'account_page'     => 0,
@@ -79,13 +80,38 @@ class RCOM_Settings {
 		return defined( 'RCOM_ALLOW_DEV_BYPASS' ) && RCOM_ALLOW_DEV_BYPASS;
 	}
 
+	/**
+	 * Turnstile key and where it comes from, read in this order: wp-config constant, key saved in this plugin,
+	 * the Turnstile keys of the Bricks settings (read only, never copied; no hard dependency on Bricks).
+	 * @param string $which 'site' or 'secret'
+	 * @return array{0:string,1:string} value, source ('constant', 'own', 'bricks' or '')
+	 */
+	public static function turnstile_key( $which ) {
+		$const = 'site' === $which ? 'RCOM_TURNSTILE_SITE_KEY' : 'RCOM_TURNSTILE_SECRET_KEY';
+		if ( defined( $const ) && '' !== (string) constant( $const ) ) {
+			return array( (string) constant( $const ), 'constant' );
+		}
+		$own = (string) self::get( 'site' === $which ? 'turnstile_site' : 'turnstile_secret' );
+		if ( '' !== $own ) {
+			return array( $own, 'own' );
+		}
+		if ( defined( 'BRICKS_VERSION' ) ) {
+			$g = get_option( 'bricks_global_settings', array() );
+			$b = is_array( $g ) ? (string) ( $g['site' === $which ? 'apiKeyTurnstile' : 'apiSecretKeyTurnstile'] ?? '' ) : '';
+			if ( '' !== $b ) {
+				return array( $b, 'bricks' );
+			}
+		}
+		return array( '', '' );
+	}
+
 	public static function turnstile_site() {
-		$v = defined( 'RCOM_TURNSTILE_SITE_KEY' ) ? (string) RCOM_TURNSTILE_SITE_KEY : (string) self::get( 'turnstile_site' );
+		$v = self::turnstile_key( 'site' )[0];
 		return ( '' === $v && self::bypass() ) ? self::TEST_SITE : $v;
 	}
 
 	public static function turnstile_secret() {
-		$v = defined( 'RCOM_TURNSTILE_SECRET_KEY' ) ? (string) RCOM_TURNSTILE_SECRET_KEY : (string) self::get( 'turnstile_secret' );
+		$v = self::turnstile_key( 'secret' )[0];
 		return ( '' === $v && self::bypass() ) ? self::TEST_SECRET : $v;
 	}
 

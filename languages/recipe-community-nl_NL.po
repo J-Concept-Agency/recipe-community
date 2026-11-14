@@ -1944,3 +1944,35 @@ msgstr "Demo-gegevens verwijderen"
 #, php-format
 msgid "%d demo rows present"
 msgstr "%d demo-regels aanwezig"
+
+#. translators: %s: constant name
+#, php-format
+msgid "Set via %s in wp-config.php"
+msgstr "Ingesteld via %s in wp-config.php"
+
+msgid "Saved in this plugin"
+msgstr "Opgeslagen in deze plugin"
+
+msgid "Taken from the Bricks settings (read only)"
+msgstr "Overgenomen uit de Bricks-instellingen (alleen lezen)"
+
+msgid "Leave empty to keep the saved key. Fill in your own key to override the Bricks one."
+msgstr "Laat leeg om de opgeslagen sleutel te houden. Vul een eigen sleutel in om die van Bricks te overschrijven."
+
+msgid "Taken from Bricks Laposta (read live, not copied)"
+msgstr "Overgenomen uit Bricks Laposta (live uitgelezen, niet gekopieerd)"
+
+msgid "Fill this in only if the key is not set in wp-config.php (LAPOSTA_API_KEY works for both this plugin and Bricks Laposta). Only the last 4 characters are ever shown."
+msgstr "Vul dit alleen in als de sleutel niet in wp-config.php staat (LAPOSTA_API_KEY werkt voor deze plugin en voor Bricks Laposta). Alleen de laatste 4 tekens worden getoond."
+
+msgid "Notification email"
+msgstr "Meldingsmail"
+
+msgid "Do not send the Laposta notification email"
+msgstr "Laposta-meldingsmail niet versturen"
+
+msgid "Laposta can email you for every new sign-up through the API. This switches that email off for sign-ups from this site."
+msgstr "Laposta kan je bij elke nieuwe aanmelding via de API een mail sturen. Dit zet die mail uit voor aanmeldingen vanaf deze site."
+
+msgid "Copy to this plugin"
+msgstr "Kopieer naar deze plugin"
