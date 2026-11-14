@@ -1,0 +1,782 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Recipe Community package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Recipe Community\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 14:15+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: includes/class-front.php:33
+msgid "Charcoal"
+msgstr ""
+
+#: includes/class-front.php:33
+msgid "made on charcoal"
+msgstr ""
+
+#: includes/class-front.php:34
+msgid "Gas grill"
+msgstr ""
+
+#: includes/class-front.php:34
+msgid "made on a gas grill"
+msgstr ""
+
+#: includes/class-front.php:35
+msgid "Kamado"
+msgstr ""
+
+#: includes/class-front.php:35
+msgid "made on a kamado"
+msgstr ""
+
+#: includes/class-front.php:36
+msgid "Pellet grill"
+msgstr ""
+
+#: includes/class-front.php:36
+msgid "made on a pellet grill"
+msgstr ""
+
+#: includes/class-front.php:37
+msgid "Something else"
+msgstr ""
+
+#. translators: %s: number of reviews
+#: includes/class-front.php:67
+#, php-format
+msgid "%s review"
+msgid_plural "%s reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of stars
+#: includes/class-front.php:72
+#, php-format
+msgid "%d star"
+msgid_plural "%d stars"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-front.php:86
+msgid "No reviews yet. Be the first to rate this recipe."
+msgstr ""
+
+#. translators: %s: average rating, e.g. 4,5
+#: includes/class-front.php:89
+#, php-format
+msgid "%s out of 5"
+msgstr ""
+
+#: includes/class-front.php:101
+msgid ""
+"This recipe has no reviews yet. Did you make it? Let me know what you "
+"thought."
+msgstr ""
+
+#: includes/class-front.php:103
+msgid "Distribution of the reviews"
+msgstr ""
+
+#: includes/class-front.php:117
+msgid ""
+"Recipe Community: the review form is hidden because the Turnstile keys are "
+"missing. Add them under Recipe community > Settings (only you can see this "
+"message)."
+msgstr ""
+
+#: includes/class-front.php:121
+msgid "Thanks, your email address is confirmed."
+msgstr ""
+
+#: includes/class-front.php:122
+msgid "Done. You can now remove your review on this device for 30 days."
+msgstr ""
+
+#. translators: %s: masked email address
+#: includes/class-front.php:124
+#, php-format
+msgid "Posting with %s."
+msgstr ""
+
+#: includes/class-front.php:125
+msgid "Not you?"
+msgstr ""
+
+#: includes/class-front.php:126
+msgid "Remove my review"
+msgstr ""
+
+#: includes/class-front.php:127
+msgid "Remove your review?"
+msgstr ""
+
+#: includes/class-front.php:128
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: includes/class-front.php:131
+msgid "Rate this recipe"
+msgstr ""
+
+#: includes/class-front.php:132
+msgid "Your rating"
+msgstr ""
+
+#: includes/class-front.php:137
+msgid "What did you think? (optional)"
+msgstr ""
+
+#: includes/class-front.php:137
+msgid "How did it go and what did you cook it on?"
+msgstr ""
+
+#: includes/class-front.php:138
+msgid "First name"
+msgstr ""
+
+#: includes/class-front.php:139
+msgid "Email address (never shown)"
+msgstr ""
+
+#: includes/class-front.php:140
+msgid "Which BBQ? (optional)"
+msgstr ""
+
+#: includes/class-front.php:140
+msgid "Choose your BBQ"
+msgstr ""
+
+#: includes/class-front.php:144
+msgid "Photo (optional)"
+msgstr ""
+
+#: includes/class-front.php:145
+msgid "Yes, send me the newsletter"
+msgstr ""
+
+#: includes/class-front.php:148
+msgid ""
+"Your email address is never shown. We only use it to send you one "
+"confirmation link. Your review does not depend on the newsletter."
+msgstr ""
+
+#: includes/class-front.php:149
+msgid "Post review"
+msgstr ""
+
+#: includes/class-front.php:150
+msgid "Already reviewed? Manage your review"
+msgstr ""
+
+#: includes/class-front.php:150
+msgid "Send me a link to manage my review"
+msgstr ""
+
+#: includes/class-front.php:150
+msgid "Send link"
+msgstr ""
+
+#: includes/class-front.php:151
+msgid "JavaScript is needed to post a review."
+msgstr ""
+
+#. translators: %d: stars
+#: includes/class-front.php:159
+#, php-format
+msgid "%d out of 5 stars."
+msgstr ""
+
+#. translators: %s: first name
+#: includes/class-front.php:168
+#, php-format
+msgid "Photo of the dish by %s"
+msgstr ""
+
+#: includes/class-front.php:171
+msgid "Photo is being checked"
+msgstr ""
+
+#: includes/class-front.php:175 admin/class-admin.php:223
+msgid "Reply from the author"
+msgstr ""
+
+#. translators: %s: number of reviews
+#: includes/class-front.php:198
+#, php-format
+msgid "Read all %s reviews"
+msgstr ""
+
+#: includes/class-front.php:210 admin/class-admin.php:106
+#: admin/class-admin.php:165
+msgid "Reviews"
+msgstr ""
+
+#: includes/class-front.php:212
+msgid "Powered by J-Concept"
+msgstr ""
+
+#. translators: %s: site name
+#: includes/class-identity.php:109
+#, php-format
+msgid "Confirm your review on %s"
+msgstr ""
+
+#. translators: 1: first name, 2: recipe title, 3: link, 4: days
+#: includes/class-identity.php:111
+#, php-format
+msgid ""
+"Hi %1$s,\n"
+"\n"
+"Thanks for your review of \"%2$s\". It is already online. Click this link to "
+"confirm that this is your email address:\n"
+"\n"
+"%3$s\n"
+"\n"
+"The link works once and expires in %4$d days. After confirming you can "
+"remove your review yourself on this device."
+msgstr ""
+
+#: includes/class-identity.php:113
+msgid ""
+"You also ticked the newsletter box. Clicking the link confirms your "
+"newsletter signup too. If you did not mean to sign up, simply do not click "
+"the link."
+msgstr ""
+
+#: includes/class-identity.php:115
+msgid "Did not write this review? Ignore this email."
+msgstr ""
+
+#. translators: %s: site name
+#: includes/class-identity.php:135
+#, php-format
+msgid "Manage your reviews on %s"
+msgstr ""
+
+#. translators: 1: first name, 2: link
+#: includes/class-identity.php:137
+#, php-format
+msgid ""
+"Hi %1$s,\n"
+"\n"
+"Use this link to manage your reviews in this browser for the next 30 days:\n"
+"\n"
+"%2$s\n"
+"\n"
+"The link works once and expires in 7 days. Did not ask for this? Ignore this "
+"email."
+msgstr ""
+
+#: includes/class-identity.php:174
+msgid "This link has expired or was already used."
+msgstr ""
+
+#: includes/class-laposta.php:56
+msgid "Enter an API key first."
+msgstr ""
+
+#: includes/class-laposta.php:60
+msgid "Could not reach Laposta. Try again later."
+msgstr ""
+
+#: includes/class-laposta.php:63
+msgid "Laposta rejected the API key."
+msgstr ""
+
+#. translators: %d: number of lists
+#: includes/class-laposta.php:67
+#, php-format
+msgid "Connected. Laposta returned %d list."
+msgid_plural "Connected. Laposta returned %d lists."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-newsletter.php:22
+msgid "None"
+msgstr ""
+
+#: includes/class-photo.php:39
+msgid ""
+"This photo could not be used. Please choose a JPG, PNG or WebP image up to 8 "
+"MB."
+msgstr ""
+
+#: includes/class-privacy.php:9 includes/class-privacy.php:13
+#: includes/class-privacy.php:38
+msgid "Recipe reviews"
+msgstr ""
+
+#: includes/class-privacy.php:27 admin/class-admin.php:140
+#: admin/class-table.php:18
+msgid "Recipe"
+msgstr ""
+
+#: includes/class-privacy.php:28
+msgid "Rating"
+msgstr ""
+
+#: includes/class-privacy.php:29 admin/class-admin.php:143
+#: admin/class-table.php:20
+msgid "Review"
+msgstr ""
+
+#: includes/class-privacy.php:30 admin/class-admin.php:142
+#: admin/class-admin.php:165 admin/class-table.php:21
+msgid "Name"
+msgstr ""
+
+#: includes/class-privacy.php:31
+msgid "Email address"
+msgstr ""
+
+#: includes/class-privacy.php:32 admin/class-admin.php:202
+msgid "Newsletter"
+msgstr ""
+
+#: includes/class-privacy.php:32 admin/class-admin.php:167
+msgid "Yes"
+msgstr ""
+
+#: includes/class-privacy.php:32 admin/class-admin.php:167
+msgid "No"
+msgstr ""
+
+#: includes/class-privacy.php:33 admin/class-table.php:26
+msgid "Date"
+msgstr ""
+
+#: includes/class-privacy.php:36 admin/class-admin.php:145
+#: admin/class-table.php:24
+msgid "Photo"
+msgstr ""
+
+#: includes/class-rest.php:59 includes/class-rest.php:77
+#: includes/class-rest.php:89
+msgid "Unknown recipe."
+msgstr ""
+
+#: includes/class-rest.php:92
+msgid "Reviews are temporarily closed."
+msgstr ""
+
+#: includes/class-rest.php:95 includes/class-rest.php:103
+#: includes/class-rest.php:186
+msgid "The form has expired. Please reload the page and try again."
+msgstr ""
+
+#: includes/class-rest.php:97
+msgid ""
+"Thanks! Your review is online. We sent you an email: click the link in it to "
+"confirm your review."
+msgstr ""
+
+#: includes/class-rest.php:106
+msgid "Please wait a moment and try again."
+msgstr ""
+
+#: includes/class-rest.php:109
+msgid "You have posted a few reviews already. Please try again later."
+msgstr ""
+
+#: includes/class-rest.php:112
+msgid "The spam check failed. Please try again."
+msgstr ""
+
+#: includes/class-rest.php:126
+msgid "Please choose a star rating."
+msgstr ""
+
+#: includes/class-rest.php:129
+msgid "Please enter your first name (max 40 characters)."
+msgstr ""
+
+#: includes/class-rest.php:132 includes/class-rest.php:189
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: includes/class-rest.php:135
+msgid "Your text is too long (max 1500 characters)."
+msgstr ""
+
+#: includes/class-rest.php:164
+msgid "Something went wrong. Please try again later."
+msgstr ""
+
+#: includes/class-rest.php:176
+msgid "You cannot remove this review."
+msgstr ""
+
+#: includes/class-rest.php:179
+msgid "Your review has been removed."
+msgstr ""
+
+#: includes/class-rest.php:192
+msgid "Too many requests. Please try again later."
+msgstr ""
+
+#: includes/class-rest.php:195
+msgid "If this address has reviews, a link is on its way. Check your inbox."
+msgstr ""
+
+#: includes/class-updater.php:82
+msgid ""
+"Community features for recipe sites: star reviews with photos, email-"
+"verified reviewers, no WordPress comments."
+msgstr ""
+
+#: admin/class-admin.php:18 admin/class-admin.php:106
+msgid "Settings"
+msgstr ""
+
+#: admin/class-admin.php:26 admin/class-admin.php:100
+msgid "Recipe community"
+msgstr ""
+
+#: admin/class-admin.php:35
+msgid ""
+"the review form is hidden for visitors until you add Cloudflare Turnstile "
+"keys."
+msgstr ""
+
+#: admin/class-admin.php:35
+msgid "Open settings"
+msgstr ""
+
+#: admin/class-admin.php:40
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: admin/class-admin.php:101
+msgid "Export CSV"
+msgstr ""
+
+#: admin/class-admin.php:103
+msgid "Done."
+msgstr ""
+
+#: admin/class-admin.php:106
+msgid "People"
+msgstr ""
+
+#: admin/class-admin.php:121
+msgid "Search reviews"
+msgstr ""
+
+#: admin/class-admin.php:132
+msgid "Review not found."
+msgstr ""
+
+#: admin/class-admin.php:139
+msgid "All reviews"
+msgstr ""
+
+#: admin/class-admin.php:141 admin/class-table.php:19
+msgid "Stars"
+msgstr ""
+
+#: admin/class-admin.php:147 admin/class-table.php:38
+msgid "Approve photo"
+msgstr ""
+
+#: admin/class-admin.php:149
+msgid "Delete photo"
+msgstr ""
+
+#: admin/class-admin.php:153
+msgid "Reply"
+msgstr ""
+
+#: admin/class-admin.php:153
+msgid "Shown under the review. Leave empty to remove the reply."
+msgstr ""
+
+#: admin/class-admin.php:154
+msgid "Save reply"
+msgstr ""
+
+#: admin/class-admin.php:155 admin/class-table.php:37 admin/class-table.php:112
+msgid "Show"
+msgstr ""
+
+#: admin/class-admin.php:155 admin/class-table.php:36 admin/class-table.php:112
+msgid "Hide"
+msgstr ""
+
+#: admin/class-admin.php:155 admin/class-table.php:113
+msgid "Delete this review?"
+msgstr ""
+
+#: admin/class-admin.php:155
+msgid "Delete review"
+msgstr ""
+
+#: admin/class-admin.php:165 admin/class-table.php:22
+msgid "Email"
+msgstr ""
+
+#: admin/class-admin.php:165
+msgid "Newsletter (confirmed)"
+msgstr ""
+
+#: admin/class-admin.php:165
+msgid "Last review"
+msgstr ""
+
+#: admin/class-admin.php:170
+msgid "No people yet."
+msgstr ""
+
+#: admin/class-admin.php:186
+msgid ""
+"Your secret key is accepted by Cloudflare. (The site key cannot be checked "
+"from the server: test the form on the site.)"
+msgstr ""
+
+#: admin/class-admin.php:187
+msgid ""
+"Cloudflare rejected the secret key. Check that you copied it completely."
+msgstr ""
+
+#: admin/class-admin.php:188
+msgid "Enter and save both keys first."
+msgstr ""
+
+#: admin/class-admin.php:189
+msgid "Could not reach Cloudflare. Try again later."
+msgstr ""
+
+#: admin/class-admin.php:197
+msgid "Spam protection (Cloudflare Turnstile)"
+msgstr ""
+
+#: admin/class-admin.php:200
+msgid "Site key"
+msgstr ""
+
+#: admin/class-admin.php:200
+msgid "Set in wp-config.php (RCOM_TURNSTILE_SITE_KEY)"
+msgstr ""
+
+#: admin/class-admin.php:200
+msgid ""
+"Public key from the Cloudflare dashboard. Without both keys the review form "
+"is hidden for visitors."
+msgstr ""
+
+#: admin/class-admin.php:201
+msgid "Secret key"
+msgstr ""
+
+#: admin/class-admin.php:201
+msgid "Set in wp-config.php (RCOM_TURNSTILE_SECRET_KEY)"
+msgstr ""
+
+#: admin/class-admin.php:201
+msgid ""
+"Leave empty to keep the saved key. Constants in wp-config.php take "
+"precedence over these fields."
+msgstr ""
+
+#: admin/class-admin.php:207
+msgid "Service"
+msgstr ""
+
+#: admin/class-admin.php:207
+msgid ""
+"Only visitors who tick the newsletter box and confirm their email address "
+"are sent to the service."
+msgstr ""
+
+#: admin/class-admin.php:209
+msgid "Laposta API key"
+msgstr ""
+
+#: admin/class-admin.php:209
+msgid "Set in wp-config.php (RCOM_LAPOSTA_API_KEY)"
+msgstr ""
+
+#: admin/class-admin.php:209
+msgid "Leave empty to keep the saved key."
+msgstr ""
+
+#: admin/class-admin.php:216
+msgid "Laposta list"
+msgstr ""
+
+#: admin/class-admin.php:218
+msgid "Laposta list ID"
+msgstr ""
+
+#: admin/class-admin.php:218
+msgid "Save a valid API key to pick from your lists."
+msgstr ""
+
+#: admin/class-admin.php:220
+msgid "Field for the first name"
+msgstr ""
+
+#: admin/class-admin.php:220
+msgid ""
+"Optional: the name of the Laposta custom field that receives the first name."
+msgstr ""
+
+#: admin/class-admin.php:221
+msgid "Confirmation"
+msgstr ""
+
+#: admin/class-admin.php:221
+msgid "Our email link confirms it (no second email)"
+msgstr ""
+
+#: admin/class-admin.php:221
+msgid "Laposta sends its own confirmation email"
+msgstr ""
+
+#: admin/class-admin.php:221
+msgid ""
+"The review email always asks the visitor to confirm. The first choice reuses "
+"that confirmation, so the visitor gets one email."
+msgstr ""
+
+#: admin/class-admin.php:222
+msgid "General"
+msgstr ""
+
+#: admin/class-admin.php:223
+msgid "Label for your reply"
+msgstr ""
+
+#: admin/class-admin.php:224
+msgid "Sender email for mails"
+msgstr ""
+
+#: admin/class-admin.php:224
+msgid "Default: the WordPress admin address."
+msgstr ""
+
+#: admin/class-admin.php:225
+msgid "Post types"
+msgstr ""
+
+#: admin/class-admin.php:225
+msgid "Comma separated slugs of the post types that get reviews."
+msgstr ""
+
+#: admin/class-admin.php:226
+msgid "Credit link"
+msgstr ""
+
+#: admin/class-admin.php:226
+msgid "Show a \"Powered by J-Concept\" link below the reviews"
+msgstr ""
+
+#: admin/class-admin.php:227
+msgid "Updates"
+msgstr ""
+
+#: admin/class-admin.php:227
+msgid "Do not check GitHub for plugin updates"
+msgstr ""
+
+#: admin/class-admin.php:228
+msgid "Keep data on uninstall"
+msgstr ""
+
+#: admin/class-admin.php:228
+msgid "Do not delete reviews and photos when the plugin is deleted"
+msgstr ""
+
+#: admin/class-admin.php:233
+msgid "Test my keys"
+msgstr ""
+
+#: admin/class-admin.php:236
+msgid "Test Laposta connection"
+msgstr ""
+
+#: admin/class-admin.php:241
+msgid "Use existing Laposta settings"
+msgstr ""
+
+#. translators: 1: plugin version, 2: link to the author
+#: admin/class-admin.php:246
+#, php-format
+msgid "Recipe Community %1$s by %2$s"
+msgstr ""
+
+#: admin/class-table.php:23
+msgid "BBQ"
+msgstr ""
+
+#: admin/class-table.php:25 admin/class-table.php:137
+msgid "Verified"
+msgstr ""
+
+#: admin/class-table.php:39 admin/class-table.php:113
+msgid "Delete"
+msgstr ""
+
+#: admin/class-table.php:50
+msgid "All recipes"
+msgstr ""
+
+#: admin/class-table.php:54
+msgid "All stars"
+msgstr ""
+
+#: admin/class-table.php:58
+msgid "All statuses"
+msgstr ""
+
+#: admin/class-table.php:58
+msgid "Published"
+msgstr ""
+
+#: admin/class-table.php:58
+msgid "Hidden"
+msgstr ""
+
+#: admin/class-table.php:59
+msgid "Photo pending"
+msgstr ""
+
+#: admin/class-table.php:60
+msgid "Filter"
+msgstr ""
+
+#: admin/class-table.php:111
+msgid "Reply / edit"
+msgstr ""
+
+#: admin/class-table.php:115
+msgid "hidden"
+msgstr ""
+
+#: admin/class-table.php:124
+msgid "Has a reply"
+msgstr ""
+
+#: admin/class-table.php:134
+msgid "Pending"
+msgstr ""
+
+#: admin/class-table.php:134
+msgid "Approved"
+msgstr ""
+
+#: admin/class-table.php:145
+msgid "No reviews found."
+msgstr ""

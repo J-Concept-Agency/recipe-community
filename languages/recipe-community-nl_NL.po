@@ -1,0 +1,779 @@
+# Dutch translation of Recipe Community.
+# This file is distributed under the same license as the Recipe Community package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Recipe Community\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 14:15+0100\n"
+"PO-Revision-Date: 2026-11-14 14:00+0100\n"
+"Last-Translator: J-Concept\n"
+"Language-Team: J-Concept\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/class-front.php:33
+msgid "Charcoal"
+msgstr "Houtskool"
+
+#: includes/class-front.php:33
+msgid "made on charcoal"
+msgstr "gemaakt op houtskool"
+
+#: includes/class-front.php:34
+msgid "Gas grill"
+msgstr "Gasbarbecue"
+
+#: includes/class-front.php:34
+msgid "made on a gas grill"
+msgstr "gemaakt op een gasbarbecue"
+
+#: includes/class-front.php:35
+msgid "Kamado"
+msgstr "Kamado"
+
+#: includes/class-front.php:35
+msgid "made on a kamado"
+msgstr "gemaakt op een kamado"
+
+#: includes/class-front.php:36
+msgid "Pellet grill"
+msgstr "Pelletgrill"
+
+#: includes/class-front.php:36
+msgid "made on a pellet grill"
+msgstr "gemaakt op een pelletgrill"
+
+#: includes/class-front.php:37
+msgid "Something else"
+msgstr "Iets anders"
+
+#. translators: %s: number of reviews
+#: includes/class-front.php:67
+#, php-format
+msgid "%s review"
+msgid_plural "%s reviews"
+msgstr[0] "%s beoordeling"
+msgstr[1] "%s beoordelingen"
+
+#. translators: %d: number of stars
+#: includes/class-front.php:72
+#, php-format
+msgid "%d star"
+msgid_plural "%d stars"
+msgstr[0] "%d ster"
+msgstr[1] "%d sterren"
+
+#: includes/class-front.php:86
+msgid "No reviews yet. Be the first to rate this recipe."
+msgstr "Nog geen beoordelingen. Beoordeel dit recept als eerste."
+
+#. translators: %s: average rating, e.g. 4,5
+#: includes/class-front.php:89
+#, php-format
+msgid "%s out of 5"
+msgstr "%s uit 5"
+
+#: includes/class-front.php:101
+msgid ""
+"This recipe has no reviews yet. Did you make it? Let me know what you "
+"thought."
+msgstr "Dit recept heeft nog geen beoordelingen. Heb je het gemaakt? Laat me weten wat je ervan vond."
+
+#: includes/class-front.php:103
+msgid "Distribution of the reviews"
+msgstr "Verdeling van de beoordelingen"
+
+#: includes/class-front.php:117
+msgid ""
+"Recipe Community: the review form is hidden because the Turnstile keys are "
+"missing. Add them under Recipe community > Settings (only you can see this "
+"message)."
+msgstr "Recipe Community: het beoordelingsformulier is verborgen omdat de Turnstile-sleutels ontbreken. Voeg ze toe onder Recept-community > Instellingen (alleen jij ziet dit bericht)."
+
+#: includes/class-front.php:121
+msgid "Thanks, your email address is confirmed."
+msgstr "Bedankt, je e-mailadres is bevestigd."
+
+#: includes/class-front.php:122
+msgid "Done. You can now remove your review on this device for 30 days."
+msgstr "Klaar. Je kunt je beoordeling de komende 30 dagen op dit apparaat zelf verwijderen."
+
+#. translators: %s: masked email address
+#: includes/class-front.php:124
+#, php-format
+msgid "Posting with %s."
+msgstr "Je plaatst met %s."
+
+#: includes/class-front.php:125
+msgid "Not you?"
+msgstr "Ben jij dit niet?"
+
+#: includes/class-front.php:126
+msgid "Remove my review"
+msgstr "Verwijder mijn beoordeling"
+
+#: includes/class-front.php:127
+msgid "Remove your review?"
+msgstr "Je beoordeling verwijderen?"
+
+#: includes/class-front.php:128
+msgid "Something went wrong. Please try again."
+msgstr "Er ging iets mis. Probeer het nog een keer."
+
+#: includes/class-front.php:131
+msgid "Rate this recipe"
+msgstr "Beoordeel dit recept"
+
+#: includes/class-front.php:132
+msgid "Your rating"
+msgstr "Jouw beoordeling"
+
+#: includes/class-front.php:137
+msgid "What did you think? (optional)"
+msgstr "Wat vond je ervan? (optioneel)"
+
+#: includes/class-front.php:137
+msgid "How did it go and what did you cook it on?"
+msgstr "Hoe ging het en op welke BBQ heb je het gemaakt?"
+
+#: includes/class-front.php:138
+msgid "First name"
+msgstr "Voornaam"
+
+#: includes/class-front.php:139
+msgid "Email address (never shown)"
+msgstr "E-mailadres (wordt nooit getoond)"
+
+#: includes/class-front.php:140
+msgid "Which BBQ? (optional)"
+msgstr "Op welke BBQ? (optioneel)"
+
+#: includes/class-front.php:140
+msgid "Choose your BBQ"
+msgstr "Kies je BBQ"
+
+#: includes/class-front.php:144
+msgid "Photo (optional)"
+msgstr "Foto (optioneel)"
+
+#: includes/class-front.php:145
+msgid "Yes, send me the newsletter"
+msgstr "Ja, stuur me de nieuwsbrief"
+
+#: includes/class-front.php:148
+msgid ""
+"Your email address is never shown. We only use it to send you one "
+"confirmation link. Your review does not depend on the newsletter."
+msgstr "Je e-mailadres wordt nooit getoond. We gebruiken het alleen om je één bevestigingslink te sturen. Je beoordeling hangt niet af van de nieuwsbrief."
+
+#: includes/class-front.php:149
+msgid "Post review"
+msgstr "Plaats beoordeling"
+
+#: includes/class-front.php:150
+msgid "Already reviewed? Manage your review"
+msgstr "Al beoordeeld? Beheer je beoordeling"
+
+#: includes/class-front.php:150
+msgid "Send me a link to manage my review"
+msgstr "Stuur me een link om mijn review te beheren"
+
+#: includes/class-front.php:150
+msgid "Send link"
+msgstr "Stuur link"
+
+#: includes/class-front.php:151
+msgid "JavaScript is needed to post a review."
+msgstr "Je hebt JavaScript nodig om een beoordeling te plaatsen."
+
+#. translators: %d: stars
+#: includes/class-front.php:159
+#, php-format
+msgid "%d out of 5 stars."
+msgstr "%d van 5 sterren."
+
+#. translators: %s: first name
+#: includes/class-front.php:168
+#, php-format
+msgid "Photo of the dish by %s"
+msgstr "Foto van het gerecht door %s"
+
+#: includes/class-front.php:171
+msgid "Photo is being checked"
+msgstr "Foto wordt gecontroleerd"
+
+#: includes/class-front.php:175 admin/class-admin.php:223
+msgid "Reply from the author"
+msgstr "Reactie van de auteur"
+
+#. translators: %s: number of reviews
+#: includes/class-front.php:198
+#, php-format
+msgid "Read all %s reviews"
+msgstr "Lees alle %s beoordelingen"
+
+#: includes/class-front.php:210 admin/class-admin.php:106
+#: admin/class-admin.php:165
+msgid "Reviews"
+msgstr "Beoordelingen"
+
+#: includes/class-front.php:212
+msgid "Powered by J-Concept"
+msgstr "Mogelijk gemaakt door J-Concept"
+
+#. translators: %s: site name
+#: includes/class-identity.php:109
+#, php-format
+msgid "Confirm your review on %s"
+msgstr "Bevestig je beoordeling op %s"
+
+#. translators: 1: first name, 2: recipe title, 3: link, 4: days
+#: includes/class-identity.php:111
+#, php-format
+msgid ""
+"Hi %1$s,\n"
+"\n"
+"Thanks for your review of \"%2$s\". It is already online. Click this link to "
+"confirm that this is your email address:\n"
+"\n"
+"%3$s\n"
+"\n"
+"The link works once and expires in %4$d days. After confirming you can "
+"remove your review yourself on this device."
+msgstr "Hoi %1$s,\n\nBedankt voor je beoordeling van \"%2$s\". Hij staat al online. Klik op deze link om te bevestigen dat dit jouw e-mailadres is:\n\n%3$s\n\nDe link werkt één keer en verloopt na %4$d dagen. Na het bevestigen kun je je beoordeling zelf verwijderen op dit apparaat."
+
+#: includes/class-identity.php:113
+msgid ""
+"You also ticked the newsletter box. Clicking the link confirms your "
+"newsletter signup too. If you did not mean to sign up, simply do not click "
+"the link."
+msgstr "Je hebt ook het vakje voor de nieuwsbrief aangevinkt. Met deze link bevestig je ook je nieuwsbriefaanmelding. Wil je je niet aanmelden, klik dan gewoon niet op de link."
+
+#: includes/class-identity.php:115
+msgid "Did not write this review? Ignore this email."
+msgstr "Heb jij deze beoordeling niet geschreven? Negeer dan deze e-mail."
+
+#. translators: %s: site name
+#: includes/class-identity.php:135
+#, php-format
+msgid "Manage your reviews on %s"
+msgstr "Beheer je beoordelingen op %s"
+
+#. translators: 1: first name, 2: link
+#: includes/class-identity.php:137
+#, php-format
+msgid ""
+"Hi %1$s,\n"
+"\n"
+"Use this link to manage your reviews in this browser for the next 30 days:\n"
+"\n"
+"%2$s\n"
+"\n"
+"The link works once and expires in 7 days. Did not ask for this? Ignore this "
+"email."
+msgstr "Hoi %1$s,\n\nGebruik deze link om je beoordelingen de komende 30 dagen in deze browser te beheren:\n\n%2$s\n\nDe link werkt één keer en verloopt na 7 dagen. Niet aangevraagd? Negeer dan deze e-mail."
+
+#: includes/class-identity.php:174
+msgid "This link has expired or was already used."
+msgstr "Deze link is verlopen of al gebruikt."
+
+#: includes/class-laposta.php:56
+msgid "Enter an API key first."
+msgstr "Vul eerst een API-sleutel in."
+
+#: includes/class-laposta.php:60
+msgid "Could not reach Laposta. Try again later."
+msgstr "Laposta is niet bereikbaar. Probeer het later nog een keer."
+
+#: includes/class-laposta.php:63
+msgid "Laposta rejected the API key."
+msgstr "Laposta weigert de API-sleutel."
+
+#. translators: %d: number of lists
+#: includes/class-laposta.php:67
+#, php-format
+msgid "Connected. Laposta returned %d list."
+msgid_plural "Connected. Laposta returned %d lists."
+msgstr[0] "Verbonden. Laposta gaf %d lijst terug."
+msgstr[1] "Verbonden. Laposta gaf %d lijsten terug."
+
+#: includes/class-newsletter.php:22
+msgid "None"
+msgstr "Geen"
+
+#: includes/class-photo.php:39
+msgid ""
+"This photo could not be used. Please choose a JPG, PNG or WebP image up to 8 "
+"MB."
+msgstr "Deze foto kon niet worden gebruikt. Kies een JPG-, PNG- of WebP-afbeelding tot 8 MB."
+
+#: includes/class-privacy.php:9 includes/class-privacy.php:13
+#: includes/class-privacy.php:38
+msgid "Recipe reviews"
+msgstr "Recept-reviews"
+
+#: includes/class-privacy.php:27 admin/class-admin.php:140
+#: admin/class-table.php:18
+msgid "Recipe"
+msgstr "Recept"
+
+#: includes/class-privacy.php:28
+msgid "Rating"
+msgstr "Beoordeling"
+
+#: includes/class-privacy.php:29 admin/class-admin.php:143
+#: admin/class-table.php:20
+msgid "Review"
+msgstr "Beoordeling"
+
+#: includes/class-privacy.php:30 admin/class-admin.php:142
+#: admin/class-admin.php:165 admin/class-table.php:21
+msgid "Name"
+msgstr "Naam"
+
+#: includes/class-privacy.php:31
+msgid "Email address"
+msgstr "E-mailadres"
+
+#: includes/class-privacy.php:32 admin/class-admin.php:202
+msgid "Newsletter"
+msgstr "Nieuwsbrief"
+
+#: includes/class-privacy.php:32 admin/class-admin.php:167
+msgid "Yes"
+msgstr "Ja"
+
+#: includes/class-privacy.php:32 admin/class-admin.php:167
+msgid "No"
+msgstr "Nee"
+
+#: includes/class-privacy.php:33 admin/class-table.php:26
+msgid "Date"
+msgstr "Datum"
+
+#: includes/class-privacy.php:36 admin/class-admin.php:145
+#: admin/class-table.php:24
+msgid "Photo"
+msgstr "Foto"
+
+#: includes/class-rest.php:59 includes/class-rest.php:77
+#: includes/class-rest.php:89
+msgid "Unknown recipe."
+msgstr "Onbekend recept."
+
+#: includes/class-rest.php:92
+msgid "Reviews are temporarily closed."
+msgstr "Beoordelingen zijn tijdelijk gesloten."
+
+#: includes/class-rest.php:95 includes/class-rest.php:103
+#: includes/class-rest.php:186
+msgid "The form has expired. Please reload the page and try again."
+msgstr "Het formulier is verlopen. Laad de pagina opnieuw en probeer het nog een keer."
+
+#: includes/class-rest.php:97
+msgid ""
+"Thanks! Your review is online. We sent you an email: click the link in it to "
+"confirm your review."
+msgstr "Bedankt! Je beoordeling staat online. We hebben je een e-mail gestuurd: klik op de link daarin om je beoordeling te bevestigen."
+
+#: includes/class-rest.php:106
+msgid "Please wait a moment and try again."
+msgstr "Wacht even en probeer het dan nog een keer."
+
+#: includes/class-rest.php:109
+msgid "You have posted a few reviews already. Please try again later."
+msgstr "Je hebt al een paar beoordelingen geplaatst. Probeer het later nog een keer."
+
+#: includes/class-rest.php:112
+msgid "The spam check failed. Please try again."
+msgstr "De spamcontrole is mislukt. Probeer het nog een keer."
+
+#: includes/class-rest.php:126
+msgid "Please choose a star rating."
+msgstr "Kies een aantal sterren."
+
+#: includes/class-rest.php:129
+msgid "Please enter your first name (max 40 characters)."
+msgstr "Vul je voornaam in (max. 40 tekens)."
+
+#: includes/class-rest.php:132 includes/class-rest.php:189
+msgid "Please enter a valid email address."
+msgstr "Vul een geldig e-mailadres in."
+
+#: includes/class-rest.php:135
+msgid "Your text is too long (max 1500 characters)."
+msgstr "Je tekst is te lang (max. 1500 tekens)."
+
+#: includes/class-rest.php:164
+msgid "Something went wrong. Please try again later."
+msgstr "Er ging iets mis. Probeer het later nog een keer."
+
+#: includes/class-rest.php:176
+msgid "You cannot remove this review."
+msgstr "Je kunt deze beoordeling niet verwijderen."
+
+#: includes/class-rest.php:179
+msgid "Your review has been removed."
+msgstr "Je beoordeling is verwijderd."
+
+#: includes/class-rest.php:192
+msgid "Too many requests. Please try again later."
+msgstr "Te veel verzoeken. Probeer het later nog een keer."
+
+#: includes/class-rest.php:195
+msgid "If this address has reviews, a link is on its way. Check your inbox."
+msgstr "Als dit adres beoordelingen heeft, is er een link onderweg. Kijk in je inbox."
+
+#: includes/class-updater.php:82
+msgid ""
+"Community features for recipe sites: star reviews with photos, email-"
+"verified reviewers, no WordPress comments."
+msgstr "Community-functies voor receptensites: sterbeoordelingen met foto's, schrijvers met bevestigd e-mailadres, geen WordPress-reacties."
+
+#: admin/class-admin.php:18 admin/class-admin.php:106
+msgid "Settings"
+msgstr "Instellingen"
+
+#: admin/class-admin.php:26 admin/class-admin.php:100
+msgid "Recipe community"
+msgstr "Recept-community"
+
+#: admin/class-admin.php:35
+msgid ""
+"the review form is hidden for visitors until you add Cloudflare Turnstile "
+"keys."
+msgstr "het beoordelingsformulier is verborgen voor bezoekers totdat je Cloudflare Turnstile-sleutels toevoegt."
+
+#: admin/class-admin.php:35
+msgid "Open settings"
+msgstr "Instellingen openen"
+
+#: admin/class-admin.php:40
+msgid "You are not allowed to do this."
+msgstr "Je mag dit niet doen."
+
+#: admin/class-admin.php:101
+msgid "Export CSV"
+msgstr "CSV exporteren"
+
+#: admin/class-admin.php:103
+msgid "Done."
+msgstr "Klaar."
+
+#: admin/class-admin.php:106
+msgid "People"
+msgstr "Personen"
+
+#: admin/class-admin.php:121
+msgid "Search reviews"
+msgstr "Beoordelingen zoeken"
+
+#: admin/class-admin.php:132
+msgid "Review not found."
+msgstr "Beoordeling niet gevonden."
+
+#: admin/class-admin.php:139
+msgid "All reviews"
+msgstr "Alle beoordelingen"
+
+#: admin/class-admin.php:141 admin/class-table.php:19
+msgid "Stars"
+msgstr "Sterren"
+
+#: admin/class-admin.php:147 admin/class-table.php:38
+msgid "Approve photo"
+msgstr "Foto goedkeuren"
+
+#: admin/class-admin.php:149
+msgid "Delete photo"
+msgstr "Foto verwijderen"
+
+#: admin/class-admin.php:153
+msgid "Reply"
+msgstr "Reactie"
+
+#: admin/class-admin.php:153
+msgid "Shown under the review. Leave empty to remove the reply."
+msgstr "Wordt onder de beoordeling getoond. Laat leeg om de reactie te verwijderen."
+
+#: admin/class-admin.php:154
+msgid "Save reply"
+msgstr "Reactie opslaan"
+
+#: admin/class-admin.php:155 admin/class-table.php:37 admin/class-table.php:112
+msgid "Show"
+msgstr "Tonen"
+
+#: admin/class-admin.php:155 admin/class-table.php:36 admin/class-table.php:112
+msgid "Hide"
+msgstr "Verbergen"
+
+#: admin/class-admin.php:155 admin/class-table.php:113
+msgid "Delete this review?"
+msgstr "Deze beoordeling verwijderen?"
+
+#: admin/class-admin.php:155
+msgid "Delete review"
+msgstr "Beoordeling verwijderen"
+
+#: admin/class-admin.php:165 admin/class-table.php:22
+msgid "Email"
+msgstr "E-mail"
+
+#: admin/class-admin.php:165
+msgid "Newsletter (confirmed)"
+msgstr "Nieuwsbrief (bevestigd)"
+
+#: admin/class-admin.php:165
+msgid "Last review"
+msgstr "Laatste beoordeling"
+
+#: admin/class-admin.php:170
+msgid "No people yet."
+msgstr "Nog geen personen."
+
+#: admin/class-admin.php:186
+msgid ""
+"Your secret key is accepted by Cloudflare. (The site key cannot be checked "
+"from the server: test the form on the site.)"
+msgstr "Cloudflare accepteert je geheime sleutel. (De site key kan niet vanaf de server worden gecontroleerd: test het formulier op de site.)"
+
+#: admin/class-admin.php:187
+msgid ""
+"Cloudflare rejected the secret key. Check that you copied it completely."
+msgstr "Cloudflare weigert de geheime sleutel. Controleer of je hem volledig hebt gekopieerd."
+
+#: admin/class-admin.php:188
+msgid "Enter and save both keys first."
+msgstr "Vul eerst beide sleutels in en sla ze op."
+
+#: admin/class-admin.php:189
+msgid "Could not reach Cloudflare. Try again later."
+msgstr "Cloudflare is niet bereikbaar. Probeer het later nog een keer."
+
+#: admin/class-admin.php:197
+msgid "Spam protection (Cloudflare Turnstile)"
+msgstr "Spambeveiliging (Cloudflare Turnstile)"
+
+#: admin/class-admin.php:200
+msgid "Site key"
+msgstr "Site key"
+
+#: admin/class-admin.php:200
+msgid "Set in wp-config.php (RCOM_TURNSTILE_SITE_KEY)"
+msgstr "Ingesteld in wp-config.php (RCOM_TURNSTILE_SITE_KEY)"
+
+#: admin/class-admin.php:200
+msgid ""
+"Public key from the Cloudflare dashboard. Without both keys the review form "
+"is hidden for visitors."
+msgstr "Publieke sleutel uit het Cloudflare-dashboard. Zonder beide sleutels is het formulier verborgen voor bezoekers."
+
+#: admin/class-admin.php:201
+msgid "Secret key"
+msgstr "Secret key"
+
+#: admin/class-admin.php:201
+msgid "Set in wp-config.php (RCOM_TURNSTILE_SECRET_KEY)"
+msgstr "Ingesteld in wp-config.php (RCOM_TURNSTILE_SECRET_KEY)"
+
+#: admin/class-admin.php:201
+msgid ""
+"Leave empty to keep the saved key. Constants in wp-config.php take "
+"precedence over these fields."
+msgstr "Laat leeg om de opgeslagen sleutel te houden. Constanten in wp-config.php hebben voorrang op deze velden."
+
+#: admin/class-admin.php:207
+msgid "Service"
+msgstr "Dienst"
+
+#: admin/class-admin.php:207
+msgid ""
+"Only visitors who tick the newsletter box and confirm their email address "
+"are sent to the service."
+msgstr "Alleen bezoekers die het nieuwsbriefvakje aanvinken en hun e-mailadres bevestigen worden naar de dienst gestuurd."
+
+#: admin/class-admin.php:209
+msgid "Laposta API key"
+msgstr "Laposta API-sleutel"
+
+#: admin/class-admin.php:209
+msgid "Set in wp-config.php (RCOM_LAPOSTA_API_KEY)"
+msgstr "Ingesteld in wp-config.php (RCOM_LAPOSTA_API_KEY)"
+
+#: admin/class-admin.php:209
+msgid "Leave empty to keep the saved key."
+msgstr "Laat leeg om de opgeslagen sleutel te houden."
+
+#: admin/class-admin.php:216
+msgid "Laposta list"
+msgstr "Laposta-lijst"
+
+#: admin/class-admin.php:218
+msgid "Laposta list ID"
+msgstr "Laposta lijst-ID"
+
+#: admin/class-admin.php:218
+msgid "Save a valid API key to pick from your lists."
+msgstr "Sla een geldige API-sleutel op om uit je lijsten te kiezen."
+
+#: admin/class-admin.php:220
+msgid "Field for the first name"
+msgstr "Veld voor de voornaam"
+
+#: admin/class-admin.php:220
+msgid ""
+"Optional: the name of the Laposta custom field that receives the first name."
+msgstr "Optioneel: de naam van het Laposta-veld dat de voornaam krijgt."
+
+#: admin/class-admin.php:221
+msgid "Confirmation"
+msgstr "Bevestiging"
+
+#: admin/class-admin.php:221
+msgid "Our email link confirms it (no second email)"
+msgstr "Onze e-maillink bevestigt het (geen tweede e-mail)"
+
+#: admin/class-admin.php:221
+msgid "Laposta sends its own confirmation email"
+msgstr "Laposta stuurt zelf een bevestigingsmail"
+
+#: admin/class-admin.php:221
+msgid ""
+"The review email always asks the visitor to confirm. The first choice reuses "
+"that confirmation, so the visitor gets one email."
+msgstr "De review-mail vraagt de bezoeker altijd om te bevestigen. De eerste keuze hergebruikt die bevestiging, zodat de bezoeker één e-mail krijgt."
+
+#: admin/class-admin.php:222
+msgid "General"
+msgstr "Algemeen"
+
+#: admin/class-admin.php:223
+msgid "Label for your reply"
+msgstr "Label voor jouw reactie"
+
+#: admin/class-admin.php:224
+msgid "Sender email for mails"
+msgstr "Afzender van de mails"
+
+#: admin/class-admin.php:224
+msgid "Default: the WordPress admin address."
+msgstr "Standaard: het e-mailadres van de WordPress-beheerder."
+
+#: admin/class-admin.php:225
+msgid "Post types"
+msgstr "Berichttypen"
+
+#: admin/class-admin.php:225
+msgid "Comma separated slugs of the post types that get reviews."
+msgstr "Slugs van de berichttypen die beoordelingen krijgen, gescheiden door komma's."
+
+#: admin/class-admin.php:226
+msgid "Credit link"
+msgstr "Naamsvermelding"
+
+#: admin/class-admin.php:226
+msgid "Show a \"Powered by J-Concept\" link below the reviews"
+msgstr "Toon een link \"Mogelijk gemaakt door J-Concept\" onder de beoordelingen"
+
+#: admin/class-admin.php:227
+msgid "Updates"
+msgstr "Updates"
+
+#: admin/class-admin.php:227
+msgid "Do not check GitHub for plugin updates"
+msgstr "Controleer GitHub niet op plugin-updates"
+
+#: admin/class-admin.php:228
+msgid "Keep data on uninstall"
+msgstr "Gegevens bewaren bij verwijderen"
+
+#: admin/class-admin.php:228
+msgid "Do not delete reviews and photos when the plugin is deleted"
+msgstr "Verwijder beoordelingen en foto's niet als de plugin wordt verwijderd"
+
+#: admin/class-admin.php:233
+msgid "Test my keys"
+msgstr "Test mijn sleutels"
+
+#: admin/class-admin.php:236
+msgid "Test Laposta connection"
+msgstr "Test Laposta-verbinding"
+
+#: admin/class-admin.php:241
+msgid "Use existing Laposta settings"
+msgstr "Bestaande Laposta-instellingen overnemen"
+
+#. translators: 1: plugin version, 2: link to the author
+#: admin/class-admin.php:246
+#, php-format
+msgid "Recipe Community %1$s by %2$s"
+msgstr "Recipe Community %1$s door %2$s"
+
+#: admin/class-table.php:23
+msgid "BBQ"
+msgstr "BBQ"
+
+#: admin/class-table.php:25 admin/class-table.php:137
+msgid "Verified"
+msgstr "Bevestigd"
+
+#: admin/class-table.php:39 admin/class-table.php:113
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: admin/class-table.php:50
+msgid "All recipes"
+msgstr "Alle recepten"
+
+#: admin/class-table.php:54
+msgid "All stars"
+msgstr "Alle sterren"
+
+#: admin/class-table.php:58
+msgid "All statuses"
+msgstr "Alle statussen"
+
+#: admin/class-table.php:58
+msgid "Published"
+msgstr "Gepubliceerd"
+
+#: admin/class-table.php:58
+msgid "Hidden"
+msgstr "Verborgen"
+
+#: admin/class-table.php:59
+msgid "Photo pending"
+msgstr "Foto wacht op goedkeuring"
+
+#: admin/class-table.php:60
+msgid "Filter"
+msgstr "Filteren"
+
+#: admin/class-table.php:111
+msgid "Reply / edit"
+msgstr "Reageren / bewerken"
+
+#: admin/class-table.php:115
+msgid "hidden"
+msgstr "verborgen"
+
+#: admin/class-table.php:124
+msgid "Has a reply"
+msgstr "Heeft een reactie"
+
+#: admin/class-table.php:134
+msgid "Pending"
+msgstr "In afwachting"
+
+#: admin/class-table.php:134
+msgid "Approved"
+msgstr "Goedgekeurd"
+
+#: admin/class-table.php:145
+msgid "No reviews found."
+msgstr "Geen beoordelingen gevonden."
