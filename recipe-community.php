@@ -3,7 +3,7 @@
  * Plugin Name:       Recipe Community
  * Plugin URI:        https://github.com/J-Concept-Agency/recipe-community
  * Description:       Light, fast and safe community features for recipe sites. Version 0.1: star reviews with photos, no WordPress comments, no account needed, email-verified reviewers.
- * Version:           0.1.0
+ * Version:           0.2.0
  * Requires at least: 6.2
  * Requires PHP:      8.0
  * Author:            J-Concept
@@ -20,7 +20,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'RCOM_VERSION', '0.1.0' );
+define( 'RCOM_VERSION', '0.2.0' );
 define( 'RCOM_FILE', __FILE__ );
 define( 'RCOM_DIR', plugin_dir_path( __FILE__ ) );
 define( 'RCOM_URL', plugin_dir_url( __FILE__ ) );
