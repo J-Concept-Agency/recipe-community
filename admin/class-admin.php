@@ -225,7 +225,17 @@ class RCOM_Admin {
 			'show_credit'         => empty( $_POST['show_credit'] ) ? 0 : 1,
 			'disable_updates'     => empty( $_POST['disable_updates'] ) ? 0 : 1,
 			'keep_data'           => empty( $_POST['keep_data'] ) ? 0 : 1,
+			'skin'                => isset( RCOM_Style::skins()[ $_POST['skin'] ?? '' ] ) ? sanitize_key( $_POST['skin'] ) : 'neutral',
+			'extra_css'           => $old['extra_css'],
 		);
+		if ( isset( $_POST['extra_css'] ) ) {
+			$css = RCOM_Style::clean( wp_unslash( $_POST['extra_css'] ) );
+			if ( strlen( $css ) > RCOM_Style::MAX_CSS ) {
+				$css_long = true; // keep the previous CSS rather than saving half of it
+			} else {
+				$new['extra_css'] = $css;
+			}
+		}
 		if ( 'laposta' === $new['newsletter_provider'] && '' !== $new['laposta_list'] && '' === $new['laposta_name_field'] ) {
 			update_option( 'rcom_settings', $new, false ); // so the API call below uses the new key
 			$f                         = ( new RCOM_Laposta() )->fields( $new['laposta_list'] );
@@ -249,6 +259,9 @@ class RCOM_Admin {
 		delete_transient( 'rcom_update' );
 		delete_transient( 'rcom_lp_lists' );
 		$arg = array( 'done' => 1 );
+		if ( ! empty( $css_long ) ) {
+			$arg['css_long'] = 1;
+		}
 		if ( isset( $r ) && is_array( $r ) ) {
 			$arg['acc'] = $r['status'];
 			if ( ! empty( $r['suggest'] ) ) {

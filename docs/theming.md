@@ -5,18 +5,21 @@ The plugin ships **structure** and a **neutral default style** built on CSS cust
 ## How it works
 
 1. The default CSS (`assets/rcom.css`, `rcom-helpful.css`, `rcom-account.css`) only reads tokens, each with a safe fallback: `color: var(--rcom-text, #1f2328)`.
-2. The skin sets the tokens, usually on `:root`, and adds a few finishing rules. Attach it with `wp_add_inline_style( 'rcom', $css )` (and the handles `rcom-helpful`, `rcom-account`). Inline styles print only when that handle is loaded, so nothing loads on pages without the plugin output.
-3. `add_filter( 'rcom_skin_active', '__return_true' )` tells the admin screen (Settings > Appearance) that a skin is connected. It has no other effect.
+2. **Settings > Appearance > Style** chooses what sets the tokens:
+   - **Neutral (default)**: nothing; the fallbacks apply.
+   - **Core Framework**: the bundled `assets/skins/core-framework.css` maps every `--rcom-*` token to the Core Framework variable (`--primary`, `--text-title`, `--space-s`, ...). A variable that does not exist simply falls back to the neutral default.
+   - **None**: no plugin CSS at all. The markup stays; you style the `rcom-` classes yourself.
+3. **Extra CSS** (same card, max 20 KB) is printed right after the plugin CSS, only on pages that render reviews, votes or the account page, so it wins on equal specificity. Use it for site finishing: override a token, add a rule. `<` characters, `@import` and script-like values (`javascript:`, `expression(`, `url()` to anything but `https:`, a path or `data:image/`) are removed on save and on output. Longer than 20 KB: not saved, the previous CSS stays.
 
-```php
-add_filter( 'rcom_skin_active', '__return_true' );
-add_action( 'wp_enqueue_scripts', function () {
-	$css = ':root{--rcom-accent:var(--brand);--rcom-text:var(--ink);--rcom-radius:var(--radius);}';
-	foreach ( array( 'rcom', 'rcom-helpful', 'rcom-account' ) as $h ) {
-		wp_add_inline_style( $h, $css );
-	}
-}, 20 );
+The skin and the Extra CSS are attached inline to the plugin's own stylesheet handles at the moment a shortcode renders. Pages without plugin output load nothing and the setting is not even read.
+
+```css
+/* Extra CSS example */
+:root { --rcom-star-size-lg: 1.5rem; --rcom-font-heading: "My Font", sans-serif; }
+#beoordelingen { scroll-margin-top: 9rem; }
 ```
+
+A theme or plugin can still do it in code: `wp_add_inline_style( 'rcom', $css )` (also `rcom-helpful`, `rcom-account`), or return `false` from `rcom_load_default_css`.
 
 ## Filters
 
@@ -24,7 +27,6 @@ add_action( 'wp_enqueue_scripts', function () {
 |---|---|
 | `rcom_load_default_css` (bool, default `true`) | Return `false` to load none of the default CSS. The handles stay registered, so inline skins still work. |
 | `rcom_css_classes` (string, `$type`) | Extra classes per element type: `button`, `card`, `input`. Lets a site apply its own utility classes without forking. |
-| `rcom_skin_active` (bool) | Report that a skin is connected (admin status only). |
 
 ## Tokens (all optional)
 
@@ -55,9 +57,9 @@ add_action( 'wp_enqueue_scripts', function () {
 
 ## Class names (BEM-like, prefix `rcom-`)
 
-- Section: `rcom`, summary `rcom-sum`, `rcom-score`, `rcom-bars`, `rcom-bar`; star line `rcom-line`, `rcom-stars`, `rcom-s` (`on`).
+- Section: `rcom`, summary `rcom-sum`, `rcom-score`, `rcom-bars`, `rcom-bar` (width in `--w`); star line `rcom-line`; stars are one element, `rcom-stars`, drawn with a CSS mask (fill in `--r`, size in `--sz`).
 - Form: `rcom-form`, `rcom-f`, `rcom-two`, `rcom-in`, `rcom-lbl`, `rcom-opt`, `rcom-check`, `rcom-row` (star input), `rcom-photo-f`, `rcom-fbtn`, `rcom-prev`, `rcom-msg`, `rcom-btn`, `rcom-priv`.
-- List: `rcom-list`, `rcom-item` (header, `rcom-name`, `rcom-small`, `rcom-own`, `rcom-del`), `rcom-photo`, `rcom-note`, `rcom-reply`, `rcom-more`, `rcom-credit`.
+- List: `rcom-list` > `ul.rcom-items` > `li.rcom-item` > `article.rcom-review` > `div.rcom-head` (stars, `rcom-name`, `rcom-small` with a `<time>`, `rcom-own`, `rcom-del`), then the text `<p>`, `rcom-photo`, `rcom-note`, `div.rcom-reply`; `rcom-more`, `rcom-credit`.
 - Helpful: `rcom-helpful`, `rcom-hbtn`, `rcom-hcount`, `rcom-hform`, `rcom-hmsg`, `rcom-hrm`.
 - Account: `rcom-acc`, `rcom-accform`, `rcom-tabs`, `rcom-tab`, `rcom-sec`, `rcom-vrow`, `rcom-accbtns`, `rcom-danger`.
 

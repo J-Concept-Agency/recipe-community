@@ -1,0 +1,32 @@
+/* Recipe Community skin for Core Framework: maps the --rcom-* tokens to the Core Framework variables.
+   No fallbacks here on purpose: when a Core Framework variable does not exist, the token becomes invalid and the
+   neutral default in rcom.css (var(--rcom-accent, #2b59c3)) takes over. Site specific finishing belongs in Settings > Appearance > Extra CSS. */
+:root{
+--rcom-accent:var(--primary);
+--rcom-accent-hover:var(--primary-d-1);
+--rcom-link:var(--tertiary);
+--rcom-text:var(--text-title);
+--rcom-muted:var(--text-muted);
+--rcom-surface:var(--bg-surface);
+--rcom-surface-alt:var(--bg-body);
+--rcom-border:var(--border-color);
+--rcom-radius:var(--radius-m);
+--rcom-radius-sm:var(--radius-m);
+--rcom-btn-bg:var(--secondary);
+--rcom-star:var(--primary);
+--rcom-star-empty:var(--text-muted);
+--rcom-reply-bg:var(--bg-body);
+--rcom-reply-pad:var(--space-xs) var(--space-s);
+--rcom-space-0:var(--space-4xs);
+--rcom-space-1:var(--space-3xs);
+--rcom-space-2:var(--space-2xs);
+--rcom-space-3:var(--space-xs);
+--rcom-space-4:var(--space-s);
+--rcom-space-5:var(--space-m);
+--rcom-space-6:var(--space-l);
+--rcom-text-s:var(--text-s);
+--rcom-text-m:var(--text-m);
+--rcom-text-l:var(--text-l);
+--rcom-name-size:var(--text-l);
+--rcom-star-size-lg:var(--text-l);
+}

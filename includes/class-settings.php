@@ -38,6 +38,8 @@ class RCOM_Settings {
 			'helpful_links'    => 0,
 			'helpful_yes_label' => '',
 			'helpful_no_label' => '',
+			'skin'             => 'neutral',
+			'extra_css'        => '',
 		);
 	}
 

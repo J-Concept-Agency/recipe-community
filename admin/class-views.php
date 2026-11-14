@@ -15,6 +15,9 @@ class RCOM_Views {
 
 	private static function head( $title, $intro, $actions = '' ) {
 		echo '<div class="wrap rcom-a"><header class="rcom-a-head"><div><h1>' . esc_html( $title ) . '</h1><p>' . esc_html( $intro ) . '</p></div><div class="rcom-a-actions">' . $actions . '</div></header>';
+		if ( isset( $_GET['css_long'] ) ) {
+			echo '<div class="rcom-a-flash err" role="alert">' . esc_html( sprintf( /* translators: %d: size in KB */ __( 'Extra CSS is longer than %d KB and was not saved. The previous CSS is still active.', 'recipe-community' ), RCOM_Style::MAX_CSS / 1024 ) ) . '</div>';
+		}
 		if ( isset( $_GET['done'] ) ) {
 			echo '<div class="rcom-a-flash" role="status">' . esc_html__( 'Done.', 'recipe-community' ) . '</div>';
 		}
@@ -507,10 +510,16 @@ class RCOM_Views {
 		echo '</section>';
 
 		// Appearance
-		$skin = (bool) apply_filters( 'rcom_skin_active', false );
-		$dflt = (bool) apply_filters( 'rcom_load_default_css', true );
-		echo '<section class="rcom-card"><h2>' . esc_html__( 'Appearance', 'recipe-community' ) . '</h2><p class="rcom-muted">' . esc_html__( 'The plugin ships structure and a neutral default style built on CSS custom properties (--rcom-accent, --rcom-text, --rcom-surface, ...). A site links those tokens to its own variables in one small snippet (a skin). The filter rcom_load_default_css turns the default style off completely.', 'recipe-community' ) . '</p>';
-		echo self::field( __( 'Status', 'recipe-community' ), self::pill( $skin ? 'ok' : 'mute', $skin ? __( 'Site skin connected', 'recipe-community' ) : __( 'No skin: neutral default style', 'recipe-community' ) ) . ( $dflt ? '' : ' ' . self::pill( 'warn', __( 'Default style is off', 'recipe-community' ) ) ), '<a href="https://github.com/J-Concept-Agency/recipe-community/blob/main/docs/theming.md" target="_blank" rel="noopener">' . esc_html__( 'How theming works (docs/theming.md)', 'recipe-community' ) . '</a>' );
+		$sk = RCOM_Style::current();
+		$so = '';
+		foreach ( RCOM_Style::skins() as $k => $l ) {
+			$so .= '<option value="' . esc_attr( $k ) . '"' . selected( $sk, $k, false ) . '>' . esc_html( $l ) . '</option>';
+		}
+		$hint = RCOM_Style::framework_detected() && 'core-framework' !== $sk ? ' ' . self::pill( 'warn', __( 'Core Framework found on this site', 'recipe-community' ) ) : '';
+		$docs = '<a href="https://github.com/J-Concept-Agency/recipe-community/blob/main/docs/theming.md" target="_blank" rel="noopener">' . esc_html__( 'How theming works (docs/theming.md)', 'recipe-community' ) . '</a>';
+		echo '<section class="rcom-card"><h2>' . esc_html__( 'Appearance', 'recipe-community' ) . '</h2><p class="rcom-muted">' . esc_html__( 'The plugin ships structure and a neutral style built on CSS variables (--rcom-accent, --rcom-text, ...). Pick a ready-made skin for your framework, or style it yourself.', 'recipe-community' ) . '</p>';
+		echo self::field( __( 'Style', 'recipe-community' ), '<select name="skin">' . $so . '</select>' . $hint, __( 'Core Framework links the variables to your Core Framework tokens. None loads no plugin CSS at all.', 'recipe-community' ) );
+		echo self::field( __( 'Extra CSS', 'recipe-community' ), '<textarea class="rcom-css" name="extra_css" rows="8" maxlength="' . (int) RCOM_Style::MAX_CSS . '" spellcheck="false" placeholder=":root { --rcom-star-size-lg: 1.5rem; }">' . esc_textarea( RCOM_Settings::get( 'extra_css' ) ) . '</textarea>', sprintf( /* translators: %d: size in KB */ __( 'Added after the plugin CSS, only on pages that show reviews, votes or the account. Max %d KB. Tags, @import and script-like values are removed. ', 'recipe-community' ), RCOM_Style::MAX_CSS / 1024 ) . $docs );
 		echo '</section>';
 
 		// Account

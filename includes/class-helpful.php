@@ -153,7 +153,7 @@ class RCOM_Helpful {
 		if ( ! $id || ! RCOM_Settings::helpful_enabled_for( $id ) ) {
 			return '';
 		}
-		wp_enqueue_style( 'rcom-helpful' );
+		RCOM_Style::enqueue( 'rcom-helpful' );
 		wp_enqueue_script( 'rcom-helpful' );
 		$yl = (string) RCOM_Settings::get( 'helpful_yes_label' );
 		$nl = (string) RCOM_Settings::get( 'helpful_no_label' );

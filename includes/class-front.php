@@ -62,7 +62,7 @@ class RCOM_Front {
 
 	private static function enqueue() {
 		if ( apply_filters( 'rcom_load_assets', true ) ) {
-			wp_enqueue_style( 'rcom' );
+			RCOM_Style::enqueue( 'rcom' );
 			wp_enqueue_script( 'rcom' );
 		}
 	}

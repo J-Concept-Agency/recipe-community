@@ -206,3 +206,5 @@ g:hover>.rcom-rect{fill:var(--ac-d)}
 .rcom-fc .rcom-btns{margin-top:16px}
 .rcom-fc>.rcom-btn-a,.rcom-fc input+.rcom-btn-a{margin-left:8px}
 @media (max-width:782px){.rcom-create{grid-template-columns:1fr}}
+
+.rcom-a textarea.rcom-css{width:100%;max-width:640px;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;padding:8px 10px;border:1px solid #8c8f94;border-radius:var(--r);background:#fff;tab-size:2}

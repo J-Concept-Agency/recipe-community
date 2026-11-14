@@ -373,8 +373,8 @@ class RCOM_Account {
 		if ( ! self::page_id() || ! RCOM_Settings::turnstile_ready() ) {
 			return current_user_can( 'manage_options' ) ? '<p class="rcom-msg err">' . esc_html__( 'Recipe Community: the account page needs the Turnstile keys and must be chosen under Settings > Account page (only you can see this message).', 'recipe-community' ) . '</p>' : '';
 		}
-		wp_enqueue_style( 'rcom' );
-		wp_enqueue_style( 'rcom-account' );
+		RCOM_Style::enqueue( 'rcom' );
+		RCOM_Style::enqueue( 'rcom-account' );
 		wp_enqueue_script( 'rcom-account' );
 		RCOM_Front::i18n( 'ac', array(
 			'err'     => __( 'Something went wrong. Please try again.', 'recipe-community' ),

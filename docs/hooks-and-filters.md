@@ -25,7 +25,6 @@ After any change (new, hidden, deleted, verified). Use it to purge caches. `lite
 | `rcom_account_sections` (array) | Sections of the account page: `id => [ 'label' => ..., 'cb' => callable( $session ) returning HTML ]`. |
 | `rcom_load_default_css` (bool) | Turn the default stylesheets off. See [theming](theming.md). |
 | `rcom_css_classes` (string, `$type`) | Extra classes for `button`, `card`, `input`. |
-| `rcom_skin_active` (bool) | Report that a site skin is connected (admin status). |
 | `rcom_load_assets` (bool) | Return false to skip CSS/JS on a single page. |
 | `rcom_bbq_types` (array) | `key => [ form label, sentence under the review ('' = none) ]`. |
 | `rcom_client_ip` (string) | IP used for the (hashed) rate limit, for sites behind a proxy: return the real visitor IP. |
