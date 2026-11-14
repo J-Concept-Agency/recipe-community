@@ -110,6 +110,14 @@ class RCOM_Admin {
 			$do  = sanitize_key( ( $_POST['action'] ?? '-1' ) !== '-1' ? $_POST['action'] : ( $_POST['action2'] ?? '' ) );
 			$ids = array_map( 'intval', (array) $_POST['ids'] );
 		}
+		if ( 'revoke' === $do ) {
+			$idn = isset( $_REQUEST['identity'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['identity'] ) ) : '';
+			if ( preg_match( '/^[a-f0-9]{64}$/', $idn ) ) {
+				RCOM_Account::revoke( $idn );
+			}
+			wp_safe_redirect( add_query_arg( 'done', 1, admin_url( 'admin.php?page=rcom-people' ) ) );
+			exit;
+		}
 		if ( in_array( $do, array( 'fb_handled', 'fb_hide', 'fb_show', 'fb_delete' ), true ) ) {
 			global $wpdb;
 			$fid = (int) ( $_REQUEST['id'] ?? 0 );
@@ -192,6 +200,8 @@ class RCOM_Admin {
 			'privacy_page'        => (int) ( $_POST['privacy_page'] ?? 0 ),
 			'terms_label'         => $str( 'terms_label' ),
 			'newsletter_label'    => $str( 'newsletter_label' ),
+			'account_page'        => (int) ( $_POST['account_page'] ?? 0 ),
+			'account_label'       => $str( 'account_label' ),
 			'terms_snapshots'     => empty( $_POST['terms_snapshots'] ) ? 0 : 1,
 			'on_delete'           => 'keep' === ( $_POST['on_delete'] ?? '' ) ? 'keep' : 'delete',
 			'ai_abilities'        => empty( $_POST['ai_abilities'] ) ? 0 : 1,
@@ -210,11 +220,23 @@ class RCOM_Admin {
 			$new['laposta_key']         = $e['key'];
 			$new['laposta_list']        = $e['list'];
 		}
+		if ( 'create_account' === $after ) {
+			$r = self::create_account_page( sanitize_title( wp_unslash( $_POST['account_slug'] ?? '' ) ) ?: 'pitmaster', $str( 'account_title', 'Pitmaster' ) );
+			if ( ! empty( $r['id'] ) ) {
+				$new['account_page'] = (int) $r['id'];
+			}
+		}
 		update_option( 'rcom_settings', $new, false );
 		update_option( 'rcom_ai_on', $new['ai_abilities'] ? 1 : 0, true );
 		delete_transient( 'rcom_update' );
 		delete_transient( 'rcom_lp_lists' );
 		$arg = array( 'done' => 1 );
+		if ( isset( $r ) && is_array( $r ) ) {
+			$arg['acc'] = $r['status'];
+			if ( ! empty( $r['suggest'] ) ) {
+				$arg['acc_suggest'] = $r['suggest'];
+			}
+		}
 		if ( 'rebuild' === $after ) {
 			$arg['rebuilt'] = RCOM_Integrity::rebuild_cache();
 		} elseif ( 'turnstile' === $after ) {
@@ -226,6 +248,46 @@ class RCOM_Admin {
 		}
 		wp_safe_redirect( add_query_arg( $arg, admin_url( 'admin.php?page=rcom-settings' ) ) );
 		exit;
+	}
+
+	/** Is a URL slug free? Checks posts of every type, terms of public taxonomies, post type archives and core paths. */
+	public static function slug_free( $slug ) {
+		global $wpdb;
+		if ( in_array( $slug, array( 'wp-admin', 'wp-json', 'wp-login', 'wp-content', 'feed', 'embed', 'page', 'author', 'search', 'comments', 'category', 'tag', 'login', 'admin' ), true ) ) {
+			return false;
+		}
+		if ( $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_name = %s AND post_status NOT IN ('trash','auto-draft','inherit') LIMIT 1", $slug ) ) ) {
+			return false;
+		}
+		foreach ( get_taxonomies( array( 'public' => true ), 'objects' ) as $t ) {
+			if ( ( is_array( $t->rewrite ) && ( $t->rewrite['slug'] ?? '' ) === $slug ) || term_exists( $slug, $t->name ) ) {
+				return false;
+			}
+		}
+		foreach ( get_post_types( array( 'public' => true ), 'objects' ) as $pt ) {
+			if ( ( is_array( $pt->rewrite ) && ( $pt->rewrite['slug'] ?? '' ) === $slug ) || ( is_string( $pt->has_archive ) && $pt->has_archive === $slug ) ) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/** @return array{status:string,id?:int,suggest?:string} */
+	public static function create_account_page( $slug, $title ) {
+		global $wpdb;
+		$existing = (int) $wpdb->get_var( "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'page' AND post_status IN ('publish','draft','private') AND post_content LIKE '%[rcom\\_account]%' ORDER BY ID LIMIT 1" );
+		if ( $existing ) {
+			return array( 'status' => 'existing', 'id' => $existing );
+		}
+		if ( ! self::slug_free( $slug ) ) {
+			$i = 2;
+			while ( ! self::slug_free( $slug . '-' . $i ) && $i < 50 ) {
+				$i++;
+			}
+			return array( 'status' => 'conflict', 'suggest' => $slug . '-' . $i );
+		}
+		$id = wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_title' => $title ?: 'Pitmaster', 'post_name' => $slug, 'post_content' => '[rcom_account]' ), true );
+		return is_wp_error( $id ) ? array( 'status' => 'error' ) : array( 'status' => 'created', 'id' => (int) $id );
 	}
 
 	/** Settings of an already configured Laposta connection on this site (Bricks Laposta plugin or constant), if readable. No hard dependency. */

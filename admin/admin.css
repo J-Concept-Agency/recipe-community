@@ -189,3 +189,7 @@ g:hover>.rcom-rect{fill:var(--ac-d)}
 .rcom-a .wp-list-table td.check-column,.rcom-a .wp-list-table th.check-column{vertical-align:middle;padding:0 0 0 12px}
 .rcom-a .wp-list-table .check-column input{margin:0;vertical-align:middle}
 @media (max-width:782px){.rcom-kpis{grid-template-columns:1fr 1fr}.rcom-kpi,.rcom-kpi:first-child{border-left:0;border-top:1px solid var(--line)}.rcom-kpi:nth-child(-n+2){border-top:0}.rcom-kpi:nth-child(even){border-left:1px solid var(--line)}}
+.rcom-table .rcom-tr .rcom-btn-a{white-space:nowrap;height:30px;padding:0 10px;font-size:12px}
+.rcom-table .rcom-tr>span:has(.rcom-btn-a){flex-basis:auto}
+.rcom-a .rcom-table .rcom-tr a:not(.rcom-btn-a){color:var(--ink);text-decoration:none}
+.rcom-a .rcom-table .rcom-tr a:not(.rcom-btn-a):hover{color:var(--ac);text-decoration:underline}

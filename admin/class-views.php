@@ -394,6 +394,17 @@ class RCOM_Views {
 				$vc[ $map[ $x->identity_id ] ] = (int) $x->c;
 			}
 		}
+		$sess = array();
+		if ( $rows ) {
+			$ids = array();
+			foreach ( $rows as $r ) {
+				$ids[ RCOM_Helpful::identity_for( $r->email ) ] = 1;
+			}
+			$in = implode( ',', array_fill( 0, count( $ids ), '%s' ) );
+			foreach ( $wpdb->get_results( $wpdb->prepare( 'SELECT identity_id, COUNT(*) AS c FROM ' . RCOM_Account::t( 'sessions' ) . " WHERE identity_id IN ({$in}) AND expires_at > %s GROUP BY identity_id", array_merge( array_keys( $ids ), array( gmdate( 'Y-m-d H:i:s' ) ) ) ) ) as $x ) {
+				$sess[ $x->identity_id ] = (int) $x->c;
+			}
+		}
 		self::head( __( 'People', 'recipe-community' ), __( 'Everyone who left a review, one row per email address.', 'recipe-community' ), '<a class="rcom-btn-a" href="' . esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=rcom_export' ), 'rcom_export' ) ) . '">' . esc_html__( 'Export CSV', 'recipe-community' ) . '</a>' );
 		if ( ! $rows ) {
 			echo '<section class="rcom-card flush">' . self::empty_state( __( 'No people yet', 'recipe-community' ), __( 'Everyone who leaves a review appears here once, with their number of reviews and votes. Email addresses are only visible in the admin.', 'recipe-community' ), __( 'Open settings', 'recipe-community' ), self::url( 'rcom-settings' ) ) . '</section></div>';
@@ -401,9 +412,18 @@ class RCOM_Views {
 		}
 		echo '<section class="rcom-card flush"><div class="rcom-table">';
 		foreach ( $rows as $r ) {
-			echo '<a class="rcom-tr" href="' . esc_url( self::url( 'rcom-reviews', array( 's' => $r->email ) ) ) . '"><span class="rcom-ava">' . self::initials( $r->name ) . '</span><span class="rcom-grow"><b>' . esc_html( $r->name ) . '</b><br><span class="rcom-muted">' . esc_html( $r->email ) . '</span></span><span>' . esc_html( sprintf( _n( '%s review', '%s reviews', $r->n, 'recipe-community' ), $r->n ) ) . '</span><span>' . ( $r->ver ? '<span class="rcom-ok">' . esc_html__( 'Verified', 'recipe-community' ) . '</span>' : '–' ) . '</span><span>' . ( $r->nl ? esc_html__( 'Newsletter', 'recipe-community' ) : '–' ) . '</span><span class="rcom-hide-s">' . esc_html( sprintf( /* translators: %d: helpful votes */ _n( '%d vote', '%d votes', $vc[ $r->email ] ?? 0, 'recipe-community' ), $vc[ $r->email ] ?? 0 ) ) . '</span><span class="rcom-hide-s rcom-muted">' . esc_html( self::dt( $r->last ) ) . '</span></a>';
+			echo '<div class="rcom-tr"><span class="rcom-ava">' . self::initials( $r->name ) . '</span><span class="rcom-grow"><a href="' . esc_url( self::url( 'rcom-reviews', array( 's' => $r->email ) ) ) . '"><b>' . esc_html( $r->name ) . '</b></a><br><span class="rcom-muted">' . esc_html( $r->email ) . '</span></span><span>' . esc_html( sprintf( _n( '%s review', '%s reviews', $r->n, 'recipe-community' ), $r->n ) ) . '</span><span>' . ( $r->ver ? '<span class="rcom-ok">' . esc_html__( 'Verified', 'recipe-community' ) . '</span>' : '–' ) . '</span><span>' . ( $r->nl ? esc_html__( 'Newsletter', 'recipe-community' ) : '–' ) . '</span><span class="rcom-hide-s">' . ( ! empty( $sess[ RCOM_Helpful::identity_for( $r->email ) ] ) ? '<a class="rcom-btn-a" href="' . esc_url( wp_nonce_url( add_query_arg( array( 'page' => 'rcom-people', 'rcom_do' => 'revoke', 'identity' => RCOM_Helpful::identity_for( $r->email ) ), admin_url( 'admin.php' ) ), 'rcom_admin' ) ) . '">' . esc_html( sprintf( /* translators: %d: number of sessions */ _n( 'End %d session', 'End %d sessions', $sess[ RCOM_Helpful::identity_for( $r->email ) ], 'recipe-community' ), $sess[ RCOM_Helpful::identity_for( $r->email ) ] ) ) . '</a>' : '&ndash;' ) . '</span><span class="rcom-hide-s">' . esc_html( sprintf( /* translators: %d: helpful votes */ _n( '%d vote', '%d votes', $vc[ $r->email ] ?? 0, 'recipe-community' ), $vc[ $r->email ] ?? 0 ) ) . '</span><span class="rcom-hide-s rcom-muted">' . esc_html( self::dt( $r->last ) ) . '</span></div>';
 		}
-		echo '</div>' . self::foot( $tot, $per, $page ) . '</section></div>';
+		echo '</div>' . self::foot( $tot, $per, $page ) . '</section>';
+		$aud = $wpdb->get_results( 'SELECT identity_id, event, created_at FROM ' . RCOM_Account::t( 'audit' ) . ' ORDER BY id DESC LIMIT 25' );
+		echo '<section class="rcom-card"><h2>' . esc_html__( 'Account security log', 'recipe-community' ) . '</h2><p class="rcom-muted">' . esc_html__( 'Last 25 events, kept for 90 days. No email addresses or IP addresses, only a short identity code.', 'recipe-community' ) . '</p>';
+		if ( ! $aud ) {
+			echo self::empty_state( __( 'No events yet', 'recipe-community' ), __( 'Login links, sessions and deletions show up here once the account page is used.', 'recipe-community' ), '', '', true );
+		}
+		foreach ( $aud as $e ) {
+			echo '<div class="rcom-row"><span class="rcom-grow">' . esc_html( $e->event ) . '</span><code>' . esc_html( $e->identity_id ? substr( $e->identity_id, 0, 8 ) : '-' ) . '</code><span class="rcom-muted">' . esc_html( self::dt( $e->created_at, true ) ) . '</span></div>';
+		}
+		echo '</section></div>';
 	}
 
 	/* ---------- Settings ---------- */
@@ -426,6 +446,17 @@ class RCOM_Views {
 		);
 		if ( isset( $_GET['ts'], $msg['ts'][ $_GET['ts'] ] ) ) {
 			echo '<div class="rcom-a-flash ' . esc_attr( $msg['ts'][ $_GET['ts'] ][0] ) . '">' . esc_html( $msg['ts'][ $_GET['ts'] ][1] ) . '</div>';
+		}
+		if ( isset( $_GET['acc'] ) ) {
+			$am = array(
+				'created'  => array( 'ok', __( 'The account page was created and chosen.', 'recipe-community' ) ),
+				'existing' => array( 'ok', __( 'A page with [rcom_account] already exists; it was chosen instead of creating a second one.', 'recipe-community' ) ),
+				'conflict' => array( 'err', sprintf( /* translators: %s: suggested slug */ __( 'That slug is already in use. Suggestion: %s. Press "Create page" again to use it.', 'recipe-community' ), isset( $_GET['acc_suggest'] ) ? sanitize_title( wp_unslash( $_GET['acc_suggest'] ) ) : '' ) ),
+				'error'    => array( 'err', __( 'The page could not be created.', 'recipe-community' ) ),
+			)[ sanitize_key( $_GET['acc'] ) ] ?? null;
+			if ( $am ) {
+				echo '<div class="rcom-a-flash ' . esc_attr( $am[0] ) . '">' . esc_html( $am[1] ) . '</div>';
+			}
 		}
 		if ( isset( $_GET['lp'] ) ) {
 			echo '<div class="rcom-a-flash ' . ( 'ok' === $_GET['lp'] ? 'ok' : 'err' ) . '">' . esc_html( get_transient( 'rcom_lp_msg' ) ?: '' ) . '</div>';
@@ -451,9 +482,10 @@ class RCOM_Views {
 			$cb .= '<label class="rcom-chk"><input type="checkbox" name="post_types[]" value="' . esc_attr( $pt->name ) . '"' . checked( in_array( $pt->name, $pts, true ), true, false ) . '> ' . esc_html( $pt->labels->name ) . '</label>';
 		}
 		echo '<section class="rcom-card"><h2>' . esc_html__( 'Reviews', 'recipe-community' ) . '</h2>';
+		echo '<p class="rcom-muted">' . wp_kses_post( sprintf( /* translators: %s: link to the General settings */ __( 'The credit link below this block is set under %s.', 'recipe-community' ), '<a href="#rcom-general">' . esc_html__( 'General', 'recipe-community' ) . '</a>' ) ) . '</p>';
+
 		echo self::field( __( 'Active on', 'recipe-community' ), '<div class="rcom-chks">' . $cb . '</div>', __( 'The shortcodes only work on these post types. CSS and JS load only where a shortcode renders.', 'recipe-community' ) );
 		echo self::field( __( 'Label for your reply', 'recipe-community' ), '<input name="reply_label" value="' . esc_attr( $o['reply_label'] ) . '" placeholder="' . esc_attr__( 'Reply from the author', 'recipe-community' ) . '">' );
-		echo self::field( __( 'Credit link', 'recipe-community' ), '<label class="rcom-chk"><input type="checkbox" name="show_credit" value="1"' . checked( $o['show_credit'], 1, false ) . '> ' . esc_html__( 'Show a "Powered by J-Concept" link below the reviews', 'recipe-community' ) . '</label>' );
 		echo '</section>';
 
 		// Terms
@@ -474,6 +506,18 @@ class RCOM_Views {
 		echo self::field( __( 'Newsletter checkbox text', 'recipe-community' ), '<input name="newsletter_label" value="' . esc_attr( $o['newsletter_label'] ) . '" placeholder="' . esc_attr__( 'Yes, send me the newsletter', 'recipe-community' ) . '">' );
 		echo '</section>';
 
+		// Account
+		$ap = '<option value="0">&mdash;</option>';
+		foreach ( get_pages() as $pg ) {
+			$ap .= '<option value="' . (int) $pg->ID . '"' . selected( (int) $o['account_page'], (int) $pg->ID, false ) . '>' . esc_html( $pg->post_title ) . '</option>';
+		}
+		$sug = isset( $_GET['acc_suggest'] ) ? sanitize_title( wp_unslash( $_GET['acc_suggest'] ) ) : 'pitmaster';
+		echo '<section class="rcom-card"><h2>' . esc_html__( 'Account page', 'recipe-community' ) . '</h2><p class="rcom-muted">' . esc_html__( 'Visitors manage their reviews, votes and data on one page with the shortcode [rcom_account]. Without a page there are no links to it anywhere. [rcom_account_link] prints a small link, for example for the footer.', 'recipe-community' ) . '</p>';
+		echo self::field( __( 'Account page', 'recipe-community' ), '<select name="account_page">' . $ap . '</select>', __( 'Exclude this page from page caches (it is sent with no-store headers and noindex).', 'recipe-community' ) );
+		echo self::field( __( 'Name of the account', 'recipe-community' ), '<input name="account_label" value="' . esc_attr( $o['account_label'] ) . '" placeholder="' . esc_attr__( 'Pitmaster', 'recipe-community' ) . '">', __( 'Used in the link text and in the emails ("Go to your Pitmaster page").', 'recipe-community' ) );
+		echo self::field( __( 'Create the page', 'recipe-community' ), '<input name="account_slug" value="' . esc_attr( $sug ) . '" aria-label="' . esc_attr__( 'Slug', 'recipe-community' ) . '" style="max-width:180px"> <input name="account_title" value="' . esc_attr( __( 'Pitmaster', 'recipe-community' ) ) . '" aria-label="' . esc_attr__( 'Page title', 'recipe-community' ) . '" style="max-width:220px"> <button class="rcom-btn-a" name="rcom_after" value="create_account">' . esc_html__( 'Create page', 'recipe-community' ) . '</button>', __( 'Creates a published page with [rcom_account]. The slug is checked first; an existing page with the shortcode is chosen instead of making a second one.', 'recipe-community' ) );
+		echo '</section>';
+
 		// Helpful
 		$hts = RCOM_Settings::helpful_types();
 		$hb  = '';
@@ -483,6 +527,8 @@ class RCOM_Views {
 			}
 		}
 		echo '<section class="rcom-card"><h2>' . esc_html__( 'Helpful? (was this article helpful)', 'recipe-community' ) . '</h2>';
+		echo '<p class="rcom-muted">' . wp_kses_post( sprintf( /* translators: %s: link to the General settings */ __( 'The credit link below this block is set under %s.', 'recipe-community' ), '<a href="#rcom-general">' . esc_html__( 'General', 'recipe-community' ) . '</a>' ) ) . '</p>';
+
 		echo self::field( __( 'Active on', 'recipe-community' ), '<div class="rcom-chks">' . $hb . '</div>', __( 'Shortcode [rcom_helpful]. Votes are anonymous unless the visitor is identified through a review link.', 'recipe-community' ) );
 		echo self::field( __( 'Show the count from', 'recipe-community' ), '<input name="helpful_threshold" type="number" min="1" value="' . (int) $o['helpful_threshold'] . '" style="max-width:100px">', __( 'The public sentence appears once this many people voted Yes.', 'recipe-community' ) );
 		echo self::field( __( 'Question after Yes', 'recipe-community' ), '<input name="helpful_yes_label" value="' . esc_attr( $o['helpful_yes_label'] ) . '" placeholder="' . esc_attr__( 'What did you like?', 'recipe-community' ) . '">' );
@@ -528,7 +574,8 @@ class RCOM_Views {
 		echo '<script>(function(){var s=document.getElementById("rcom-nl"),b=document.getElementById("rcom-lp");function t(){b.hidden=s.value!=="laposta"}s.addEventListener("change",t);t()})()</script></section>';
 
 		// Email, updates, data
-		echo '<section class="rcom-card"><h2>' . esc_html__( 'Email, updates and data', 'recipe-community' ) . '</h2>';
+		echo '<section class="rcom-card" id="rcom-general"><h2>' . esc_html__( 'General', 'recipe-community' ) . '</h2>';
+		echo self::field( __( 'Credit link', 'recipe-community' ), '<label class="rcom-chk"><input type="checkbox" name="show_credit" value="1"' . checked( $o['show_credit'], 1, false ) . '> ' . esc_html__( 'Show "Powered by J-Concept" below the reviews and below Helpful?', 'recipe-community' ) . '</label>', __( 'One switch for both blocks. Anyone may switch it off.', 'recipe-community' ) );
 		echo self::field( __( 'Sender email for mails', 'recipe-community' ), '<input name="mail_from" type="email" value="' . esc_attr( $o['mail_from'] ) . '" placeholder="' . esc_attr( get_option( 'admin_email' ) ) . '">', __( 'Default: the WordPress admin address.', 'recipe-community' ) );
 		echo self::field( __( 'Updates', 'recipe-community' ), '<label class="rcom-chk"><input type="checkbox" name="disable_updates" value="1"' . checked( $o['disable_updates'], 1, false ) . '> ' . esc_html__( 'Do not check GitHub for plugin updates', 'recipe-community' ) . '</label>' );
 		if ( function_exists( 'wp_register_ability' ) ) {
